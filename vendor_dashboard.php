@@ -22,8 +22,10 @@ $vendorUsername = $_SESSION["username"];
     
     <!-- Vendor-specific dashboard content -->
     <div id="vendor-dashboard">
-        <!-- Display vendor's menu, orders, and other information -->
-    </div>
+    <h2>Manage Products and Items</h2>
+    <!-- Provide forms for adding/editing products and items -->
+</div>
+
     
     <a href="logout.php">Logout</a>
     

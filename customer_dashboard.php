@@ -22,8 +22,30 @@ $customerUsername = $_SESSION["username"];
     
     <!-- Customer-specific dashboard content -->
     <div id="customer-dashboard">
-        <!-- Display customer's orders and other information -->
+    <h2>Place an Order</h2>
+
+    <form action="place_order.php" method="post">
+    <label for="vendor">Select Vendor:</label>
+    <select id="vendor">
+        <option value="default" selected = "selected">Please select one of the vendor:</option>
+        <option value="vendora">Vendor A</option>
+        <option value="vendorb">Vendor B</option>
+    </select>
+    <div id ="products-list"></div>
+        
+    <h2>Your Cart</h2>
+    <div id="cart">
+        <!-- Cart items will be dynamically populated here -->
     </div>
+    
+    <button id="checkout-btn" disabled>Checkout</button>
+    </form>
+    
+    <!-- Display customer's orders and other information -->
+</div>
+
+
+
     
     <a href="logout.php">Logout</a>
     
