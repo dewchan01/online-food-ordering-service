@@ -6,7 +6,7 @@ const loadingOverlay = document.getElementById('loading-overlay');
 confirmPaymentButton.addEventListener('click', () => {
     // Show the loading overlay
     loadingOverlay.style.display = 'flex';
-    
+
     // Simulate the payment process (replace this with actual payment logic if available)
     setTimeout(() => {
         // Hide the loading overlay after a few seconds

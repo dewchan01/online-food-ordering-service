@@ -10,6 +10,7 @@ CREATE TABLE products (
 
 CREATE TABLE orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
+    time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     image_url VARCHAR(255),
     username VARCHAR(255),
     product_id INT,
