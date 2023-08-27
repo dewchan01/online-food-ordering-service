@@ -57,6 +57,15 @@ document.addEventListener('click', event => {
         updateCartCount();
         updateCheckOutBtn();
     }
+
+    // display cart items in the cart
+    if (event.target.id === 'checkout-btn') {
+        const cartItemsQuery = JSON.stringify(cartItems);
+        const checkoutURL = `place_order.php?vendor=${selectedVendor}&cart=${cartItemsQuery}`;
+
+        // Redirect to the checkout page
+        window.location.href = checkoutURL;
+    }
 });
 
 function updateCartDropdown() {
@@ -85,4 +94,4 @@ function updateCheckOutBtn() {
     checkoutButton.textContent = 'Checkout';
     cartDropdown.appendChild(checkoutButton);
 }
-// ... Rest of your code ...
+

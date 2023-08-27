@@ -6,11 +6,4 @@ CREATE TABLE users
     role VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE orders 
-(
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_id INT,
-    vendor_id INT,
-    order_details TEXT,
-    order_status VARCHAR(50)
-);
+

@@ -42,15 +42,6 @@ $customerUsername = $_SESSION["username"];
         
 </div>
     
-    
-</div>
-    
-    <!-- Display customer's orders and other information -->
-</div>
-
-
-
-    
     <a href="logout.php">Logout</a>
     
     <script src="script.js"></script>
