@@ -3,7 +3,7 @@ INSERT INTO users (username, password, role) VALUES
     ('customer1', 'password123', 'customer'),
     ('customer2', 'letmein', 'customer'),
     ('vendor1', 'vendorpass', 'vendor'),
-    --('vendor2', 'myvendorpass', 'vendor');
+    ('admin', '123', 'customer');
 
 
 INSERT INTO orders (customer_id, order_details, order_status) VALUES
