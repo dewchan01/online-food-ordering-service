@@ -42,7 +42,9 @@ $conn->close();
     <table border="1">
         <tr>
             <th>Order ID</th>
+            <th>Time of Order</th>
             <th>Product Name</th>
+            <th>Product Image</th>
             <th>Quantity</th>
             <th>Total Price</th>
             <th>Order Status</th>
@@ -50,7 +52,9 @@ $conn->close();
         <?php foreach ($orders as $order): ?>
             <tr>
                 <td><?php echo $order['order_id']; ?></td>
+                <td><?php echo $order['time']; ?></td>
                 <td><?php echo $order['product_name']; ?></td>
+                <td><img src="<?php echo $order['image_url']; ?>" alt="Product Image"></td>
                 <td><?php echo $order['quantity']; ?></td>
                 <td><?php echo $order['total_price']; ?></td>
                 <td><?php echo $order['order_status']; ?></td>

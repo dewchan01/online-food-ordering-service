@@ -33,14 +33,13 @@ $customerUsername = $_SESSION["username"];
     </select>
     <div id ="products-list"></div>
         
-    <div id="cart-icon">
-        <img src="images/cart-icon.png" alt="Cart">
+    <div>
+        <img id="cart-icon" src="images/cart-icon.png" alt="Cart">
         <span id="cart-count">0</span>
         <div id="cart-dropdown" class="cart-dropdown">
         <!-- Cart items will be dynamically populated here -->
-        </div>
-        
-</div>
+        </div>    
+    </div>
     
     <a href="logout.php">Logout</a>
     <a href="edit_profile.php">Edit Profile</a>
