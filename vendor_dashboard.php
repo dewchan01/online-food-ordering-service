@@ -64,9 +64,44 @@ if(isset($_POST['toggle_order_status'])){
     $stmt->execute();
     $stmt->close();
 
+    // Establish a new connection to the users database
+    $usersServername = "localhost";
+    $usersUsername = "root";
+    $usersPassword = "";
+    $usersDbname = "database"; // Replace with the actual users database name
+
+    $usersConn = new mysqli($usersServername, $usersUsername, $usersPassword, $usersDbname);
+
+    if ($usersConn->connect_error) {
+        die("Users Database Connection failed: " . $usersConn->connect_error);
+    }
+
+    // Fetch the customer's email from the users database
+    $fetchCustomerEmailQuery = "SELECT email FROM users WHERE username = ?";
+    $stmt = $usersConn->prepare($fetchCustomerEmailQuery);
+    $stmt->bind_param("s", $resultOrders->fetch_assoc()['username']);
+    $stmt->execute();
+    $customerEmailResult = $stmt->get_result();
+    if ($customerEmailResult && $customerEmailResult->num_rows > 0) {
+        $customerEmail = $customerEmailResult->fetch_assoc()['email'];
+
+        // Send an email to the customer
+        $to = $customerEmail;
+        $subject = "Order Status Update";
+        $message = "Your order's status has been updated to: $newStatus";
+        $headers = "From: vendora@localhost";
+
+        mail($to, $subject, $message, $headers);
+    }
+    $stmt->close();
+
+    // Close the users database connection
+    $usersConn->close();
+
     // Redirect to refresh the page
     header("Location: vendor_dashboard.php");
 }
+
 
 ?>
 

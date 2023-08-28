@@ -44,6 +44,7 @@ $customerUsername = $_SESSION["username"];
     
     <a href="logout.php">Logout</a>
     <a href="edit_profile.php">Edit Profile</a>
+    <a href="check_history.php">Check History</a>
     <script src="script.js"></script>
 </body>
 </html>
