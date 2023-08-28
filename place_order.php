@@ -37,8 +37,6 @@ while ($row = $result->fetch_assoc()) {
 }
 $stmt->close();
 
-if (isset($_POST['confirm_payment'])) { // Check if the "Confirm Payment" button was clicked
-
 // Process the cart items and insert them into the orders table
 foreach ($cartItems as $productName => $quantity) {
     if (isset($products[$productName])) {
@@ -58,7 +56,7 @@ foreach ($cartItems as $productName => $quantity) {
         $stmt->close();
     }
 }
-}
+
 
 $conn->close();
 ?>
@@ -103,13 +101,11 @@ $conn->close();
 
     <!-- Payment  -->
     <form method="POST">
-        <button type="submit" name="confirm_payment" id="confirm-payment-btn">Confirm Payment</button>
+        <input type="submit" name="confirm_payment" id="confirm-payment-btn" onclick="confirmPayment()"value="Confirm Payment"></input>
     </form>
     <div id="loading-overlay">
         <div class="loading-spinner"></div>
     </div>
-
-    <script src="payment.js"></script>
-
+        <script src="payment.js"></script>
 </body>
 </html>
