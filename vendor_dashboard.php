@@ -161,7 +161,7 @@ if(isset($_POST['toggle_order_status'])){
     </div>
 
     <a href="logout.php">Logout</a>
-    
+    <a href="edit_profile.php">Edit Profile</a>
     <script src="script.js"></script>
 </body>
 </html>
