@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 
 // Fetch products from the database based on the selected vendor
 // $sql = "SELECT product_id, product_name, price, image_url FROM products WHERE vendor = ?";
-$sql = "SELECT product_id, product_name, price, image_url FROM products";
+$sql = "SELECT product_id, product_name, price, image_url FROM products WHERE status = 'available' ";
 $stmt = $conn->prepare($sql);
 // $stmt->bind_param("s", $selectedVendor);
 $stmt->execute();

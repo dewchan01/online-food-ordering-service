@@ -19,13 +19,11 @@ $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-// Retrieve user ID and username from the session or wherever it's stored
-$customerUsername = $_SESSION["username"]; // Assuming you store username in session
+
+$customerUsername = $_SESSION["username"];
 
 $products = [];
 // Process the cart items and insert them into the orders table
-    // Fetch product details from the products table (adjust your SQL query)
-    // Fetch product details from the products table, including image_url and description
 $sql = "SELECT product_id, product_name, price, image_url, description FROM products";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
@@ -36,27 +34,6 @@ while ($row = $result->fetch_assoc()) {
     $products[$row['product_name']] = $row; // Store product details in an array with product_name as key
 }
 $stmt->close();
-
-// Process the cart items and insert them into the orders table
-foreach ($cartItems as $productName => $quantity) {
-    if (isset($products[$productName])) {
-        $product = $products[$productName];
-        $productID = $product['product_id'];
-        $imageURL = $product['image_url'];
-        $description = $product['description'];
-        $price = $product['price'];
-        $totalPrice = $price * $quantity;
-
-        // Insert order details into the orders table
-        $insertQuery = "INSERT INTO orders (time, image_url, username, product_id, product_name, description, quantity, total_price, order_status) 
-                        VALUES (CURRENT_TIMESTAMP, ?, ?, ?, ?, ?, ?, ?, 'Payment Received')";
-        $stmt = $conn->prepare($insertQuery);
-        $stmt->bind_param("ssisssd", $imageURL, $customerUsername, $productID, $productName, $description, $quantity, $totalPrice);
-        $stmt->execute();
-        $stmt->close();
-    }
-}
-
 
 $conn->close();
 ?>
@@ -102,12 +79,11 @@ $conn->close();
     <!-- back to order page to retry order -->
     <input type="button" name="back_to_order" id="back-to-order-btn" onclick="backToOrder()"value="Back to Order"></input>
     <!-- Payment  -->
-    <form method="POST">
-        <input type="submit" name="confirm_payment" id="confirm-payment-btn" onclick="confirmPayment()"value="Confirm Payment"></input>
+    <form method="POST" action="process_payment.php">
+        <input type="hidden" name="cart" value='<?php echo json_encode($cartItems); ?>'>
+        <input type="hidden" name="vendor" value='<?php echo $selectedVendor; ?>'>
+        <button type="submit" name="confirm_payment" id="confirm-payment-btn" value="Confirm Payment" onclick="confirmPayment()">Confirm Payment</button>
     </form>
-    <div id="loading-overlay">
-        <div class="loading-spinner"></div>
-    </div>
-        <script src="payment.js"></script>
+    <script src="payment.js"></script>
 </body>
 </html>
