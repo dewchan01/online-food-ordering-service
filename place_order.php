@@ -98,7 +98,9 @@ $conn->close();
         ?>
     </table>
     <p>Total Cost: <?php echo $totalCost; ?></p>
-
+    
+    <!-- back to order page to retry order -->
+    <input type="button" name="back_to_order" id="back-to-order-btn" onclick="backToOrder()"value="Back to Order"></input>
     <!-- Payment  -->
     <form method="POST">
         <input type="submit" name="confirm_payment" id="confirm-payment-btn" onclick="confirmPayment()"value="Confirm Payment"></input>

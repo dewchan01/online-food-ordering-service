@@ -24,3 +24,10 @@ function confirmPayment() {
         window.location.href = "customer_dashboard.php";
     }, 3000); // Simulate a 3-second payment process and database writing
 }
+
+function backToOrder() {
+    choice = confirm("Are you sure you want to go back to the order? Current order will be deleted and refreshed!")
+    if(choice){
+        window.location.href = "customer_dashboard.php";
+    }
+}
