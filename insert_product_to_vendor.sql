@@ -7,4 +7,4 @@ VALUES
 
 INSERT INTO orders (time, image_url, username, product_id, product_name, description, quantity, total_price, order_status) 
 VALUES
-(CURRENT_TIMESTAMP,'https://static.phdvasia.com/sg1/menu/single/desktop_thumbnail_5ee2b262-0e37-4ff8-9a7f-9132dc93fa0d.jpg', 'admin','Description for Product A1', 1, 'Product A1', 2, 21.98, 'Payment Received')
+(CURRENT_TIMESTAMP,'https://static.phdvasia.com/sg1/menu/single/desktop_thumbnail_5ee2b262-0e37-4ff8-9a7f-9132dc93fa0d.jpg', 'admin','Description for Product A1', 1, 'Product A1', 2, 21.98, 'Order Confirmed')

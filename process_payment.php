@@ -43,7 +43,7 @@ foreach ($cartItems as $productName => $quantity) {
 
         // Insert order details into the orders table
         $insertQuery = "INSERT INTO orders (time, image_url, username, product_id, product_name, description, quantity, total_price, order_status) 
-                        VALUES (CURRENT_TIMESTAMP, ?, ?, ?, ?, ?, ?, ?, 'Payment Received')";
+                        VALUES (CURRENT_TIMESTAMP, ?, ?, ?, ?, ?, ?, ?, 'Order Confirmed')";
         $stmt = $conn->prepare($insertQuery);
         $stmt->bind_param("ssisssd", $imageURL, $customerUsername, $productID, $productName, $description, $quantity, $totalPrice);
         $stmt->execute();

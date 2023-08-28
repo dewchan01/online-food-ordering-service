@@ -55,7 +55,7 @@ if(isset($_POST['toggle_order_status'])){
     $stmt->close();
 
     // Determine the new order status
-    $newStatus = ($currentStatus === "Payment Received") ? "Order Confirmed" : "Payment Received";
+    $newStatus = ($currentStatus === "Order Confirmed") ? "Delivered" : "Order Confirmed";
 
     // Update the order status in the database
     $updateStatusQuery = "UPDATE orders SET order_status = ? WHERE order_id = ?";
@@ -140,9 +140,10 @@ if(isset($_POST['toggle_order_status'])){
             echo "<td>" . $row["total_price"] . "</td>";
             echo "<td>";
             // Determine the text content based on the order status
-            $orderStatusText = ($row["order_status"] === "Payment Received") ? "Payment Received" : "Order Confirmed";
+            $orderStatusText = ($row["order_status"] === "Order Confirmed") ? "Delivered" : "Delete";
+            $buttonStatus = ($row["order_status"] === "Order Confirmed") ? "" : "disabled";
             echo "<form method='POST'>";
-            echo "<button type='submit' name='toggle_order_status' value='" . $row['order_id'] . "'>" . $orderStatusText . "</button>";
+            echo "<button type='submit' name='toggle_order_status' value='" . $row['order_id'] . "' . $buttonStatus . >" . $orderStatusText . "</button>";
             echo "</form>";
             echo "</td>";
             echo "</tr>";
