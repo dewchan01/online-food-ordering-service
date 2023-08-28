@@ -31,6 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Start a session and store user information
         session_start();
         $_SESSION["username"] = $username;
+        echo "<script>console.log($role);</script>";
+
 
         // Redirect to appropriate user dashboard
         if ($role === "customer") {
@@ -41,8 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
     } else {
-        // Redirect back to the login page with an error message
-        header("Location: index.php?login_error=1");
+        echo "<script>alert('Invalid username or password');
+        window.location.href='index.html';</script>";
         exit();
     }
 
