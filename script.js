@@ -7,6 +7,7 @@ const vendorDropdown = document.getElementById('vendor');
 
 let selectedVendor;
 
+if (vendorDropdown){
 vendorDropdown.addEventListener('change', () => {
     selectedVendor = vendorDropdown.value; // Assign the selected vendor value
     // Fetch products based on the selected vendor
@@ -30,14 +31,15 @@ vendorDropdown.addEventListener('change', () => {
             console.error('Error fetching products:', error);
         });
 });
+}
 
 // Cart
-
 const cartIcon = document.getElementById('cart-icon');
 const cartCount = document.getElementById('cart-count');
 const cartDropdown = document.getElementById('cart-dropdown');
 // Track cart items
 let cartItems = {};
+if (cartIcon){
 
 cartIcon.addEventListener('click', () => {
     cartDropdown.style.display = cartDropdown.style.display === 'block' ? 'none' : 'block';
@@ -94,4 +96,4 @@ function updateCheckOutBtn() {
     checkoutButton.textContent = 'Checkout';
     cartDropdown.appendChild(checkoutButton);
 }
-
+}
