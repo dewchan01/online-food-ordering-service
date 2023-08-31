@@ -108,6 +108,8 @@ if (cartIcon) {
             cartDropdown.appendChild(cartItem);
         }
         updateCheckOutBtn();
+        updateCartCount();
+
     }
 
 
