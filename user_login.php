@@ -31,7 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Start a session and store user information
         session_start();
         $_SESSION["username"] = $username;
-        echo "<script>console.log($role);</script>";
 
 
         // Redirect to appropriate user dashboard

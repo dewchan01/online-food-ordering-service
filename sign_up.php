@@ -1,3 +1,4 @@
+
 <?php
 // Replace these with your actual database connection details
 $servername = "localhost";
@@ -18,10 +19,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $phone_number = $_POST["phone_number"];
     $role = $_POST["role"];
+    $address=$_POST["address"];
 
-    $insertQuery = "INSERT INTO users (username, password, email, phone_number, role) VALUES (?, ?, ?, ?, ?)";
+    $insertQuery = "INSERT INTO users (username, password, email, phone_number, role,address) VALUES (?, ?, ?, ?, ?,?)";
     $stmt = $conn->prepare($insertQuery);
-    $stmt->bind_param("sssss", $username, $password, $email, $phone_number, $role);
+    $stmt->bind_param("ssssss", $username, $password, $email, $phone_number, $role,$address);
     $stmt->execute();
     $stmt->close();
     echo "<script>alert('Registration successful!');
@@ -44,12 +46,15 @@ $conn->close();
         <input type="password" name="password" placeholder="Password" required>
         <input type="email" name="email" placeholder="Email" required>
         <input type="tel" name="phone_number" placeholder="Phone Number" required>
-        <select name="role" required>
+        <select name="role" id="roleSelect" required>
             <option value="customer">Customer</option>
             <option value="vendor">Vendor</option>
         </select>
+        <textarea name="address" id ="addressField" style="display:none;"placeholder="Enter Your Address" required></textarea>
+        <br>
         <button type="submit">Sign Up</button>
     </form>
     <a href="index.html">Back to Login</a>
+    <script src="script.js"></script>
 </body>
 </html>

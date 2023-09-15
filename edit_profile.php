@@ -1,3 +1,4 @@
+<!-- address -->
 <?php
 session_start();
 if (!isset($_SESSION["username"])) {
@@ -34,11 +35,12 @@ if (isset($_POST['edit_profile_submit'])) {
     $editedEmail = $_POST['edited_email'];
     $editedPhoneNumber = $_POST['edited_phone_number'];
     $editedPassword = $_POST['edited_password'];
+    $editedAddress = $_POST['edited address'];
 
     // Perform edit for the user profile
-    $editQuery = "UPDATE users SET email = ?, phone_number = ?, password = ? WHERE username = ?";
+    $editQuery = "UPDATE users SET email = ?, phone_number = ?, password = ?, address = ? WHERE username = ?";
     $stmt = $conn->prepare($editQuery);
-    $stmt->bind_param("ssss", $editedEmail, $editedPhoneNumber, $editedPassword, $loggedInUsername);
+    $stmt->bind_param("sssss", $editedEmail, $editedPhoneNumber, $editedPassword,$editedAddress, $loggedInUsername);
     $stmt->execute();
     $stmt->close();
     // Redirect based on role
@@ -75,6 +77,9 @@ $conn->close();
         
         <label for="edited_password">New Password:</label>
         <input type="password" id="edited_password" name="edited_password" required><br>
+
+        <label for="edited_address" style="vertical-align:top">New Address:</label>
+        <textarea name="address" id ="edited_address" value="<?php echo $user['address']; ?>"required></textarea><br>
         
         <button type="submit" name="edit_profile_submit">Save Changes</button>
     </form>
