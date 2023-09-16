@@ -112,10 +112,6 @@ if (cartIcon) {
         }
         updateCheckOutBtn();
         updateCartCount();
-<<<<<<< HEAD
-=======
-
->>>>>>> 5073f12c0121c7691cf42d4736f95ef12908cd2d
     }
 
 

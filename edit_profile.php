@@ -1,4 +1,3 @@
-<!-- address -->
 <?php
 session_start();
 if (!isset($_SESSION["username"])) {
@@ -35,7 +34,7 @@ if (isset($_POST['edit_profile_submit'])) {
     $editedEmail = $_POST['edited_email'];
     $editedPhoneNumber = $_POST['edited_phone_number'];
     $editedPassword = $_POST['edited_password'];
-    $editedAddress = $_POST['edited address'];
+    $editedAddress = $_POST['edited_address'];
 
     // Perform edit for the user profile
     $editQuery = "UPDATE users SET email = ?, phone_number = ?, password = ?, address = ? WHERE username = ?";
@@ -64,7 +63,7 @@ $conn->close();
 </head>
 <body>
     <h1>Edit Profile</h1>
-    <?php if (isset($user)): ?>
+    <?php if ($user['role']==='customer'): ?>
     <form method="POST" action="edit_profile.php">
         <label for="edited_username">Username:</label>
         <input type="text" id="edited_username" name="edited_username" value="<?php echo $user['username']; ?>" readonly><br>
@@ -77,17 +76,33 @@ $conn->close();
         
         <label for="edited_password">New Password:</label>
         <input type="password" id="edited_password" name="edited_password" required><br>
-
+        
         <label for="edited_address" style="vertical-align:top">New Address:</label>
-        <textarea name="address" id ="edited_address" value="<?php echo $user['address']; ?>"required></textarea><br>
+        <textarea name="edited_address" id ="edited_address" value="<?php echo $user['address']; ?>"required></textarea><br>
         
         <button type="submit" name="edit_profile_submit">Save Changes</button>
+        <a href='customer_dashboard.php';>Back to Dashboard</a>
     </form>
+
+    <?php elseif ($user['role']==='vendor'): ?>
+        <label for="edited_username">Username:</label>
+        <input type="text" id="edited_username" name="edited_username" value="<?php echo $user['username']; ?>" readonly><br>
+        
+        <label for="edited_email">Email:</label>
+        <input type="email" id="edited_email" name="edited_email" value="<?php echo $user['email']; ?>" required><br>
+        
+        <label for="edited_phone_number">Phone Number:</label>
+        <input type="tel" id="edited_phone_number" name="edited_phone_number" value="<?php echo $user['phone_number']; ?>" required><br>
+        
+        <label for="edited_password">New Password:</label>
+        <input type="password" id="edited_password" name="edited_password" required><br>
+        <br>
+        <button type="submit" name="edit_profile_submit">Save Changes</button>
+        <a href='vendor_dashboard.php';>Back to Dashboard</a>
     <?php else: ?>
         <p>User profile not found.</p>
     <?php endif; ?>
     
-    <a href="<?php echo ($user['role'] === 'customer') ? 'customer_dashboard.php' : 'vendor_dashboard.php'; ?>">Back to Dashboard</a>
 
 </body>
 </html>
