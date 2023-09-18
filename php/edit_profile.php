@@ -15,7 +15,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
- 
+
 if (isset($_SESSION['username'])) {
     $loggedInUsername = $_SESSION['username'];
 
@@ -30,16 +30,21 @@ if (isset($_SESSION['username'])) {
 }
 
 if (isset($_POST['edit_profile_submit'])) {
+    
     // Get the edited user details from the form
     $editedEmail = $_POST['edited_email'];
     $editedPhoneNumber = $_POST['edited_phone_number'];
-    $editedPassword = $_POST['edited_password'];
+    $currentPassword = $_POST['current_password'];
     $editedAddress = $_POST['edited_address'];
-
+    if($user['password']!=$currentPassword)
+    {
+        echo "<script>alert('Incorrect password! Please try again.');
+        window.location.href='edit_profile.php';</script>";
+    }
     // Perform edit for the user profile
-    $editQuery = "UPDATE users SET email = ?, phone_number = ?, password = ?, address = ? WHERE username = ?";
+    $editQuery = "UPDATE users SET email = ?, phone_number = ?, address = ? WHERE username = ?";
     $stmt = $conn->prepare($editQuery);
-    $stmt->bind_param("sssss", $editedEmail, $editedPhoneNumber, $editedPassword,$editedAddress, $loggedInUsername);
+    $stmt->bind_param("ssss", $editedEmail, $editedPhoneNumber, $editedAddress, $loggedInUsername);
     $stmt->execute();
     $stmt->close();
     // Redirect based on role
@@ -74,11 +79,11 @@ $conn->close();
         <label for="edited_phone_number">Phone Number:</label>
         <input type="tel" id="edited_phone_number" name="edited_phone_number" value="<?php echo $user['phone_number']; ?>" required><br>
         
-        <label for="edited_password">New Password:</label>
-        <input type="password" id="edited_password" name="edited_password" required><br>
-        
         <label for="edited_address" style="vertical-align:top">New Address:</label>
-        <textarea name="edited_address" id ="edited_address" value="<?php echo $user['address']; ?>"required></textarea><br>
+        <textarea name="edited_address" id ="edited_address" required><?php echo $user['address']; ?></textarea><br>
+
+        <label for="_password">Current Password:</label>
+        <input type="password" id="current_password" name="current_password" required><br>
         
         <button type="submit" name="edit_profile_submit">Save Changes</button>
         <a href='customer/customer_dashboard.php';>Back to Dashboard</a>
@@ -95,8 +100,8 @@ $conn->close();
         <label for="edited_phone_number">Phone Number:</label>
         <input type="tel" id="edited_phone_number" name="edited_phone_number" value="<?php echo $user['phone_number']; ?>" required><br>
         
-        <label for="edited_password">New Password:</label>
-        <input type="password" id="edited_password" name="edited_password" required><br>
+        <label for="current_password">Current Password:</label>
+        <input type="password" id="current_password" name="current_password" required><br>
         <br>
         <button type="submit" name="edit_profile_submit">Save Changes</button>
         <a href='vendor/vendor_dashboard.php';>Back to Dashboard</a>
