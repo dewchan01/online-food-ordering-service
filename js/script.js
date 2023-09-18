@@ -60,7 +60,6 @@ if (cartIcon) {
             updateCartDropdown();
             updateCartCount();
         }
-
         // display cart items in the cart
         if (event.target.id === 'checkout-btn') {
             const cartItemsQuery = JSON.stringify(cartItems);

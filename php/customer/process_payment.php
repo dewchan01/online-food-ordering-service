@@ -58,7 +58,7 @@ $conn->close();
 <html>
 <head>
     <title>Checkout Confirmation</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../../styles.css">
     <style>
         /* Add your confirmation animation styles here */
         @keyframes successAnimation {

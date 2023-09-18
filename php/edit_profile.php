@@ -15,7 +15,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
+ 
 if (isset($_SESSION['username'])) {
     $loggedInUsername = $_SESSION['username'];
 
@@ -45,10 +45,10 @@ if (isset($_POST['edit_profile_submit'])) {
     // Redirect based on role
     if ($user['role'] === 'customer') {
         echo "<script>alert('Changes saved successfully!');
-        window.location.href='customer_dashboard.php';</script>";
+        window.location.href='customer/customer_dashboard.php';</script>";
     } elseif ($user['role'] === 'vendor') {
         echo "<script>alert('Changes saved successfully!');
-        window.location.href='vendor_dashboard.php';</script>";
+        window.location.href='vendor/vendor_dashboard.php';</script>";
     }
 }
 
@@ -59,7 +59,7 @@ $conn->close();
 <html>
 <head>
     <title>Edit Profile</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../styles.css">
 </head>
 <body>
     <h1>Edit Profile</h1>
@@ -81,10 +81,11 @@ $conn->close();
         <textarea name="edited_address" id ="edited_address" value="<?php echo $user['address']; ?>"required></textarea><br>
         
         <button type="submit" name="edit_profile_submit">Save Changes</button>
-        <a href='customer_dashboard.php';>Back to Dashboard</a>
+        <a href='customer/customer_dashboard.php';>Back to Dashboard</a>
     </form>
 
     <?php elseif ($user['role']==='vendor'): ?>
+    <form method="POST" action="edit_profile.php">
         <label for="edited_username">Username:</label>
         <input type="text" id="edited_username" name="edited_username" value="<?php echo $user['username']; ?>" readonly><br>
         
@@ -98,7 +99,8 @@ $conn->close();
         <input type="password" id="edited_password" name="edited_password" required><br>
         <br>
         <button type="submit" name="edit_profile_submit">Save Changes</button>
-        <a href='vendor_dashboard.php';>Back to Dashboard</a>
+        <a href='vendor/vendor_dashboard.php';>Back to Dashboard</a>
+    </form>
     <?php else: ?>
         <p>User profile not found.</p>
     <?php endif; ?>

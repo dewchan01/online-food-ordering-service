@@ -2,7 +2,7 @@
 // Ensure the user is logged in as a customer
 session_start();
 if (!isset($_SESSION["username"])) {
-    header("Location: user_login.php");
+    header("Location: ../user_login.php");
     exit();
 }
 
@@ -15,7 +15,7 @@ $customerUsername = $_SESSION["username"];
 <html>
 <head>
     <title>Customer Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../../styles.css">
 </head>
 <body>
     <h1>Welcome, <?php echo $customerUsername; ?>!</h1>
@@ -34,16 +34,16 @@ $customerUsername = $_SESSION["username"];
     <div id ="products-list"></div>
         
     <div>
-        <img id="cart-icon" src="images/cart-icon.png" alt="Cart">
+        <img id="cart-icon" src="../../images/cart-icon.png" alt="Cart">
         <span id="cart-count">0</span>
         <div id="cart-dropdown" class="cart-dropdown">
         <!-- Cart items will be dynamically populated here -->
         </div>    
     </div>
     
-    <a href="logout.php">Logout</a>
-    <a href="edit_profile.php">Edit Profile</a>
+    <a href="../logout.php">Logout</a>
+    <a href="../edit_profile.php">Edit Profile</a>
     <a href="check_history.php">Check History</a>
-    <script src="script.js"></script>
+    <script src="../../js/script.js"></script>
 </body>
 </html>

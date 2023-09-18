@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
     $stmt->close();
     echo "<script>alert('Registration successful!');
-    window.location.href='index.html';</script>";
+    window.location.href='../index.html';</script>";
     // Redirect back to the login page
 }
 
@@ -37,7 +37,7 @@ $conn->close();
 <html>
 <head>
     <title>Sign Up</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../styles.css">
 </head>
 <body>
     <h1>Sign Up</h1>
@@ -54,7 +54,7 @@ $conn->close();
         <br>
         <button type="submit">Sign Up</button>
     </form>
-    <a href="index.html">Back to Login</a>
-    <script src="script.js"></script>
+    <a href="../index.html">Back to Login</a>
+    <script src="../js/script.js"></script>
 </body>
 </html>

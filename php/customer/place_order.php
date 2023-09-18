@@ -42,7 +42,7 @@ $conn->close();
 <html>
 <head>
     <title>Checkout</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../../styles.css">
 </head>
 <body>
     <h2>Checkout</h2>
@@ -84,6 +84,6 @@ $conn->close();
         <input type="hidden" name="vendor" value='<?php echo $selectedVendor; ?>'>
         <button type="submit" name="confirm_payment" id="confirm-payment-btn" value="Confirm Payment" onclick="confirmPayment()">Confirm Payment</button>
     </form>
-    <script src="payment.js"></script>
+    <script src="../../js/payment.js"></script>
 </body>
 </html>

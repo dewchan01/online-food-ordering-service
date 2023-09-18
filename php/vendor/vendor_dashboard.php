@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION["username"])) {
-    header("Location: user_login.php");
+    header("Location: ../user_login.php");
     exit();
 }
 
@@ -109,7 +109,7 @@ if(isset($_POST['toggle_order_status'])){
 <html>
 <head>
     <title>Vendor Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../../styles.css">
 </head>
 <body>
     <h1>Welcome, <?php echo $vendorUsername; ?>!</h1>
@@ -196,9 +196,9 @@ if(isset($_POST['toggle_order_status'])){
 
     </div>
 
-    <a href="logout.php">Logout</a>
-    <a href="edit_profile.php">Edit Profile</a>
-    <script src="script.js"></script>
+    <a href="../logout.php">Logout</a>
+    <a href="../edit_profile.php">Edit Profile</a>
+    <script src="../../js/script.js"></script>
 </body>
 </html>
 
