@@ -13,6 +13,7 @@ CREATE TABLE orders (
     time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     image_url VARCHAR(255),
     username VARCHAR(255),
+    address TEXT,
     product_id INT,
     product_name VARCHAR(255),
     description TEXT,

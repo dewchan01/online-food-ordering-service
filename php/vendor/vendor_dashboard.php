@@ -126,6 +126,7 @@ if(isset($_POST['toggle_order_status'])){
             <th>Product Name</th>
             <th>Quantity</th>
             <th>Total Price</th>
+            <th>Delivery Address</th>
             <th>Order Status</th>
             <!-- Add more columns as needed -->
         </tr>
@@ -138,6 +139,7 @@ if(isset($_POST['toggle_order_status'])){
             echo "<td>" . $row["product_name"] . "</td>";
             echo "<td>" . $row["quantity"] . "</td>";
             echo "<td>" . $row["total_price"] . "</td>";
+            echo "<td>" . $row["address"] . "</td>";
             echo "<td>";
             // Determine the text content based on the order status
             $orderStatusText = ($row["order_status"] === "Order Confirmed") ? "Delivered" : "Delete";
