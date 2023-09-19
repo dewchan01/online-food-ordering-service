@@ -46,11 +46,11 @@ if(isset($_POST['toggle_order_status'])){
     $orderId = $_POST['toggle_order_status']; // Assuming the button value is set to the order ID
 
     // Fetch the current order status
-    $fetchStatusQuery = "SELECT order_status FROM orders WHERE order_id = ?";
+    $fetchStatusQuery = "SELECT order_status,username FROM orders WHERE order_id = ?";
     $stmt = $conn->prepare($fetchStatusQuery);
     $stmt->bind_param("i", $orderId);
     $stmt->execute();
-    $stmt->bind_result($currentStatus);
+    $stmt->bind_result($currentStatus,$username);
     $stmt->fetch();
     $stmt->close();
 
@@ -64,7 +64,6 @@ if(isset($_POST['toggle_order_status'])){
     $stmt->execute();
     $stmt->close();
 
-    // Establish a new connection to the users database
     $usersServername = "localhost";
     $usersUsername = "root";
     $usersPassword = "";
@@ -76,10 +75,11 @@ if(isset($_POST['toggle_order_status'])){
         die("Users Database Connection failed: " . $usersConn->connect_error);
     }
 
-    // Fetch the customer's email from the users database
+    // Fetch the customer's email from the users database using the username
     $fetchCustomerEmailQuery = "SELECT email FROM users WHERE username = ?";
+
     $stmt = $usersConn->prepare($fetchCustomerEmailQuery);
-    $stmt->bind_param("s", $resultOrders->fetch_assoc()['username']);
+    $stmt->bind_param("s", $username); // Use the username obtained from the orders table
     $stmt->execute();
     $customerEmailResult = $stmt->get_result();
     if ($customerEmailResult && $customerEmailResult->num_rows > 0) {
