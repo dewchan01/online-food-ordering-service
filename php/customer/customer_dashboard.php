@@ -2,7 +2,7 @@
 // Ensure the user is logged in as a customer
 session_start();
 if (!isset($_SESSION["username"])) {
-    header("Location: ../user_login.php");
+    header("Location: ../../login.html");
     exit();
 }
 
@@ -17,9 +17,7 @@ $customerUsername = $_SESSION["username"];
     <title>Customer Dashboard</title>
     <link rel="stylesheet" type="text/css" href="../../styles.css">
 </head>
-<body>
-    <h1>Welcome, <?php echo $customerUsername; ?>!</h1>
-    
+<body>    
     <!-- Customer-specific dashboard content -->
     <div id="customer-dashboard">
     <h2>Place an Order</h2>
@@ -41,9 +39,8 @@ $customerUsername = $_SESSION["username"];
         </div>    
     </div>
     
-    <a href="../logout.php">Logout</a>
-    <a href="../edit_profile.php">Edit Profile</a>
-    <a href="check_history.php">Check History</a>
+    <a href="../order.php">Back</a>
+
     <script src="../../js/script.js"></script>
 </body>
 </html>

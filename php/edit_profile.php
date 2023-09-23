@@ -86,7 +86,7 @@ $conn->close();
         <input type="password" id="current_password" name="current_password" required><br>
         
         <button type="submit" name="edit_profile_submit">Save Changes</button>
-        <a href='customer/customer_dashboard.php';>Back to Dashboard</a>
+        <a href="../order.php">Back to Order</a>
     </form>
 
     <?php elseif ($user['role']==='vendor'): ?>

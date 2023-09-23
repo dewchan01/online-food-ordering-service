@@ -65,6 +65,6 @@ $conn->close();
         <p>No orders found.</p>
     <?php endif; ?>
     
-    <a href="customer_dashboard.php">Back to Dashboard</a>
+    <a href="../order.php">Back to Order</a>
 </body>
 </html>

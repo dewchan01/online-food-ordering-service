@@ -27,6 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
     $stmt->close();
     echo "<script>
-    window.location.href='../index.html';</script>";
+    window.location.href='../login.html';</script>";
     // Redirect back to the login page
 }

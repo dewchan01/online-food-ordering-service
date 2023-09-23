@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Redirect to appropriate user dashboard
         if ($role === "customer") {
-            header("Location: customer/customer_dashboard.php");
+            header("Location: order.php");
             exit();
         } elseif ($role === "vendor") {
             header("Location: vendor/vendor_dashboard.php");
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
         echo "<script>alert('Invalid username or password');
-        window.location.href='../index.html';</script>";
+        window.location.href='../login.html';</script>";
         exit();
     }
 

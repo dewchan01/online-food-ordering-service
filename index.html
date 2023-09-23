@@ -1,31 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Food Ordering Portal - Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domini's Pizza House</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
+
 </head>
+
 <body>
-    <h1>Welcome to Food Ordering Portal</h1>
-    
-    <!-- Login UI -->
-    <div id="login">
-        <h2>Login</h2>
-        <div id="user-login">
-            <h3>User Login</h3>
-            <form action="php/user_login.php" method="post">
-                <input type="text" name="username" placeholder="Username" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <button type="submit">Login</button>
-            </form>
-            <p>Don't have an account? <a href="sign_up.html">Sign Up</a></p>
-            <p>Forget your password? <a href="php/forget_password.php">Reset Password</a></p>
-        </div>
+    <h1>Home Page</h1>
+
+    <div>
+        <a href="login.html">My Account</a>
     </div>
-    
-    
-    <script src="js/script.js"></script>
+
+    <div>
+        <input type="button" value="Dine In" disabled>
+        <input type="button" value="Delivery Now">
+    </div>
+
+    <div class="banner">
+        <img class="banner-image" onclick="window.location.href ='php/order.php'" data-backgroundimageurl="images"
+            src="images/banner.jpg" data-loaded="true">
+    </div>
+
+    <p>It is our commitment to be the best pizza joint in Singapore and offer great value for all pizza lovers from
+        around the world. Domino's Pizza has won the hearts of many with a variety of great tasting signature pizzas
+        delivered quickly to your door step while maintaining the freshness and its state of piping hotness, for a
+        hearty meal with family and friends. Domino's Pizza has been established in Singapore since 2009. In a span of
+        14 years, we have opened over 40 outlets across the island. From the first store at Bukit Timah in 2009,
+        Domino's Pizza Singapore has grown strength to strength in providing great value through delicious pizzas
+        delivered fast. Throughout time, Domino's has also been upgrading its menu and food choices by offering limited
+        time flavors and variety such as Mentaiko Pizza, Chocolate Lava Cake, and Cheeseburger Pizzas.</p>
 </body>
+
 </html>
-
-
-

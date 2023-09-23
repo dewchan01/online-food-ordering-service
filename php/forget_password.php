@@ -46,7 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $stmt->execute();
     $stmt->close();
     echo "<script>alert('The password reset was successful!');
-    window.location.href='../index.html';</script>";
+    window.location.href='../login.html';</script>";
 }
 
 $conn->close();
@@ -69,6 +69,6 @@ $conn->close();
         <button type="submit">Submit</button>
 
     </form>
-    <a href="../index.html">Back to Login</a>
+    <a href="../login.html">Back to Login</a>
 </body>
 </html>
