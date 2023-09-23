@@ -21,7 +21,7 @@ $customerUsername = $_SESSION["username"];
     <h1>Welcome Back<br><?php echo $customerUsername; ?>!</h1>
     <h2>Start Your Order</h2>
     <div>
-        <a href="../login.html">My Account</a>
+        <h3>My Account</h3>
     </div>
 
     <div>

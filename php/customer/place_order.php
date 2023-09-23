@@ -62,19 +62,21 @@ $conn->close();
                 $productID = $product['product_id'];
                 $price = $product['price'];
                 $totalPrice = $price * $quantity;
+                $deliveryFee = 5;
                 $totalCost += $totalPrice;
                 echo "<tr>";
                 echo "<td>$productID</td>";
                 echo "<td>$productName</td>";
-                echo "<td>$price</td>";
+                echo "<td>$$price</td>";
                 echo "<td>$quantity</td>";
-                echo "<td>$totalPrice</td>";
+                echo "<td>$$totalPrice</td>";
                 echo "</tr>";
             }
         }
         ?>
     </table>
-    <p>Total Cost: <?php echo $totalCost; ?></p>
+    <p>Delivery Fee: $<?php echo $deliveryFee; ?></p>
+    <p>Total Cost: $<?php echo $totalCost+$deliveryFee; ?></p>
     
     <!-- back to order page to retry order -->
     <input type="button" name="back_to_order" id="back-to-order-btn" onclick="backToOrder()"value="Back to Order"></input>

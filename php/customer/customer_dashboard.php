@@ -23,20 +23,21 @@ $customerUsername = $_SESSION["username"];
     <h2>Place an Order</h2>
 
     <!-- <form action="place_order.php" method="post"> -->
-    <div>
+    <!-- <div>
     <label for="vendor">Select Vendor:</label>
     <select id="vendor">
         <option value="default" selected = "selected">Please select one of the vendor:</option>
         <option value="vendora">Vendor A</option>
-    </select>
+    </select> -->
     <div id ="products-list"></div>
         
     <div>
-        <img id="cart-icon" src="../../images/cart-icon.png" alt="Cart">
-        <span id="cart-count">0</span>
+        <h3 id="cart-icon" alt="Cart">Order Details</h3>
         <div id="cart-dropdown" class="cart-dropdown">
         <!-- Cart items will be dynamically populated here -->
         </div>    
+        <span id="cart-count">Total: 0</span>
+
     </div>
     
     <a href="../order.php">Back</a>
