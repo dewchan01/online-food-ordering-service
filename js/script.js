@@ -4,7 +4,6 @@
 const productsList = document.getElementById('products-list');
 const cart = document.getElementById('cart');
 const vendorDropdown = document.getElementById('vendor');
-const roleDropdown = document.getElementById('roleSelect');
 const address = document.getElementById('addressField');
 
 
@@ -130,16 +129,3 @@ if (cartIcon) {
         cartDropdown.appendChild(checkoutButton);
     }
 }
-
-//address filling
-let selectedRole;
-roleDropdown.addEventListener('change' ,()=>{
-    selectedRole = roleDropdown.value
-    if(selectedRole==="customer")
-    {
-        address.style.display="block";
-    }
-    else{
-        address.style.display="none";
-    }
-});

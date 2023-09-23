@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
     $email = $_POST["email"];
     $phone_number = $_POST["phone_number"];
-    $role = $_POST["role"];
+    $role = "customer";
     $address=$_POST["address"];
 
     $insertQuery = "INSERT INTO users (username, password, email, phone_number, role,address) VALUES (?, ?, ?, ?, ?,?)";
@@ -44,13 +44,10 @@ $conn->close();
     <form method="post">
         <input type="text" name="username" placeholder="Username" required>
         <input type="password" name="password" placeholder="Password" required>
+        <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm Password" required>
         <input type="email" name="email" placeholder="Email" required>
         <input type="tel" name="phone_number" placeholder="Phone Number" required>
-        <select name="role" id="roleSelect" required>
-            <option value="customer">Customer</option>
-            <option value="vendor">Vendor</option>
-        </select>
-        <textarea name="address" id ="addressField" style="display:none;"placeholder="Enter Your Address" required></textarea>
+        <textarea name="address" id ="addressField" placeholder="Enter Your Address" required></textarea>
         <br>
         <button type="submit">Sign Up</button>
     </form>
