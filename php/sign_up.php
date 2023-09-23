@@ -26,32 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssssss", $username, $password, $email, $phone_number, $role,$address);
     $stmt->execute();
     $stmt->close();
-    echo "<script>alert('Registration successful!');
+    echo "<script>
     window.location.href='../index.html';</script>";
     // Redirect back to the login page
 }
-
-$conn->close();
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Sign Up</title>
-    <link rel="stylesheet" type="text/css" href="../styles.css">
-</head>
-<body>
-    <h1>Sign Up</h1>
-    <form method="post">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm Password" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="tel" name="phone_number" placeholder="Phone Number" required>
-        <textarea name="address" id ="addressField" placeholder="Enter Your Address" required></textarea>
-        <br>
-        <button type="submit">Sign Up</button>
-    </form>
-    <a href="../index.html">Back to Login</a>
-    <script src="../js/script.js"></script>
-</body>
-</html>

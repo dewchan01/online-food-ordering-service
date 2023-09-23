@@ -128,4 +128,6 @@ if (cartIcon) {
         checkoutButton.textContent = 'Checkout';
         cartDropdown.appendChild(checkoutButton);
     }
+
+    
 }

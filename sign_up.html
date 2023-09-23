@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="js/script.js"></script>
+    <script type="text/javascript">
+    function validateForm() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+        alert('Registration successful!');
+        return true;
+    }
+    </script>
+</head>
+<body>
+    <h1>Sign Up</h1>
+    <form method="post" onsubmit="return validateForm()" action="php/sign_up.php" >
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" id="password" placeholder="Password" required>
+        <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm Password" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="tel" name="phone_number" placeholder="Phone Number" required>
+        <textarea name="address" id ="addressField" placeholder="Enter Your Address" required></textarea>
+        <br>
+        <input type="submit" value="Sign Up">
+    </form>
+        
+    <a href="index.html">Back to Login</a>
+</body>
+</html>
