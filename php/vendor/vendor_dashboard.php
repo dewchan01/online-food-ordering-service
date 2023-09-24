@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION["username"])) {
-    header("Location: user_login.php");
+    header("Location: ../user_login.php");
     exit();
 }
 
@@ -46,17 +46,17 @@ if(isset($_POST['toggle_order_status'])){
     $orderId = $_POST['toggle_order_status']; // Assuming the button value is set to the order ID
 
     // Fetch the current order status
-    $fetchStatusQuery = "SELECT order_status FROM orders WHERE order_id = ?";
+    $fetchStatusQuery = "SELECT time,total_price,product_name,quantity,order_status,username FROM orders WHERE order_id = ?";
     $stmt = $conn->prepare($fetchStatusQuery);
     $stmt->bind_param("i", $orderId);
     $stmt->execute();
-    $stmt->bind_result($currentStatus);
+    $stmt->bind_result($time,$price,$productName,$quantity,$currentStatus,$username);
     $stmt->fetch();
     $stmt->close();
 
     // Determine the new order status
     $newStatus = ($currentStatus === "Order Confirmed") ? "Delivered" : "Order Confirmed";
-
+    $newStatus = strtoupper($newStatus);
     // Update the order status in the database
     $updateStatusQuery = "UPDATE orders SET order_status = ? WHERE order_id = ?";
     $stmt = $conn->prepare($updateStatusQuery);
@@ -64,7 +64,6 @@ if(isset($_POST['toggle_order_status'])){
     $stmt->execute();
     $stmt->close();
 
-    // Establish a new connection to the users database
     $usersServername = "localhost";
     $usersUsername = "root";
     $usersPassword = "";
@@ -76,10 +75,11 @@ if(isset($_POST['toggle_order_status'])){
         die("Users Database Connection failed: " . $usersConn->connect_error);
     }
 
-    // Fetch the customer's email from the users database
+    // Fetch the customer's email from the users database using the username
     $fetchCustomerEmailQuery = "SELECT email FROM users WHERE username = ?";
+
     $stmt = $usersConn->prepare($fetchCustomerEmailQuery);
-    $stmt->bind_param("s", $resultOrders->fetch_assoc()['username']);
+    $stmt->bind_param("s", $username); // Use the username obtained from the orders table
     $stmt->execute();
     $customerEmailResult = $stmt->get_result();
     if ($customerEmailResult && $customerEmailResult->num_rows > 0) {
@@ -87,11 +87,29 @@ if(isset($_POST['toggle_order_status'])){
 
         // Send an email to the customer
         $to = $customerEmail;
-        $subject = "Order Status Update";
-        $message = "Your order's status has been updated to: $newStatus";
-        $headers = "From: vendora@localhost";
+        $subject = "Domini's Pizza House - Order Status Update";
+        $message = '<html><body>';
+        $message .= '<h2>Pizza Order Status Update</h2>';
+        $message .= '<p>Dear Customer,</p>';
+        $message .= '<p>We would like to inform you that your order placed on ' . $time . ', has been <strong>' . $newStatus . '.</strong></p>';
+        $message .= '<h3>Order Details:</h3>';
+        $message .= "<table border='1'>";
+        $message .= "<tr><th>Product Name</th><th>Quantity</th><th>Total Price</th></tr>";
+        $message .= "<tr>";
+        $message .= "<td>$productName</td>";
+        $message .= "<td>$quantity</td>";
+        $message .= "<td>$$price</td>";
+        $message .= "</tr>";
+        $message .= "</table>";
+        $message .= '<p>Thank you for choosing our services!</p>';
+        $message .= '<p>Sincerely,<br>Domini\'s Pizza House</p>';
+        $message .= '</body></html>';
 
-        mail($to, $subject, $message, $headers);
+        $headers = "From: vendora@localhost\r\n";
+        $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+
+
+    mail($to, $subject, $message, $headers);
     }
     $stmt->close();
 
@@ -109,7 +127,7 @@ if(isset($_POST['toggle_order_status'])){
 <html>
 <head>
     <title>Vendor Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../../styles.css">
 </head>
 <body>
     <h1>Welcome, <?php echo $vendorUsername; ?>!</h1>
@@ -126,7 +144,10 @@ if(isset($_POST['toggle_order_status'])){
             <th>Product Name</th>
             <th>Quantity</th>
             <th>Total Price</th>
+            <th>Delivery Address</th>
+            <th>Delivery Instruction</th>
             <th>Order Status</th>
+            
             <!-- Add more columns as needed -->
         </tr>
     <?php
@@ -138,10 +159,15 @@ if(isset($_POST['toggle_order_status'])){
             echo "<td>" . $row["product_name"] . "</td>";
             echo "<td>" . $row["quantity"] . "</td>";
             echo "<td>" . $row["total_price"] . "</td>";
+            echo "<td>" . $row["address"] . "</td>";
+            echo "<td>" . $row["delivery_instruction"] . "</td>";
+
             echo "<td>";
             // Determine the text content based on the order status
             $orderStatusText = ($row["order_status"] === "Order Confirmed") ? "Delivered" : "Delete";
             $buttonStatus = ($row["order_status"] === "Order Confirmed") ? "" : "disabled";
+            
+
             echo "<form method='POST'>";
             echo "<button type='submit' name='toggle_order_status' value='" . $row['order_id'] . "' . $buttonStatus . >" . $orderStatusText . "</button>";
             echo "</form>";
@@ -149,7 +175,7 @@ if(isset($_POST['toggle_order_status'])){
             echo "</tr>";
         }
     } else {
-        echo "<tr><td colspan='7'>No orders found.</td></tr>";
+        echo "<tr><td colspan='8'>No orders found.</td></tr>";
     }
     ?>
 </table>
@@ -196,9 +222,9 @@ if(isset($_POST['toggle_order_status'])){
 
     </div>
 
-    <a href="logout.php">Logout</a>
-    <a href="edit_profile.php">Edit Profile</a>
-    <script src="script.js"></script>
+    <a href="../logout.php">Logout</a>
+    <a href="../edit_profile.php">Edit Profile</a>
+    <script src="../../js/script.js"></script>
 </body>
 </html>
 

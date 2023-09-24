@@ -48,12 +48,12 @@ h1, h2 {
     padding: 6px 10px; /* Adjust padding for a bigger circle */
     font-size: 14px; /* Adjust font size */
 }
-
+/* 
 #cart-icon img {
     position: absolute;
-    left: -55px; /* Adjust to place the icon to the left of the cart count */
+    left: -55px; 
     width: 25px;
-}
+} */
 
 #loading-overlay {
     position: fixed;
@@ -80,4 +80,17 @@ h1, h2 {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.arrow-down {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #c8c8c8; 
+    transition: transform 0.3s ease; /* Add a smooth transition effect */
+}
+.arrow-down.active{
+    transform: rotate(-90deg);
 }

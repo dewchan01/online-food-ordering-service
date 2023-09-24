@@ -1,0 +1,5 @@
+INSERT INTO `products` (`product_id`, `product_name`, `description`, `price`, `image_url`, `status`) VALUES
+(1, 'Chicken Temptation', '100% Mozzarella Cheese with Succulent Smoked Chicken Breast, Chicken Ham, Green and Red Pepper', 28.90, 'https://order.dominos.com.sg/ManagedAssets/SG/product/PGCT/SG_PGCT_en_menu_11915.jpg?v306638437', 'available'),
+(2, 'Diavola Beef', 'Ground Beef, Red Capsicum, Onion, Red Pepper Flakes on Napolitana Sauce', 28.90, 'https://order.dominos.com.sg/ManagedAssets/SG/product/PNDB/SG_PNDB_en_menu_11915.jpg?v-1933679968', 'available'),
+(3, 'Parmagiana Chicken', 'Cherry Tomato, Ripe Olives, Roasted Chicken, Parmesan Cheese, Mozzarella Cheese on Napolitana Sauce\r\n', 28.90, 'https://order.dominos.com.sg/ManagedAssets/SG/product/PNPA/SG_PNPA_en_menu_11915.jpg?v-745486674', 'available'),
+(4, 'Smoky Meatilicious', 'Onion, Green Pepper, Ground Beef, Chicken Potpouri Sausage on Smoky blended BBQ Sauce', 28.90, 'https://order.dominos.com.sg/ManagedAssets/SG/product/PQMA/SG_PQMA_en_menu_11915.jpg?v-1490560718', 'unavailable');

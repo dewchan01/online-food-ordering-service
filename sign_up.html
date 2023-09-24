@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script type="text/javascript">
+    function validateForm() {
+        var username = document.getElementsByName("username")[0].value;
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+        var email = document.getElementsByName("email")[0].value;
+        var phoneNumber = document.getElementsByName("phone_number")[0].value;
+        var address = document.getElementById("addressField").value;
+
+        // Regular expressions for validation
+        var usernameRegex = /^[a-zA-Z0-9]+$/;
+        var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]/;
+        var phoneNumberRegex = /^\d{8}$/;
+        var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
+
+        // Check if the username contains only letters and numbers
+        if (!username.match(usernameRegex)) {
+            alert("Username can only contain letters and numbers.");
+            return false;
+        }
+        if (!password.match(passwordRegex)) {
+            alert("Please enter a valid password between 8-12 characters, including at least one special character, one capital letter, and one number.");
+            return false;
+        }
+        // Check if the password and confirm password match
+        if (password !== confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+
+        // Check if the email address is valid
+        if (!email.match(emailRegex)) {
+            alert("Please enter a valid email address.");
+            return false;
+        }
+
+        // Check if the phone number contains exactly 8 digits
+        if (!phoneNumber.match(phoneNumberRegex)) {
+            alert("Please enter a valid 8-digit phone number.");
+            return false;
+        }
+
+        // Check if the address is not empty
+        if (address.trim() === "") {
+            alert("Address is required.");
+            return false;
+        }
+        return true;
+    }
+    </script>
+</head>
+<body>
+    <h1>Create Account</h1>
+    <form method="post" onsubmit="return validateForm()" action="php/sign_up.php" >
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" id="password" placeholder="Password" required>
+        <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm Password" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="tel" name="phone_number" placeholder="Phone Number" required>
+        <textarea name="address" id ="addressField" placeholder="Enter Your Address" required></textarea>
+        <br>
+        <input type="submit" value="Create Account">
+    </form>
+        
+    <p>Already got an account?<a href="login.html">Log in</a></p>
+</body>
+</html>

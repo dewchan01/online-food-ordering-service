@@ -13,10 +13,12 @@ CREATE TABLE orders (
     time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     image_url VARCHAR(255),
     username VARCHAR(255),
+    address TEXT,
     product_id INT,
     product_name VARCHAR(255),
     description TEXT,
     quantity INT,
     total_price DECIMAL(10, 2),
-    order_status VARCHAR(50)
+    order_status VARCHAR(50),
+    delivery_instruction VARCHAR(50)
 );

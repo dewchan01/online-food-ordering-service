@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION["username"])) {
-    header("Location: user_login.php");
+    header("Location: ../user_login.php");
     exit();
 }
 
@@ -53,7 +53,7 @@ $conn->close();
 <html>
 <head>
     <title>Edit Product</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="../../styles.css">
 </head>
 <body>
     <h1>Edit Product</h1>
