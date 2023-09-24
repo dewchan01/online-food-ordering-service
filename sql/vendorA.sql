@@ -19,5 +19,6 @@ CREATE TABLE orders (
     description TEXT,
     quantity INT,
     total_price DECIMAL(10, 2),
-    order_status VARCHAR(50)
+    order_status VARCHAR(50),
+    delivery_instruction VARCHAR(50)
 );

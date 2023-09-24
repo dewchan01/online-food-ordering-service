@@ -3,7 +3,7 @@ session_start();
 
 $cartItemsJSON = $_POST['cart'];
 $selectedVendor = $_POST['vendor'];
-// $deliveryInstruction = 'Order Confirmed: ' . $_POST['delivery-instruction'];
+$deliveryInstruction = $_POST['delivery-instruction'];
 
 $cartItems = json_decode($cartItemsJSON, true);
 $customerUsername = $_SESSION["username"];
@@ -69,14 +69,12 @@ foreach ($cartItems as $productName => $quantity) {
         $totalPrice = $price * $quantity;
 
         // Insert order details into the orders table
-        $insertQuery = "INSERT INTO orders (time, image_url, username, product_id, product_name, description, quantity, total_price, address, order_status) 
-        VALUES (CURRENT_TIMESTAMP, ?, ?, ?, ?, ?, ?, ?,?, 'Order Confirmed')";
+        $insertQuery = "INSERT INTO orders (time, image_url, username, product_id, product_name, description, quantity, total_price, address, order_status,delivery_instruction) 
+        VALUES (CURRENT_TIMESTAMP, ?, ?, ?, ?, ?, ?, ?,?, 'Order Confirmed',?)";
         // $insertQuery = "INSERT INTO orders (time, image_url, username, product_id, product_name, description, quantity, total_price, address, order_status) 
         //                 VALUES (CURRENT_TIMESTAMP, ?, ?, ?, ?, ?, ?, ?,?, ?)";
         $stmt = $conn->prepare($insertQuery);
-        $stmt->bind_param("ssisssds", $imageURL, $customerUsername, $productID, $productName, $description, $quantity, $totalPrice,$address);
-
-        // $stmt->bind_param("ssisssdss", $imageURL, $customerUsername, $productID, $productName, $description, $quantity, $totalPrice,$address,$deliveryInstruction);
+        $stmt->bind_param("ssisssdss", $imageURL, $customerUsername, $productID, $productName, $description, $quantity, $totalPrice,$address,$deliveryInstruction);
         $stmt->execute();
         $stmt->close();
     }
@@ -108,7 +106,7 @@ $conn->close();
     <div class="confirmation-container">
         <h2>Payment Successful!</h2>
         <p>Your order has been confirmed.</p>
-        <a href="customer_dashboard.php">Back to Dashboard</a>
+        <a href="customer_dashboard.php">Back to Menu</a>
     </div>
 </body>
 </html>
