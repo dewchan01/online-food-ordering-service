@@ -106,6 +106,8 @@ $conn->close();
         
         <label for="current_password">Current Password:</label>
         <input type="password" id="current_password" name="current_password" required><br>
+        <label for="_password">New Password:</label>
+        <input type="password" id="new_password" name="new_password" required><br>
         <br>
         <button type="submit" name="edit_profile_submit">Save Changes</button>
         <a href='vendor/vendor_dashboard.php';>Back to Dashboard</a>
