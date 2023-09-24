@@ -99,17 +99,18 @@ foreach ($cartItems as $productName => $quantity) {
     if (isset($products[$productName])) {
         $product = $products[$productName];
         $price = $product['price'];
+        $productPrice = $price * $quantity;
         $totalPrice += $price * $quantity;
 
         $message .= "<tr>";
         $message .= "<td>$productName</td>";
         $message .= "<td>$quantity</td>";
-        $message .= "<td>$$price</td>";
+        $message .= "<td>$($productPrice).toFixed(2)</td>";
         $message .= "</tr>";
     }
 }
 $totalCost = $totalPrice+5;
-date_default_timezone_set('Asia/Singapore');   
+date_default_timezone_set('Asia/Singapore');
 $time = date("Y-m-d H:i:s");
 $message .= "</table>";
 $message .= "<p>Delivery Address: $address</p>";
