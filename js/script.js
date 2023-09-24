@@ -71,7 +71,7 @@ if (cartIcon) {
                 cartItems[productName] = selectedQuantity;
             }
             updateCartDropdown(productPrice);
-            updateCartCount(productPrice);
+            // updateCartCount(productPrice);
         }
         // display cart items in the cart
         if (event.target.id === 'checkout-btn') {
@@ -114,7 +114,7 @@ if (cartIcon) {
                     delete cartItems[itemName]; // Remove item from cartItems when count is 0
                     updateCartDropdown();
                 }
-                console.log(cartItems)
+                // console.log(cartItems)
                 
             });
     
@@ -138,35 +138,46 @@ if (cartIcon) {
         if (totalCartPrice) {
             updateCartCount(totalCartPrice+5); // Update total price here
         }else{
-            updateCartCount(0);
+            // updateCartCount(0);
         }
         
     }
     
-    function updateCartCount(productPrice) {
+    // function updateCartCount(productPrice) {
         
+    //     let totalItems = 0;
+    //     for (const itemName in cartItems) {
+    //         totalItems += cartItems[itemName];
+    //     }
+    //     let itemsText = "items";
+    //     if (totalItems === 1) {
+    //         itemsText = "item";
+    //     }
+    //     // console.log(cartItems)
+    //     // console.log(productPrice)
+    //     if (productPrice){
+    //         cartCount.textContent = `Delivery Service Fee: $5.00\nTotal: $${(productPrice).toFixed(2)}\n${totalItems} ${itemsText}`;
+    //     }else{
+    //         cartCount.textContent = 'Total: $0.00';
+    //     }
+    // }
+    function updateCheckOutBtn(totalCartPrice) {
+        let itemsText = "items";
         let totalItems = 0;
         for (const itemName in cartItems) {
             totalItems += cartItems[itemName];
         }
-        let itemsText = "items";
         if (totalItems === 1) {
             itemsText = "item";
         }
-        console.log(cartItems)
-        console.log(productPrice)
-        if (productPrice){
-            cartCount.textContent = `Delivery Service Fee: $5.00\nTotal: $${(productPrice).toFixed(2)}\n${totalItems}${itemsText}`;
-        }else{
-            cartCount.textContent = `Total: 0`;
-        }
-    }
-    function updateCheckOutBtn(quantityText) {
-        if (quantityText > 0) {
-        const checkoutButton = document.createElement('button');
-        checkoutButton.id = 'checkout-btn';
-        checkoutButton.textContent = 'Checkout';
-        cartDropdown.appendChild(checkoutButton);
+        if (totalCartPrice > 0) {
+            const summary = document.createElement('p');
+            summary.innerHTML = 'Delivery Service Fee: $5.00 <br> Total Price: $' + (totalCartPrice+5).toFixed(2);
+            const checkoutButton = document.createElement('button');
+            checkoutButton.id = 'checkout-btn';
+            checkoutButton.textContent = totalItems + ' ' +itemsText+' | Total Price: $' + (totalCartPrice+5).toFixed(2) + ' | Finish Order' ;
+            cartDropdown.appendChild(summary);
+            cartDropdown.appendChild(checkoutButton);
     }
     }
 

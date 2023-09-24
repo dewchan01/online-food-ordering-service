@@ -35,6 +35,7 @@ if (isset($_POST['edit_profile_submit'])) {
     $editedEmail = $_POST['edited_email'];
     $editedPhoneNumber = $_POST['edited_phone_number'];
     $currentPassword = $_POST['current_password'];
+    $newPassword = $_POST['new_password'];
     $editedAddress = $_POST['edited_address'];
     if($user['password']!=$currentPassword)
     {
@@ -42,9 +43,9 @@ if (isset($_POST['edit_profile_submit'])) {
         window.location.href='edit_profile.php';</script>";
     }
     // Perform edit for the user profile
-    $editQuery = "UPDATE users SET email = ?, phone_number = ?, address = ? WHERE username = ?";
+    $editQuery = "UPDATE users SET email = ?, phone_number = ?, address = ?, password = ?  WHERE username = ?";
     $stmt = $conn->prepare($editQuery);
-    $stmt->bind_param("ssss", $editedEmail, $editedPhoneNumber, $editedAddress, $loggedInUsername);
+    $stmt->bind_param("sssss", $editedEmail, $editedPhoneNumber, $editedAddress,$newPassword, $loggedInUsername);
     $stmt->execute();
     $stmt->close();
     // Redirect based on role
@@ -84,6 +85,9 @@ $conn->close();
 
         <label for="_password">Current Password:</label>
         <input type="password" id="current_password" name="current_password" required><br>
+
+        <label for="_password">New Password:</label>
+        <input type="password" id="new_password" name="new_password" required><br>
         
         <button type="submit" name="edit_profile_submit">Save Changes</button>
         <a href="order.php">Back to Order</a>

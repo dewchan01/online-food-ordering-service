@@ -55,13 +55,14 @@ $conn->close();
     <div id="address">
         <h3>Delivery Now:</h3>
     <p><?php echo $address; ?></p>
+    <a href="../edit_profile.php">Change Address</a>
 </div>
     <div>
         <h3 id="cart-icon" alt="Cart">Order Details</h3>
         <div id="cart-dropdown" class="cart-dropdown">
         <!-- Cart items will be dynamically populated here -->
         </div>    
-        <span id="cart-count">Total: 0</span>
+        <!-- <span id="cart-count">Total: $0.00</span> -->
 
     </div>
     
