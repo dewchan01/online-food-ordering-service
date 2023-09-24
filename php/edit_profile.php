@@ -51,7 +51,7 @@ if (isset($_POST['edit_profile_submit'])) {
     // Redirect based on role
     if ($user['role'] === 'customer') {
         echo "<script>alert('Changes saved successfully!');
-        window.location.href='customer/customer_dashboard.php';</script>";
+        window.location.href='order.php';</script>";
     } elseif ($user['role'] === 'vendor') {
         echo "<script>alert('Changes saved successfully!');
         window.location.href='vendor/vendor_dashboard.php';</script>";
@@ -66,11 +66,63 @@ $conn->close();
 <head>
     <title>Edit Profile</title>
     <link rel="stylesheet" type="text/css" href="../styles.css">
+    <script type="text/javascript">
+    function validateForm() {
+        var username = document.getElementsByName("edited_username")[0].value;
+        var password = document.getElementById("current_password").value;
+        var confirmPassword = document.getElementById("new_password").value;
+        var email = document.getElementsByName("edited_email")[0].value;
+        var phoneNumber = document.getElementsByName("edited_phone_number")[0].value;
+        var address = document.getElementById("edited_address").value;
+
+        // Regular expressions for validation
+        var usernameRegex = /^[a-zA-Z0-9]+$/;
+        var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]/;
+        var phoneNumberRegex = /^\d{8}$/;
+        var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
+
+        // Check if the username contains only letters and numbers
+        if (!username.match(usernameRegex)) {
+            alert("Username can only contain letters and numbers.");
+            return false;
+        }
+        if (!password.match(passwordRegex)) {
+            alert("Please enter a valid password between 8-12 characters, including at least one special character, one capital letter, and one number.");
+            return false;
+        }
+        // Check if the password and confirm password match
+        if (password !== confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+
+        // Check if the email address is valid
+        if (!email.match(emailRegex)) {
+            alert("Please enter a valid email address.");
+            return false;
+        }
+
+        // Check if the phone number contains exactly 8 digits
+        if (!phoneNumber.match(phoneNumberRegex)) {
+            alert("Please enter a valid 8-digit phone number.");
+            return false;
+        }
+
+        // Check if the address is not empty
+        if (address.trim() === "") {
+            alert("Address is required.");
+            return false;
+        }
+
+        return true;
+    }
+    </script>
+</head>
 </head>
 <body>
     <h1>Edit Profile</h1>
     <?php if ($user['role']==='customer'): ?>
-    <form method="POST" action="edit_profile.php">
+    <form method="POST" onsubmit="return validateForm()" action="edit_profile.php">
         <label for="edited_username">Username:</label>
         <input type="text" id="edited_username" name="edited_username" value="<?php echo $user['username']; ?>" readonly><br>
         
