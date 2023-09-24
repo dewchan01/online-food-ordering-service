@@ -4,6 +4,7 @@
 const productsList = document.getElementById('products-list');
 const cart = document.getElementById('cart');
 const address = document.getElementById('addressField');
+const arrow = document.querySelector('.arrow-down');
 
 let selectedVendor = 'vendora';
 if (productsList) {
@@ -52,7 +53,10 @@ let cartItems = {};
 if (cartIcon) {
     cartIcon.addEventListener('click', () => {
         cartDropdown.style.display = cartDropdown.style.display === 'block' ? 'none' : 'block';
+        arrow.classList.toggle('active');
+
     });
+
     cartDropdown.style.display = 'block'
 
     // Listen for add-to-cart button clicks
@@ -85,16 +89,16 @@ if (cartIcon) {
 
     function updateCartDropdown() {
         cartDropdown.innerHTML = '';
-    
+
         let totalCartPrice = 0; // Initialize the total cart price
-    
+
         for (const itemName in cartItems) {
             const cartItem = document.createElement('div');
             cartItem.className = 'cart-item';
-    
+
             const quantityContainer = document.createElement('div');
             quantityContainer.className = 'quantity-container';
-    
+
             const increaseBtn = document.createElement('button');
             increaseBtn.textContent = 'Add';
             increaseBtn.className = 'quantity-btn';
@@ -102,7 +106,7 @@ if (cartIcon) {
                 cartItems[itemName]++;
                 updateCartDropdown();
             });
-    
+
             const decreaseBtn = document.createElement('button');
             decreaseBtn.textContent = 'Remove';
             decreaseBtn.className = 'quantity-btn';
@@ -115,36 +119,36 @@ if (cartIcon) {
                     updateCartDropdown();
                 }
                 // console.log(cartItems)
-                
+
             });
-    
+
             const quantityText = cartItems[itemName];
             const itemPrice = parseFloat(document.querySelector(`[data-product-name="${itemName}"]`).getAttribute('data-product-price'));
             const itemTotalPrice = itemPrice * cartItems[itemName];
-    
+
             // Add the individual item price to the total cart price
             totalCartPrice += itemTotalPrice;
-    
+
             quantityContainer.appendChild(decreaseBtn);
             quantityContainer.appendChild(increaseBtn);
-    
+
             cartItem.innerHTML = `${quantityText} x ${itemName} \t $${itemTotalPrice.toFixed(2)}`;
             cartItem.appendChild(quantityContainer);
-    
+
             cartDropdown.appendChild(cartItem);
         }
-    
+
         updateCheckOutBtn(totalCartPrice); // Pass the total cart price to updateCheckOutBtn
-        if (totalCartPrice) {
-            updateCartCount(totalCartPrice+5); // Update total price here
-        }else{
-            // updateCartCount(0);
-        }
-        
+        // if (totalCartPrice) {
+        //     updateCartCount(totalCartPrice + 5); // Update total price here
+        // } else {
+        //     updateCartCount(0);
+        // }
+
     }
-    
+
     // function updateCartCount(productPrice) {
-        
+
     //     let totalItems = 0;
     //     for (const itemName in cartItems) {
     //         totalItems += cartItems[itemName];
@@ -167,18 +171,33 @@ if (cartIcon) {
         for (const itemName in cartItems) {
             totalItems += cartItems[itemName];
         }
-        if (totalItems === 1) {
+        if (totalItems <= 1) {
             itemsText = "item";
         }
         if (totalCartPrice > 0) {
             const summary = document.createElement('p');
-            summary.innerHTML = 'Delivery Service Fee: $5.00 <br> Total Price: $' + (totalCartPrice+5).toFixed(2);
+            summary.innerHTML = 'Delivery Service Fee: $5.00 <br> Total Price: $' + (totalCartPrice + 5).toFixed(2);
             const checkoutButton = document.createElement('button');
             checkoutButton.id = 'checkout-btn';
-            checkoutButton.textContent = totalItems + ' ' +itemsText+' | Total Price: $' + (totalCartPrice+5).toFixed(2) + ' | Finish Order' ;
+            checkoutButton.textContent = totalItems + ' ' + itemsText + ' | Total Price: $' + (totalCartPrice + 5).toFixed(2) + ' | Finish Order';
             cartDropdown.appendChild(summary);
             cartDropdown.appendChild(checkoutButton);
-    }
+        } else {
+            const summary = document.createElement('h5');
+            const summaryText = document.createElement('p');
+            summaryText.textContent = 'Add some items from the menu to get started!';
+
+            summary.innerHTML = 'Total Price: $' + (totalCartPrice).toFixed(2);
+            const checkoutButton = document.createElement('button');
+            checkoutButton.id = 'checkout-btn';
+            checkoutButton.disabled = true;
+            checkoutButton.textContent = totalItems + ' ' + itemsText + ' | Total Price: $' + (totalCartPrice).toFixed(2) + ' | Finish Order';
+            cartDropdown.appendChild(summaryText);
+            cartDropdown.appendChild(summary);
+            cartDropdown.appendChild(checkoutButton);
+        }
+
     }
 
 }
+
