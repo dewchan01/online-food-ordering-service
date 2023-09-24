@@ -42,7 +42,7 @@ $conn->close();
 <body>    
     <!-- Customer-specific dashboard content -->
     <div id="customer-dashboard">
-    <h2>Place an Order</h2>
+        <h2>Place an Order</h2>
 
     <!-- <form action="place_order.php" method="post"> -->
     <!-- <div>
@@ -54,23 +54,23 @@ $conn->close();
     <div id ="products-list"></div>
     <div id="address">
         <h3>Delivery Now:</h3>
-    <p><?php echo $address; ?></p>
-    <a href="../edit_profile.php">Change Address</a>
-</div>
+        <p><?php echo $address; ?></p>
+        <a href="../edit_profile.php">Change Address</a>
+    </div>
     <div>
         <h3 id="cart-icon" alt="Cart">Order Details <div class="arrow-down"></div></h3>
         
         <div id="cart-dropdown" class="cart-dropdown">
         <p>Add some items from the menu to get started!<p>
         <h5>Total Price: $0.00</h5>
-        <button id="checkout-btn" disabled="">0 item | Total Price: $0.00 | Finish Order</button></div>
+        <button id="checkout-btn" disabled="">0 item | Total Price: $0.00 | Finish Order</button>
         <!-- Cart items will be dynamically populated here -->
         </div>    
-        <!-- <span id="cart-count">Total: $0.00</span> -->
-
+    
+    </div><!-- <span id="cart-count">Total: $0.00</span> -->
+    <a href="../order.php">Back</a>
     </div>
     
-    <a href="../order.php">Back</a>
 
     <script src="../../js/script.js"></script>
 </body>

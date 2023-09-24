@@ -3,7 +3,7 @@ session_start();
 
 $cartItemsJSON = $_POST['cart'];
 $selectedVendor = $_POST['vendor'];
-
+// $deliveryInstruction = 'Order Confirmed: ' . $_POST['delivery-instruction'];
 
 $cartItems = json_decode($cartItemsJSON, true);
 $customerUsername = $_SESSION["username"];
@@ -70,9 +70,13 @@ foreach ($cartItems as $productName => $quantity) {
 
         // Insert order details into the orders table
         $insertQuery = "INSERT INTO orders (time, image_url, username, product_id, product_name, description, quantity, total_price, address, order_status) 
-                        VALUES (CURRENT_TIMESTAMP, ?, ?, ?, ?, ?, ?, ?,?, 'Order Confirmed')";
+        VALUES (CURRENT_TIMESTAMP, ?, ?, ?, ?, ?, ?, ?,?, 'Order Confirmed')";
+        // $insertQuery = "INSERT INTO orders (time, image_url, username, product_id, product_name, description, quantity, total_price, address, order_status) 
+        //                 VALUES (CURRENT_TIMESTAMP, ?, ?, ?, ?, ?, ?, ?,?, ?)";
         $stmt = $conn->prepare($insertQuery);
         $stmt->bind_param("ssisssds", $imageURL, $customerUsername, $productID, $productName, $description, $quantity, $totalPrice,$address);
+
+        // $stmt->bind_param("ssisssdss", $imageURL, $customerUsername, $productID, $productName, $description, $quantity, $totalPrice,$address,$deliveryInstruction);
         $stmt->execute();
         $stmt->close();
     }

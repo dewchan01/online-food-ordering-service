@@ -144,6 +144,9 @@ if(isset($_POST['toggle_order_status'])){
             // Determine the text content based on the order status
             $orderStatusText = ($row["order_status"] === "Order Confirmed") ? "Delivered" : "Delete";
             $buttonStatus = ($row["order_status"] === "Order Confirmed") ? "" : "disabled";
+            // $orderStatusText = (strpos($row["order_status"], "Order Confirmed") !== false) ? "Delivered" : "Delete";
+            // $buttonStatus = (strpos($row["order_status"], "Order Confirmed") !== false) ? "" : "disabled";
+
             echo "<form method='POST'>";
             echo "<button type='submit' name='toggle_order_status' value='" . $row['order_id'] . "' . $buttonStatus . >" . $orderStatusText . "</button>";
             echo "</form>";
