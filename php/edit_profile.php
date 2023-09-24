@@ -29,6 +29,8 @@ if (isset($_SESSION['username'])) {
     $stmt->close();
 }
 
+$errors = [];
+
 if (isset($_POST['edit_profile_submit'])) {
     
     // Get the edited user details from the form
@@ -37,11 +39,26 @@ if (isset($_POST['edit_profile_submit'])) {
     $currentPassword = $_POST['current_password'];
     $newPassword = $_POST['new_password'];
     $editedAddress = $_POST['edited_address'];
+
     if($user['password']!=$currentPassword)
     {
         echo "<script>alert('Incorrect password! Please try again.');
         window.location.href='edit_profile.php';</script>";
     }
+
+    // Check for duplicate email
+    $checkEmailQuery = "SELECT * FROM users WHERE email = ?";
+    $stmt = $conn->prepare($checkEmailQuery);
+    $stmt->bind_param("s", $editedEmail);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $errors[] = "Email address already registered. Please use a different email address.";
+    }
+    $stmt->close();
+
+    if (empty($errors)) {
+
     // Perform edit for the user profile
     $editQuery = "UPDATE users SET email = ?, phone_number = ?, address = ?, password = ?  WHERE username = ?";
     $stmt = $conn->prepare($editQuery);
@@ -52,9 +69,13 @@ if (isset($_POST['edit_profile_submit'])) {
     if ($user['role'] === 'customer') {
         echo "<script>alert('Changes saved successfully!');
         window.location.href='order.php';</script>";
-    } elseif ($user['role'] === 'vendor') {
+    } else if ($user['role'] === 'vendor') {
         echo "<script>alert('Changes saved successfully!');
         window.location.href='vendor/vendor_dashboard.php';</script>";
+    }
+}else{
+    echo "<script>
+    alert('".$errors[0]."');window.location.href='edit_profile.php';</script>";
     }
 }
 
