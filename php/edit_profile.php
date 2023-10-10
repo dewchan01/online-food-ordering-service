@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION["username"])) {
-    header("Location: user_login.php");
+    header("Location: ../login.html");
     exit();
 }
 
@@ -141,32 +141,51 @@ $conn->close();
 </head>
 </head>
 <body>
-    <h1>Edit Profile</h1>
-    <?php if ($user['role']==='customer'): ?>
-    <form method="POST" onsubmit="return validateForm()" action="edit_profile.php">
-        <label for="edited_username">Username:</label>
-        <input type="text" id="edited_username" name="edited_username" value="<?php echo $user['username']; ?>" readonly><br>
-        
-        <label for="edited_email">Email:</label>
-        <input type="email" id="edited_email" name="edited_email" value="<?php echo $user['email']; ?>" required><br>
-        
-        <label for="edited_phone_number">Phone Number:</label>
-        <input type="tel" id="edited_phone_number" name="edited_phone_number" value="<?php echo $user['phone_number']; ?>" required><br>
-        
-        <label for="edited_address" style="vertical-align:top">New Address:</label>
-        <textarea name="edited_address" id ="edited_address" required><?php echo $user['address']; ?></textarea><br>
+    <div class="nav">
+        <div class="header">
+            <a href="../index.html" class="headerLogo"><img src="../images/logo.png" alt="Domini's Logo" height="21" width="23">Domini's</a>
+        </div>
+        <div class="menu">
+            <a href="order.php">MENU</a>
+        </div>
+        <div class="myAccount">
+            <a href="edit_profile.php"><img src="../images/acc-1.png" alt="User's Account" height="37" width="34" style="padding-top: 5px;"></a>
+            <a href="edit_profile.php">MY ACCOUNT</a>
+        </div>
+</div>
+    <!-- <?php if ($user['role']==='customer'): ?> -->
+    
 
-        <label for="_password">Current Password:</label>
-        <input type="password" id="current_password" name="current_password" required><br>
+    <div class="login-signup">
+        <h2>My Details</h2>
+        <input type="button" value="Back" id="back" onclick="window.location.href='order.php'">
+        <div id="user-login">
+            <form method="POST" onsubmit="return validateForm()" action="edit_profile.php">
+                <p class="edit-input">Username:</p>
+                <input type="text" class="user-input" id="edited_username" name="edited_username" value="<?php echo $user['username']; ?>" readonly><br>
+                
+                <p class="edit-input">Email:</p>
+                <input type="email" class="user-input" id="edited_email" name="edited_email" value="<?php echo $user['email']; ?>" required><br>
+                
+                <p class="edit-input">Phone Number:</p>
+                <input type="tel" class="user-input" id="edited_phone_number" name="edited_phone_number" value="<?php echo $user['phone_number']; ?>" required><br>
+                
+                <p class="edit-input">New Address:</p>
+                <textarea name="edited_address" class="user-input" id ="edited_address" required><?php echo $user['address']; ?></textarea><br>
 
-        <label for="_password">New Password:</label>
-        <input type="password" id="new_password" name="new_password" required><br>
+                <p class="edit-input">Current Password:</p>
+                <input type="password" class="user-input" id="current_password" name="current_password" required><br>
+
+                <p class="edit-input">New Password:</p>
+                <input type="password" class="user-input" id="new_password" name="new_password" required><br>
+                
+                <button type="submit" name="edit_profile_submit" class="submit-button">Save Changes</button>
+            </form>
+        </div>
         
-        <button type="submit" name="edit_profile_submit">Save Changes</button>
-        <a href="order.php">Back to Order</a>
-    </form>
+    </div>
 
-    <?php elseif ($user['role']==='vendor'): ?>
+    <!-- <?php elseif ($user['role']==='vendor'): ?>
     <form method="POST" action="edit_profile.php">
         <label for="edited_username">Username:</label>
         <input type="text" id="edited_username" name="edited_username" value="<?php echo $user['username']; ?>" readonly><br>
@@ -187,7 +206,7 @@ $conn->close();
     </form>
     <?php else: ?>
         <p>User profile not found.</p>
-    <?php endif; ?>
+    <?php endif; ?> -->
     
 
 </body>

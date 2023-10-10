@@ -75,13 +75,24 @@ $conn->close();
     <link rel="stylesheet" type="text/css" href="../styles.css">
 </head>
 <body>
-    <h1>Reset Password</h1>
-    <h2>Please enter your email address and we will email you instructions to reset your password.</h2>
-    <form method="post">
-        <input type="email" name="email" placeholder="Email" requried><br>
-        <button type="submit">Submit</button>
+    <div class="nav" style="justify-content: flex-start;">
+        <div class="header">
+            <a href="../index.html" class="headerLogo"><img src="../images/logo.png" alt="Domini's Logo" height="21" width="23">Domini's</a>
+        </div>
+    </div>
+    <div class="login-signup">
+        <h2>Reset Password</h2>
+        <div id="user-login">
+            <h3>Please enter your email address and we will email you instructions to reset your password.</h3>
+            <form method="post">
+                <input type="email" name="email" placeholder="Email" class="user-input" requried><br>
+                <button type="submit" class="submit-button">Submit</button>
 
-    </form>
-    <a href="../login.html">Back to Login</a>
+            </form>
+            <input type="button" value="Back" id="back" onclick="window.location.href='../index.html'">
+        </div>
+        
+    </div>
+    
 </body>
 </html>

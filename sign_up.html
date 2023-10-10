@@ -55,18 +55,27 @@
     </script>
 </head>
 <body>
-    <h1>Create Account</h1>
-    <form method="post" onsubmit="return validateForm()" action="php/sign_up.php" >
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" id="password" placeholder="Password" required>
-        <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm Password" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="tel" name="phone_number" placeholder="Phone Number" required>
-        <textarea name="address" id ="addressField" placeholder="Enter Your Address" required></textarea>
-        <br>
-        <input type="submit" value="Create Account">
-    </form>
-        
-    <p>Already got an account?<a href="login.html">Log in</a></p>
+    <div class="nav" style="justify-content: flex-start;">
+        <div class="header">
+            <a href="index.html" class="headerLogo"><img src="images/logo.png" alt="Domini's Logo" height="21" width="23">Domini's</a>
+        </div>
+    </div>
+    <div class="login-signup">
+        <h2>Create Account</h2>
+        <input type="button" value="Back" id="back" onclick="window.location.href='index.html'">
+        <div id="user-signup">
+            <form method="post" onsubmit="return validateForm()" action="php/sign_up.php" >
+                <input type="email" name="email" placeholder="Email" class="user-input" required><br>
+                <input type="text" name="username" placeholder="Username" class="user-input" required><br>
+                <input type="tel" name="phone_number" placeholder="Phone Number" class="user-input" required><br>
+                <textarea name="address" id ="addressField" placeholder="Enter Your Address" class="user-input" style="resize: none;" required></textarea><br>
+                <br><input type="password" name="password" id="password" placeholder="Password" class="user-input" required><br>
+                <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm Password" class="user-input" required><br>
+                <p style="font-size: 20px;text-align:left;">Already got an account?<a href="login.html">Log in</a></p>
+                <input type="submit" value="Create Account" class="submit-button">
+            </form>
+        </div>
+    </div>
+    
 </body>
 </html>

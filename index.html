@@ -10,30 +10,41 @@
 </head>
 
 <body>
-    <h1>Home Page</h1>
-
-    <div>
-        <a href="login.html">My Account</a>
+    <div class="nav">
+        <div class="header">
+            <a href="index.html" class="headerLogo"><img src="images/logo.png" alt="Domini's Logo" height="21" width="23">Domini's</a>
+        </div>
+        <div class="menu">
+            <a href="php/order.php">MENU</a>
+        </div>
+        <div class="myAccount">
+            <a href="php/edit_profile.php"><img src="images/acc-1.png" alt="User's Account" height="37" width="34" style="padding-top: 5px;"></a>
+            <a href="php/edit_profile.php">MY ACCOUNT</a>
+        </div>
     </div>
-
-    <div>
-        <input type="button" value="Dine In" disabled>
-        <input type="button" value="Delivery Now" onclick="window.location.href='php/order.php'">
+    <div class="orderNav">
+        <input type="button" value="DINE IN" id="dineIn" disabled>
+        <input type="button" value="DELIVERY NOW" id="delivery" onclick="window.location.href='php/order.php'">    
     </div>
-
     <div class="banner">
+        <img class="vector" src="images/vector-left.png">
         <img class="banner-image" onclick="window.location.href ='php/order.php'" data-backgroundimageurl="images"
             src="images/banner.jpg" data-loaded="true">
+        <img class="vector" src="images/vector-left.png" style="transform: rotate(180deg);">
     </div>
 
-    <p>It is our commitment to be the best pizza joint in Singapore and offer great value for all pizza lovers from
-        around the world. Domino's Pizza has won the hearts of many with a variety of great tasting signature pizzas
-        delivered quickly to your door step while maintaining the freshness and its state of piping hotness, for a
-        hearty meal with family and friends. Domino's Pizza has been established in Singapore since 2009. In a span of
-        14 years, we have opened over 40 outlets across the island. From the first store at Bukit Timah in 2009,
-        Domino's Pizza Singapore has grown strength to strength in providing great value through delicious pizzas
-        delivered fast. Throughout time, Domino's has also been upgrading its menu and food choices by offering limited
-        time flavors and variety such as Mentaiko Pizza, Chocolate Lava Cake, and Cheeseburger Pizzas.</p>
+    <div class="des">
+        <h2>Domini's Pizza - The Best Pizza In Singapore</h2>
+        <p>It is our commitment to be the best pizza joint in Singapore and offer great value for all pizza lovers from
+            around the world. Domino's Pizza has won the hearts of many with a variety of great tasting signature pizzas
+            delivered quickly to your door step while maintaining the freshness and its state of piping hotness, for a
+            hearty meal with family and friends. Domino's Pizza has been established in Singapore since 2009. In a span of
+            14 years, we have opened over 40 outlets across the island. From the first store at Bukit Timah in 2009,
+            Domino's Pizza Singapore has grown strength to strength in providing great value through delicious pizzas
+            delivered fast. Throughout time, Domino's has also been upgrading its menu and food choices by offering limited
+            time flavors and variety such as Mentaiko Pizza, Chocolate Lava Cake, and Cheeseburger Pizzas.
+        </p>
+    </div>
 </body>
 
 </html>
