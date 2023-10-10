@@ -32,6 +32,9 @@ $customerUsername = $_SESSION["username"];
         </div>
     </div>
     <div id="order">
+        <div>
+            <img src="../images/order-image.jpg" style="width: 100%; height: 100%; object-fit: cover; object-position: center"></img>
+        </div>
         <h1>WELCOME <?php echo $customerUsername; ?>!</h1>
         <h2>Start Your Order</h2>
         <div>
