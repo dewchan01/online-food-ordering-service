@@ -16,14 +16,20 @@ if (productsList) {
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
                 productCard.innerHTML = `
-                <img src="${product.image_url}" alt="${product.product_name}" width="100">
+                <div class="product-container">
+                <img src="${product.image_url}" alt="${product.product_name}" class="product-image">
+                <div class="product-details-container">
                 <h3>${product.product_name}</h3>
                 <p>From $${product.price}</p>
                 <p>${product.description}</p>
+                </div>
+                </div>
+                <div class="product-selector">
                 <select class="quantity-dropdown" id="quantity-${product.product_id}">
                         ${generateQuantityOptions()}
                 </select>
                 <button class="add-to-cart" data-product-name="${product.product_name}" data-product-id="${product.product_id}" data-product-price="${product.price}">Add</button>
+                </div>    
             `;
                 productsList.appendChild(productCard);
             });
@@ -100,6 +106,7 @@ if (cartIcon) {
             quantityContainer.className = 'quantity-container';
 
             const increaseBtn = document.createElement('button');
+            increaseBtn.style = 'color:#006E9A;font-weight:1000;';
             increaseBtn.textContent = 'Add';
             increaseBtn.className = 'quantity-btn';
             increaseBtn.addEventListener('click', () => {
@@ -108,6 +115,7 @@ if (cartIcon) {
             });
 
             const decreaseBtn = document.createElement('button');
+            decreaseBtn.style = 'color:red;font-weight:1000;';
             decreaseBtn.textContent = 'Remove';
             decreaseBtn.className = 'quantity-btn';
             decreaseBtn.addEventListener('click', () => {
@@ -132,7 +140,7 @@ if (cartIcon) {
             quantityContainer.appendChild(decreaseBtn);
             quantityContainer.appendChild(increaseBtn);
 
-            cartItem.innerHTML = `${quantityText} x ${itemName} \t $${itemTotalPrice.toFixed(2)}`;
+            cartItem.innerHTML = `<div class="cart-item-container"><div>${quantityText} x ${itemName} \t</div> <p style="font-weight:700;margin:0;">$${itemTotalPrice.toFixed(2)}</p></div>`;
             cartItem.appendChild(quantityContainer);
 
             cartDropdown.appendChild(cartItem);
@@ -176,7 +184,16 @@ if (cartIcon) {
         }
         if (totalCartPrice > 0) {
             const summary = document.createElement('p');
-            summary.innerHTML = 'Delivery Service Fee: $5.00 <br> Total Price: $' + (totalCartPrice + 5).toFixed(2);
+            summary.class='cart-item-container'
+            summary.innerHTML = `
+            <div class="cart-item-container" style="font-weight: 700;">
+                <p>Delivery Service Fee</p> 
+                <p>$5.00</p>
+            </div> 
+            <div class="cart-item-container" style="font-weight: 700;">
+                <p>Total Price</p>  
+                <p>$` + (totalCartPrice + 5).toFixed(2)+'</p></div>';
+            
             const checkoutButton = document.createElement('button');
             checkoutButton.id = 'checkout-btn';
             checkoutButton.textContent = totalItems + ' ' + itemsText + ' | Total Price: $' + (totalCartPrice + 5).toFixed(2) + ' | Finish Order';

@@ -37,14 +37,14 @@ a{
     padding-left: 50px;
     height: 19px;
 }
-.myAccount{
+.my-account{
     padding-right:100px;
     height: 20px;
     font-size: 20px;
     display:inline-block;
 }
 
-.orderNav
+.order-nav
 {
     height: 80px;
     padding:5px;
@@ -53,7 +53,7 @@ a{
     justify-content: center;
     
 }
-#dineIn
+#dine-in
 {
     background: #007AAF;
     border-radius: 5px;
@@ -172,12 +172,139 @@ p{
 }
 
 #order{
+    margin: auto;
     background-image: url(images/order-image.avif);
     background-repeat: no-repeat;
     background-size: cover;
     height: 350px;
-    
+    width: 80%;
+    text-align: center;
+}
 
+#welcome{
+    padding-top: 200px;
+}
+
+#line{
+    border-bottom: 1px solid #FFF;
+    width: 400px;
+    margin: auto;
+}
+
+#start-your-order{
+    border:#FAFAFA;
+    border-radius: 17px;
+    background: #FFF;
+    width: 400px;
+    height: 400px;
+    margin: auto;
+}
+
+.basic-buttons-container{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.basic-buttons{
+    border-radius: 5px;
+    color: #000;
+    font-weight: 700;
+    display: flex;
+    height: auto;
+}
+
+.categories{
+    font-size: 25px;
+    width: 600px;
+    display: flex;
+    justify-content: space-around;
+    margin-right:200px;
+}
+.categories a{
+    font-weight: 700;
+}
+/* .categories button{
+    border: none;
+    height: 40px;
+    width: auto;
+    font-size: 16px;
+    font-weight: 1000;
+    background: #FAFAFA;
+    
+} */
+
+.categories a:active{
+    background: #4A4A4A;
+    border-top-right-radius: 9px;
+    border-top-left-radius: 9px;
+    /* border-bottom-right-radius: ; */
+}
+
+.categories-choices{
+    background: #4A4A4A;
+    height: 38px;
+}
+#customer-dashboard{
+    display:flex;
+    justify-content: space-around;
+    margin-left:200px;
+    margin-right: 50px; 
+}
+
+#products-list{
+    margin-top: 50px;
+    width: 1000px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-card{
+    background: #D0D0D0;
+    display:fixed;
+    width: 180px;
+    height: 330px;
+    border-radius: 7px;
+}
+
+.product-container{
+    margin:5px;
+    font-size: 14px;
+    color: #000;
+    font-family: Work Sans;
+}
+
+.product-image{
+    width: 170px;
+    border-radius:7px;
+}
+.product-details-container{
+    height: 140px;
+    
+}
+
+.product-selector{
+    display:flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.quantity-dropdown{
+    border-radius: 3px;
+    border: 1px solid #AFAFAF;
+    background: #D9D9D9;
+    width: 60px;
+    height: 25px;
+    flex-shrink: 0;
+}
+
+.add-to-cart{
+    border-radius: 3px;
+    border: none;
+    width: 80px;
+    height: 25px;
+    background: #1FC36A;
+    color: #FFF;
 }
 
 #customer-login, #vendor-login {
@@ -187,23 +314,100 @@ p{
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
+#checkout-container{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 500px;
+    
+}
+#address-container{
+    display:flex;
+    height: 50px;
+    border: 1px solid;
+    border-left: none;
+    border-right:none;
+    border-color: black;
+    flex-wrap:wrap;
+    align-content: center;
+    
+}
+
+#van2-container{
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right:10px;
+    width: 35px;
+    height: 35px;
+    border-radius:25px;
+}
+
+#address-details{
+    font-size: 12px;
+}
+#cart-container{
+    border: 1px solid;
+    border-left: none;
+    border-right: none;
+    border-color: black;
+    
+}
 /* Add these styles to your existing CSS */
 .cart-dropdown {
-    display: none;
+    /* display: none;
     position: absolute;
     top: 50px;
-    right: 10px;
-    background-color: white;
-    border: 1px solid #000000;
+    right: 10px; */
+    background-color: #FAFAFA;
+    border: 1px solid #FAFAFA;
+    border-top-color:black;
     padding: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #cart-icon,#cart-count {
-    position: fixed; /* Change to fixed for positioning */
-    top: 10px; /* Adjust the top position */
-    right: 10px; /* Adjust the right position */
+
+    /* position: fixed; 
+    top: 30px;
+    right: 10px;  */
+    
     cursor: pointer;
+}
+.cart-item{
+    margin-bottom:15px;
+    border: 1px solid #878787;
+    border-left: none;
+    border-right:none;
+    padding: 15px 0 15px 0;
+}
+.cart-item-container{
+    display:flex;
+    justify-content: space-between;
+}
+
+.quantity-container{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    width: 200px;
+}
+.quantity-btn{
+    border:none;
+    background-color: white;
+    
+}
+
+#checkout-btn{
+    background: #1FC36A;
+    color: white;
+    border-radius: 3px;
+    border: none;
+    height: 35px;
+    width: 280px;
 }
 
 #cart-count {
