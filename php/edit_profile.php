@@ -148,9 +148,19 @@ $conn->close();
         <div class="menu">
             <a href="order.php">MENU</a>
         </div>
-        <div class="myAccount">
-            <a href="edit_profile.php"><img src="../images/acc-1.png" alt="User's Account" height="37" width="34" style="padding-top: 5px;"></a>
-            <a href="edit_profile.php">MY ACCOUNT</a>
+        <div class="my-account">
+            <div id="my-account-container" style="cursor: pointer;">
+                <a><img src="../images/acc-1.png" alt="User's Account" height="37" width="34" style="padding-top: 5px;"></a>
+                <a>MY ACCOUNT</a>
+            </div>
+            <div class="basic-buttons-container" id="my-account-nav" style="display:none;">
+                <a href="edit_profile.php" class="basic-buttons" id="edit-profile"><img src="../images/acc-3.png" alt="User's Account" width= "34"
+height= "30"><p style="margin:5px 0 0 8px;">Edit Profile</p></a>
+                <a href="customer/check_history.php" class="basic-buttons" id="order-history"><img src="../images/newspaper-regular-1.svg" alt="Order History" width= "34"
+height= "25" style="margin-top:5px;"><p style="margin:5px 0 0 7px;">Order History</p></a>
+                <a href="logout.php" class="basic-buttons" id="log-out"><img src="../images/vector.svg" alt="Order History" width= "34"
+height= "20"style="margin-top:5px;" ><p style="margin:4px 0 0 7px;">Logout</p></a>
+            </div> 
         </div>
 </div>
     <!-- <?php if ($user['role']==='customer'): ?> -->
@@ -171,7 +181,7 @@ $conn->close();
                 <input type="tel" class="user-input" id="edited_phone_number" name="edited_phone_number" value="<?php echo $user['phone_number']; ?>" required><br>
                 
                 <p class="edit-input">New Address:</p>
-                <textarea name="edited_address" class="user-input" id ="edited_address" required><?php echo $user['address']; ?></textarea><br>
+                <input type="text" name="edited_address" class="user-input" id ="edited_address" value="<?php echo $user['address']; ?>" required><br>
 
                 <p class="edit-input">Current Password:</p>
                 <input type="password" class="user-input" id="current_password" name="current_password" required><br>
@@ -208,6 +218,6 @@ $conn->close();
         <p>User profile not found.</p>
     <?php endif; ?> -->
     
-
+    <script type="text/javascript" src="../js/script.js"></script>
 </body>
 </html>

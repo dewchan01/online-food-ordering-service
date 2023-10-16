@@ -81,7 +81,7 @@ $conn->close();
             <div id="cart-dropdown" class="cart-dropdown">
             <p>Add some items from the menu to get started!<p>
             <h5>Total Price: $0.00</h5>
-            <button id="checkout-btn" disabled="">0 item | Total Price: $0.00 | Finish Order</button>
+            <button id="checkout-btn" class="confirm-btn" disabled="">0 item | Total Price: $0.00 | Finish Order</button>
         </div>
         <!-- Cart items will be dynamically populated here -->
         

@@ -50,6 +50,8 @@ if (productsList) {
 }
 
 
+
+
 // Cart
 const cartIcon = document.getElementById('cart-icon');
 const cartCount = document.getElementById('cart-count');
@@ -60,7 +62,7 @@ if (cartIcon) {
     cartIcon.addEventListener('click', () => {
         cartDropdown.style.display = cartDropdown.style.display === 'block' ? 'none' : 'block';
         arrow.classList.toggle('active');
-
+    
     });
 
     cartDropdown.style.display = 'block'
@@ -196,6 +198,7 @@ if (cartIcon) {
             
             const checkoutButton = document.createElement('button');
             checkoutButton.id = 'checkout-btn';
+            checkoutButton.class= 'confirm-btn';
             checkoutButton.textContent = totalItems + ' ' + itemsText + ' | Total Price: $' + (totalCartPrice + 5).toFixed(2) + ' | Finish Order';
             cartDropdown.appendChild(summary);
             cartDropdown.appendChild(checkoutButton);
@@ -207,6 +210,7 @@ if (cartIcon) {
             summary.innerHTML = 'Total Price: $' + (totalCartPrice).toFixed(2);
             const checkoutButton = document.createElement('button');
             checkoutButton.id = 'checkout-btn';
+            checkoutButton.class= 'confirm-btn';
             checkoutButton.disabled = true;
             checkoutButton.textContent = totalItems + ' ' + itemsText + ' | Total Price: $' + (totalCartPrice).toFixed(2) + ' | Finish Order';
             cartDropdown.appendChild(summaryText);
@@ -218,3 +222,12 @@ if (cartIcon) {
 
 }
 
+// My Account
+const myAccount = document.getElementById('my-account-container');
+const myAccountNav = document.getElementById('my-account-nav');
+if(myAccount){    
+    myAccount.addEventListener('click', () =>{
+    console.log('Clicked on my account');
+    myAccountNav.style.display = myAccountNav.style.display ==='block' ? 'none' : 'block';
+    });
+}
