@@ -61,12 +61,10 @@ a{
     height: 70px;
     color: #FFF;
     font-size: 35px;
-    background-image: url('images/van-1.png');
-    background-repeat: no-repeat;
-    background-position-x: 20%;
-    background-position-y: center;
     border: none;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #delivery
 {
@@ -76,11 +74,11 @@ a{
     height: 70px;
     color: #FFF;
     font-size: 35px;
-    background-image: url('images/van-2.png');
-    background-repeat: no-repeat;
-    background-position-x: 5%;
-    background-position-y: center;
     border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 .banner{
     height: 350px;
