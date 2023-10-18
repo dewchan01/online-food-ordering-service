@@ -99,13 +99,13 @@ foreach ($cartItems as $productName => $quantity) {
     if (isset($products[$productName])) {
         $product = $products[$productName];
         $price = $product['price'];
-        $productPrice = $price * $quantity;
+        $productPrice = number_format($price * $quantity,2,'.','');
         $totalPrice += $price * $quantity;
 
         $message .= "<tr>";
         $message .= "<td>$productName</td>";
         $message .= "<td>$quantity</td>";
-        $message .= "<td>$($productPrice).toFixed(2)</td>";
+        $message .= "<td>$$productPrice</td>";
         $message .= "</tr>";
     }
 }

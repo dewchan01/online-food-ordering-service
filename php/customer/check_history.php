@@ -49,7 +49,7 @@ $conn->close();
                 <a><img src="../../images/acc-1.png" alt="User's Account" height="37" width="34" style="padding-top: 5px;"></a>
                 <a>MY ACCOUNT</a>
             </div>
-            <div class="basic-buttons-container" id="my-account-nav" style="display:none;">
+            <div class="basic-buttons-container" id="my-account-nav" style="display:none;position:relative;z-index:10;background-color:white;">
                 <a href="../edit_profile.php" class="basic-buttons" id="edit-profile"><img src="../../images/acc-3.png" alt="User's Account" width= "34"
 height= "30"><p style="margin:5px 0 0 8px;">Edit Profile</p></a>
                 <a href="check_history.php" class="basic-buttons" id="order-history"><img src="../../images/newspaper-regular-1.svg" alt="Order History" width= "34"
