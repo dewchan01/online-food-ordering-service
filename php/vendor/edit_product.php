@@ -116,7 +116,7 @@ $conn->close();
             <option value="unavailable" <?php if ($product['status'] === 'unavailable') echo 'selected'; ?>>Unavailable</option>
         </select><br>
         
-        <input type="submit" name="edit_product_submit" value="Save Changes" onclick="alert('Are you sure you want to make changes?')"></input>
+        <input type="submit" name="edit_product_submit" value="Save Changes" onclick="alert('Are you sure you want to make changes?')">
     </form>
     <?php else: ?>
         <p>Product not found.</p>

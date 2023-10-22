@@ -90,7 +90,7 @@ $conn->close();
             <option value="unavailable">Unavailable</option>
         </select><br>
 
-        <input type="submit" name="insert_product"  value="Insert Product"></input>
+        <input type="submit" name="insert_product"  value="Insert Product">
     </form>
 
     <a href="vendor_dashboard.php">Back to Dashboard</a>

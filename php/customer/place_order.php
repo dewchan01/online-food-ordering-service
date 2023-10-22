@@ -135,7 +135,7 @@ $conn->close();
             <button type="submit" name="confirm_payment" class="confirm-btn" id="confirm-payment-btn" value="Confirm Payment" style="margin-top:10px;width:400px;" onclick="confirmPayment()"><?php echo $totalQuantity ?> items | Total Price: $<?php echo $totalCost+$deliveryFee; ?> | Confirm Payment</button>
             </form>
         </div>
-        <input type="button" name="back_to_order" id="back-to-order-btn" onclick="backToOrder()"value="Menu"></input>
+        <input type="button" name="back_to_order" id="back-to-order-btn" onclick="backToOrder()"value="Menu">
     </div>
     <script src="../../js/payment.js"></script>
 

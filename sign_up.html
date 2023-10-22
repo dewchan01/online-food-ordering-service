@@ -1,81 +1,228 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Sign Up</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script type="text/javascript">
-    function validateForm() {
-        var username = document.getElementsByName("username")[0].value;
-        var password = document.getElementById("password").value;
-        var confirmPassword = document.getElementById("confirmPassword").value;
-        var email = document.getElementsByName("email")[0].value;
-        var phoneNumber = document.getElementsByName("phone_number")[0].value;
-        var address = document.getElementById("addressField").value;
-
-        // Regular expressions for validation
-        var usernameRegex = /^[a-zA-Z0-9]+$/;
-        var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]/;
-        var phoneNumberRegex = /^\d{8}$/;
-        var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
 
         // Check if the username contains only letters and numbers
-        if (!username.match(usernameRegex)) {
-            alert("Username can only contain letters and numbers.");
-            return false;
+        function checkUsername(input) {
+            var usernameRegex = /^[a-zA-Z0-9]+$/;
+            let container = document.createElement("div");
+            container.className = "checkUsername";
+            let p = document.createElement("p");
+            p.textContent = "Username can only contain letters and numbers.";
+            container.appendChild(p);
+
+            // Check if a previous error message exists and remove it
+            let existingError = document.querySelector(".checkUsername");
+            if (existingError) {
+                existingError.remove();
+            }
+
+            let span = document.createElement("span");
+            submitButton = document.getElementsByClassName("submit-button")[0];
+
+            if (!input.value.match(usernameRegex)) {
+                container.appendChild(p);
+                input.after(container);
+                submitButton.disabled = true;
+                return false;
+            } else {
+                submitButton.disabled = false;
+                return true;
+            }
         }
-        if (!password.match(passwordRegex)) {
-            alert("Please enter a valid password between 8-12 characters, including at least one special character, one capital letter, and one number.");
-            return false;
+
+        function checkPassword(input) {
+            var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
+            let container = document.createElement("div");
+            container.className = "checkPassword";
+            let p = document.createElement("p");
+            p.textContent = "Please enter a valid password between 8-12 characters, including at least one special character, one capital letter, and one number.";
+            container.appendChild(p);
+
+            // Check if a previous error message exists and remove it
+            let existingError = document.querySelector(".checkPassword");
+            if (existingError) {
+                existingError.remove();
+            }
+
+            let span = document.createElement("span");
+            submitButton = document.getElementsByClassName("submit-button")[0];
+
+            if (!input.value.match(passwordRegex)) {
+                container.appendChild(p);
+                input.after(container);
+                submitButton.disabled = true;
+                return false;
+            } else {
+                submitButton.disabled = false;
+                return true;
+            }
         }
+
+
         // Check if the password and confirm password match
-        if (hash('sha256',password) !== hash('sha256',confirmPassword)) {
-            alert("Passwords do not match.");
-            return false;
+        function matchPassword(input) {
+            let container = document.createElement("div");
+            container.className = "matchPassword";
+            let p = document.createElement("p");
+            p.textContent = "Passwords do not match.";
+            container.appendChild(p);
+
+            // Check if a previous error message exists and remove it
+            let existingError = document.querySelector(".matchPassword");
+            if (existingError) {
+                existingError.remove();
+            }
+
+            let span = document.createElement("span");
+            var password = document.getElementById("password");
+            submitButton = document.getElementsByClassName("submit-button")[0];
+
+            if (password.value !== input.value) {
+                container.appendChild(p);
+                input.after(container);
+                submitButton.disabled = true;
+                return false;
+            } else {
+                submitButton.disabled = false;
+                return true;
+            }
         }
 
         // Check if the email address is valid
-        if (!email.match(emailRegex)) {
-            alert("Please enter a valid email address.");
-            return false;
+        function checkEmail(input) {
+            var emailRegex = /^[a-zA-Z0-9._-]+@localhost/;
+
+            let container = document.createElement("div");
+            container.className = "checkEmail";
+            let p = document.createElement("p");
+            p.textContent = "Please enter a valid email address.(eg: test@localhost)";
+            container.appendChild(p);
+
+            // Check if a previous error message exists and remove it
+            let existingError = document.querySelector(".checkEmail");
+            if (existingError) {
+                existingError.remove();
+            }
+
+            let span = document.createElement("span");
+            submitButton = document.getElementsByClassName("submit-button")[0];
+
+            if (!input.value.match(emailRegex)) {
+                container.appendChild(p);
+                input.after(container);
+                submitButton.disabled = true;
+                return false;
+            } else {
+                submitButton.disabled = false;
+                return true;
+            }
         }
 
         // Check if the phone number contains exactly 8 digits
-        if (!phoneNumber.match(phoneNumberRegex)) {
-            alert("Please enter a valid 8-digit phone number.");
-            return false;
+        function checkPhone(input) {
+            var phoneNumberRegex = /^\d{8}$/;
+            let container = document.createElement("div");
+            container.className = "checkPhone";
+            let p = document.createElement("p");
+            p.textContent = "Please enter a valid 8-digit phone number.";
+            container.appendChild(p);
+
+            // Check if a previous error message exists and remove it
+            let existingError = document.querySelector(".checkPhone");
+            if (existingError) {
+                existingError.remove();
+            }
+
+            let span = document.createElement("span");
+            submitButton = document.getElementsByClassName("submit-button")[0];
+
+            if (!input.value.match(phoneNumberRegex)) {
+                container.appendChild(p);
+                input.after(container);
+                submitButton.disabled = true;
+                return false;
+            }
+            else {
+                submitButton.disabled = false;
+                return true;
+            }
         }
 
+
         // Check if the address is not empty
-        if (address.trim() === "") {
-            alert("Address is required.");
-            return false;
+        function checkAddress(input) {
+            let container = document.createElement("div");
+            container.className = "checkAddress";
+            let p = document.createElement("p");
+            p.textContent = "Address is required.";
+            container.appendChild(p);
+
+            // Check if a previous error message exists and remove it
+            let existingError = document.querySelector(".checkAddress");
+            if (existingError) {
+                existingError.remove();
+            }
+
+            let span = document.createElement("span");
+            submitButton = document.getElementsByClassName("submit-button")[0];
+            if (input.value.trim() === "") {
+                container.appendChild(p);
+                input.after(container);
+                submitButton.disabled = true;
+                return false;
+            }
+            else {
+                submitButton.disabled = false;
+                return true;
+            }
         }
-        return true;
-    }
+
+        function validateForm() {
+            checkUsername();
+            checkPassword();
+            matchPassword();
+            checkEmail();
+            checkPhone();
+            checkAddress();
+        }
     </script>
 </head>
+
 <body>
     <div class="nav" style="justify-content: flex-start;">
         <div class="header">
-            <a href="index.html" class="headerLogo"><img src="images/logo.png" alt="Domini's Logo" height="21" width="23">Domini's</a>
+            <a href="index.html" class="headerLogo"><img src="images/logo.png" alt="Domini's Logo" height="21"
+                    width="23">Domini's</a>
         </div>
     </div>
     <div class="login-signup">
         <h2>Create Account</h2>
         <input type="button" value="Back" id="back" onclick="window.location.href='index.html'">
         <div id="user-signup">
-            <form method="post" onsubmit="return validateForm()" action="php/sign_up.php" >
-                <input type="email" name="email" placeholder="Email" class="user-input" required><br>
-                <input type="text" name="username" placeholder="Username" class="user-input" required><br>
-                <input type="tel" name="phone_number" placeholder="Phone Number" class="user-input" required><br>
-                <input type="text" name="address" id ="addressField" placeholder="Enter Your Address" class="user-input" required><br>
-                <br><input type="password" name="password" id="password" placeholder="Password" class="user-input" required><br>
-                <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm Password" class="user-input" required><br>
+            <form method="post" onsubmit="return validateForm()" action="php/sign_up.php">
+                <input type="email" name="email" placeholder="Email" class="user-input" required
+                    onchange="checkEmail(this)"><br>
+                <input type="text" name="username" placeholder="Username" class="user-input" required
+                    onchange="checkUsername(this)"><br>
+                <input type="tel" name="phone_number" placeholder="Phone Number" class="user-input" required
+                    onchange="checkPhone(this)"><br>
+                <input type="text" name="address" id="addressField" placeholder="Enter Your Address" class="user-input"
+                    required onchange="checkAddress(this)"><br>
+                <br><input type="password" name="password" id="password" placeholder="Password" class="user-input"
+                    required onchange="checkPassword(this)"><br>
+                <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm Password"
+                    class="user-input" required onchange="matchPassword(this)"><br>
                 <p style="font-size: 20px;text-align:left;">Already got an account?<a href="login.html">Log in</a></p>
-                <input type="submit" value="Create Account" class="submit-button">
+                <input type="submit" value="Create Account" class="submit-button" onclick="return confirm('Are you sure?')">
             </form>
         </div>
     </div>
-    
+
 </body>
+
 </html>

@@ -15,7 +15,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $checkEmail = $_POST["email"];
 
      // Generate a temporary password
-    $newPassword = generateRandomPassword();
+    $newPassword = hash('sha256',generateRandomPassword());
 
 
     // Fetch the user details from the database
@@ -43,7 +43,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Reset user's password
     $editQuery = "UPDATE users SET password = ? WHERE email = ? ";
     $stmt = $conn->prepare($editQuery);
-    $stmt->bind_param("ss",hash('sha256',$newPassword),$checkEmail);
+    $stmt->bind_param("ss",$newPassword,$checkEmail);
     $stmt->execute();
     $stmt->close();
     echo "<script>alert('The temporary password has been sent to your email address. Please check your email.');

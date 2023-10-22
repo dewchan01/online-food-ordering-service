@@ -37,52 +37,52 @@ if (isset($_POST['edit_profile_submit'])) {
     $editedEmail = $_POST['edited_email'];
     $editedPhoneNumber = $_POST['edited_phone_number'];
     $currentPassword = $_POST['current_password'];
-    $newPassword = $_POST['new_password'];
+    $newPassword = hash("sha256",$_POST['new_password']);
     $editedAddress = $_POST['edited_address'];
     if ($user['password'] !== hash('sha256', $currentPassword)) {
         echo "<script>alert('Incorrect password! Please try again.');
         window.location.href='edit_profile.php';</script>";
-    }else{
-
-    // Check for duplicate email
-    $checkEmailQuery = "SELECT * FROM users WHERE email = ? AND username <> ?";
-    $stmt = $conn->prepare($checkEmailQuery);
-    $stmt->bind_param("ss", $editedEmail,$loggedInUsername);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($result->num_rows > 0 && $newPassword === '') {
-        $errors[] = "Email address already registered. Please use a different email address.";
-    }
-
-    if (empty($errors) ) {
-        // Perform edit for the user profile
-        if ($newPassword !== '') {
-            $editQuery = "UPDATE users SET email = ?, phone_number = ?, address = ?, password = ?  WHERE username = ?";
-            $stmt = $conn->prepare($editQuery);
-            $stmt->bind_param("sssss", $editedEmail, $editedPhoneNumber, $editedAddress, hash('sha256', $newPassword), $loggedInUsername);
-            $stmt->execute();
-            $stmt->close();
-        } else {
-            $editQuery = "UPDATE users SET email = ?, phone_number = ?, address = ? WHERE username = ?";
-            $stmt = $conn->prepare($editQuery);
-            $stmt->bind_param("ssss", $editedEmail, $editedPhoneNumber, $editedAddress, $loggedInUsername);
-            $stmt->execute();
-            $stmt->close();
-        }
-
-        // Redirect based on role
-        if ($user['role'] === 'customer') {
-            echo "<script>alert('Changes saved successfully!');
-        window.location.href='order.php';</script>";
-        } else if ($user['role'] === 'vendor') {
-            echo "<script>alert('Changes saved successfully!');
-        window.location.href='vendor/vendor_dashboard.php';</script>";
-        }
     } else {
-        echo "<script>
+
+        // Check for duplicate email
+        $checkEmailQuery = "SELECT * FROM users WHERE email = ? AND username <> ?";
+        $stmt = $conn->prepare($checkEmailQuery);
+        $stmt->bind_param("ss", $editedEmail, $loggedInUsername);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0 && $newPassword === '') {
+            $errors[] = "Email address already registered. Please use a different email address.";
+        }
+
+        if (empty($errors)) {
+            // Perform edit for the user profile
+            if ($newPassword !== '') {
+                $editQuery = "UPDATE users SET email = ?, phone_number = ?, address = ?, password = ?  WHERE username = ?";
+                $stmt = $conn->prepare($editQuery);
+                $stmt->bind_param("sssss", $editedEmail, $editedPhoneNumber, $editedAddress, $newPassword, $loggedInUsername);
+                $stmt->execute();
+                $stmt->close();
+            } else {
+                $editQuery = "UPDATE users SET email = ?, phone_number = ?, address = ? WHERE username = ?";
+                $stmt = $conn->prepare($editQuery);
+                $stmt->bind_param("ssss", $editedEmail, $editedPhoneNumber, $editedAddress, $loggedInUsername);
+                $stmt->execute();
+                $stmt->close();
+            }
+
+            // Redirect based on role
+            if ($user['role'] === 'customer') {
+                echo "<script>alert('Changes saved successfully!');
+        window.location.href='order.php';</script>";
+            } else if ($user['role'] === 'vendor') {
+                echo "<script>alert('Changes saved successfully!');
+        window.location.href='vendor/vendor_dashboard.php';</script>";
+            }
+        } else {
+            echo "<script>
     alert('" . $errors[0] . "');window.location.href='edit_profile.php';</script>";
+        }
     }
-}
 }
 $conn->close();
 ?>
@@ -143,6 +143,59 @@ $conn->close();
 
             return true;
         }
+
+        function checkCurrentPassword(input){
+            var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
+            let container = document.createElement("div");
+            container.className = "checkCurrentPassword";
+            let p = document.createElement("p");
+            p.textContent = "Please enter a valid password between 8-12 characters, including at least one special character, one capital letter, and one number.";
+            container.appendChild(p);
+            let existingError = document.querySelector(".checkCurrentPassword");
+            if (existingError) {
+                existingError.remove();
+            }
+            let span = document.createElement("span");
+            submitButton = document.getElementsByClassName("submit-button")[0];
+            
+            if (!input.value.match(passwordRegex) || input.value === '') {
+                container.appendChild(p);
+                input.after(container);
+                submitButton.disabled = true;
+                return false;
+            } else {
+                submitButton.disabled = false;
+                return true;
+            }
+        }
+
+        function checkPassword(input) {
+            var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
+            let container = document.createElement("div");
+            container.className = "checkPassword";
+            let p = document.createElement("p");
+            p.textContent = "Please enter a valid password between 8-12 characters, including at least one special character, one capital letter, and one number.";
+            container.appendChild(p);
+
+            // Check if a previous error message exists and remove it
+            let existingError = document.querySelector(".checkPassword");
+            if (existingError) {
+                existingError.remove();
+            }
+
+            let span = document.createElement("span");
+            submitButton = document.getElementsByClassName("submit-button")[0];
+            
+            if (!input.value.match(passwordRegex) || input.value === '') {
+                container.appendChild(p);
+                input.after(container);
+                submitButton.disabled = true;
+                return false;
+            } else {
+                submitButton.disabled = false;
+                return true;
+            }
+        }
     </script>
 </head>
 </head>
@@ -167,7 +220,7 @@ $conn->close();
                 <a href="customer/check_history.php" class="basic-buttons" id="order-history"><img src="../images/newspaper-regular-1.svg" alt="Order History" width="34" height="25" style="margin-top:5px;">
                     <p style="margin:5px 0 0 7px;">Order History</p>
                 </a>
-                <a href="logout.php" class="basic-buttons" id="log-out" onclick="alert('Are you sure you want to log out?')"><img src="../images/vector.svg" alt="Order History" width="34" height="20" style="margin-top:5px;">
+                <a href="logout.php" class="basic-buttons" id="log-out" onclick="return confirm('Are you sure you want to log out?')"><img src="../images/vector.svg" alt="Order History" width="34" height="20" style="margin-top:5px;">
                     <p style="margin:4px 0 0 7px;">Logout</p>
                 </a>
             </div>
@@ -194,14 +247,14 @@ $conn->close();
                 <input type="text" name="edited_address" class="user-input" id="edited_address" value="<?php echo $user['address']; ?>" required><br>
 
                 <p class="edit-input">*Current Password:</p>
-                <input type="password" class="user-input" id="current_password" name="current_password" required><br>
+                <input type="password" class="user-input" id="current_password" name="current_password" onchange="checkCurrentPassword(this)"><br>
 
                 <p class="edit-input">New Password:</p>
-                <input type="password" class="user-input" id="new_password" name="new_password"><br>
+                <input type="password" class="user-input" id="new_password" name="new_password" onchange="checkPassword(this)"><br>
 
                 <p> *Current Password is required to edit details</p>
 
-                <button type="submit" name="edit_profile_submit" class="submit-button" onclick="alert('Are you sure you want to make changes?')">Save Changes</button>
+                <input type="submit" name="edit_profile_submit" class="submit-button" onclick="return confirm('Are you sure you want to make changes?')" value="Save Changes">
             </form>
         </div>
 

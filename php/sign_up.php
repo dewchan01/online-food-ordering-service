@@ -16,8 +16,7 @@ $errors = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
-    // $password = password_hash($_POST["password"], PASSWORD_DEFAULT); // Hash the password
-    $password = $_POST["password"];
+    $password = hash('sha256',$_POST["password"]);
     $email = $_POST["email"];
     $phone_number = $_POST["phone_number"];
     $role = "customer";
@@ -48,10 +47,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $insertQuery = "INSERT INTO users (username, password, email, phone_number, role,address) VALUES (?, ?, ?, ?, ?,?)";
     $stmt = $conn->prepare($insertQuery);
-    $stmt->bind_param("ssssss", $username, hash('sha256',$password), $email, $phone_number, $role,$address);
+    $stmt->bind_param("ssssss", $username, $password, $email, $phone_number, $role,$address);
     $stmt->execute();
     $stmt->close();
     echo "<script>
+    alert('Registration successful. You can now login.');
     window.location.href='../login.html';</script>";
     }else{
     echo "<script>

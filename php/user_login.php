@@ -2,7 +2,7 @@
 // Handle user login and authentication
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
-    $password = $_POST["password"];
+    $password = hash('sha256',$_POST["password"]);
 
     // Database connection parameters
     $servername = "localhost";
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Perform user authentication
     $query = "SELECT role FROM users WHERE username = ? AND password = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ss", $username, hash('sha256',$password));
+    $stmt->bind_param("ss", $username, $password);
     $stmt->execute();
     $stmt->bind_result($role);
     $stmt->fetch();
