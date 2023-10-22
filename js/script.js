@@ -107,27 +107,31 @@ if (cartIcon) {
             const quantityContainer = document.createElement('div');
             quantityContainer.className = 'quantity-container';
 
-            const increaseBtn = document.createElement('button');
-            increaseBtn.style = 'color:#006E9A;font-weight:1000;';
-            increaseBtn.textContent = 'Add';
-            increaseBtn.className = 'quantity-btn';
-            increaseBtn.addEventListener('click', () => {
-                cartItems[itemName]++;
+            const removeBtn = document.createElement('button');
+            removeBtn.style = 'color:#006E9A;font-weight:1000;';
+            removeBtn.textContent = 'Remove One';
+            removeBtn.className = 'quantity-btn';
+            removeBtn.addEventListener('click', () => {
+                if (cartItems[itemName] === 1){
+                    delete cartItems[itemName]; // Remove item from cartItems when count is 0
+                }else{
+                cartItems[itemName]--;
+                }
                 updateCartDropdown();
             });
 
-            const decreaseBtn = document.createElement('button');
-            decreaseBtn.style = 'color:red;font-weight:1000;';
-            decreaseBtn.textContent = 'Remove';
-            decreaseBtn.className = 'quantity-btn';
-            decreaseBtn.addEventListener('click', () => {
-                if (cartItems[itemName] > 1) {
-                    cartItems[itemName]--;
-                    updateCartDropdown();
-                } else {
+            const removeAllBtn = document.createElement('button');
+            removeAllBtn.style = 'color:red;font-weight:1000;';
+            removeAllBtn.textContent = 'Remove All';
+            removeAllBtn.className = 'quantity-btn';
+            removeAllBtn.addEventListener('click', () => {
+                if (confirm("Are you sure you want to remove all?")){
+                if (cartItems[itemName] > 0) {
+                    cartItems[itemName] = 0;
                     delete cartItems[itemName]; // Remove item from cartItems when count is 0
                     updateCartDropdown();
                 }
+            }
                 // console.log(cartItems)
 
             });
@@ -139,8 +143,8 @@ if (cartIcon) {
             // Add the individual item price to the total cart price
             totalCartPrice += itemTotalPrice;
 
-            quantityContainer.appendChild(decreaseBtn);
-            quantityContainer.appendChild(increaseBtn);
+            quantityContainer.appendChild(removeAllBtn);
+            quantityContainer.appendChild(removeBtn);
 
             cartItem.innerHTML = `<div class="cart-item-container"><div>${quantityText} x ${itemName} \t</div> <p style="font-weight:700;margin:0;">$${itemTotalPrice.toFixed(2)}</p></div>`;
             cartItem.appendChild(quantityContainer);

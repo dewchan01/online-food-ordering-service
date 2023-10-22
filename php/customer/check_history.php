@@ -54,7 +54,7 @@ $conn->close();
 height= "30"><p style="margin:5px 0 0 8px;">Edit Profile</p></a>
                 <a href="check_history.php" class="basic-buttons" id="order-history"><img src="../../images/newspaper-regular-1.svg" alt="Order History" width= "34"
 height= "25" style="margin-top:5px;"><p style="margin:5px 0 0 7px;">Order History</p></a>
-                <a href="../logout.php" class="basic-buttons" id="log-out"><img src="../../images/vector.svg" alt="Order History" width= "34"
+                <a href="../logout.php" class="basic-buttons" id="log-out" onclick="alert('Are you sure you want to log out?')"><img src="../../images/vector.svg" alt="Order History" width= "34"
 height= "20"style="margin-top:5px;" ><p style="margin:4px 0 0 7px;">Logout</p></a>
             </div> 
         </div>

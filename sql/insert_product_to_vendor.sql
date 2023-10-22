@@ -2,4 +2,7 @@ INSERT INTO `products` (`product_id`, `product_name`, `description`, `price`, `i
 (1, 'Chicken Temptation', '100% Mozzarella Cheese with Succulent Smoked Chicken Breast, Chicken Ham, Green and Red Pepper', 28.90, '../images/Chicken_Temptation.avif', 'available'),
 (2, 'Diavola Beef', 'Ground Beef, Red Capsicum, Onion, Red Pepper Flakes on Napolitana Sauce', 28.90, '../images/Diavola_Beef.avif', 'available'),
 (3, 'Parmagiana Chicken', 'Cherry Tomato, Ripe Olives, Roasted Chicken, Parmesan Cheese, Mozzarella Cheese on Napolitana Sauce\r\n', 28.90, '../images/Parmagiana_Chicken.avif', 'available'),
-(4, 'Smoky Meatilicious', 'Onion, Green Pepper, Ground Beef, Chicken Potpouri Sausage on Smoky blended BBQ Sauce', 28.90, '../images/Smoky_Meatilicious.avif', 'unavailable');
+(4, 'Smoky Meatilicious', 'Onion, Green Pepper, Ground Beef, Chicken Potpouri Sausage on Smoky blended BBQ Sauce', 28.90, '../images/Smoky_Meatilicious.avif', 'unavailable'),
+(5, 'Chicken Bon-Taiko', 'Roasted Chicken, Bonito Flakes, Spinach, Onions, Cherry Tomatoes, Mushrooms, Green Peppers and Shredded Mozzarella covered in a creamy Mentaiko Mayo Sauce', 28.90, '../images/Chicken_Bon-Taiko.avif', 'available'),
+(6, 'Prawn Bon-Taiko', 'Succulent Prawns, Bonito Flakes, Spinach, Onions, Red Peppers and Shredded Mozzarella covered in a creamy Mentaiko Mayo Sauce', 30.90, '../images/Prawn_Bon-Taiko.avif', 'available'),
+(7, 'Very Veggie', '100% Mozzarella Cheese with Green & Red Pepper, Cherry Tomato, Mushroom, Ripe Olive and Pineapples', 25.90, '../images/Very_Veggie.avif', 'available');
