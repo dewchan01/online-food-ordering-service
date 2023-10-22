@@ -39,7 +39,10 @@ if (isset($_POST['edit_profile_submit'])) {
     $currentPassword = $_POST['current_password'];
     $newPassword = hash("sha256",$_POST['new_password']);
     $editedAddress = $_POST['edited_address'];
-    if ($user['password'] !== hash('sha256', $currentPassword)) {
+    if ($currentPassword ==='') {
+        echo "<script>alert('No password is input! Please try again.');
+        window.location.href='edit_profile.php';</script>";
+    }else if ($user['password'] !== hash('sha256', $currentPassword)) {
         echo "<script>alert('Incorrect password! Please try again.');
         window.location.href='edit_profile.php';</script>";
     } else {
@@ -50,13 +53,13 @@ if (isset($_POST['edit_profile_submit'])) {
         $stmt->bind_param("ss", $editedEmail, $loggedInUsername);
         $stmt->execute();
         $result = $stmt->get_result();
-        if ($result->num_rows > 0 && $newPassword === '') {
+        if ($result->num_rows > 0) {
             $errors[] = "Email address already registered. Please use a different email address.";
         }
 
         if (empty($errors)) {
             // Perform edit for the user profile
-            if ($newPassword !== '') {
+            if ($_POST['new_password'] !== '') {
                 $editQuery = "UPDATE users SET email = ?, phone_number = ?, address = ?, password = ?  WHERE username = ?";
                 $stmt = $conn->prepare($editQuery);
                 $stmt->bind_param("sssss", $editedEmail, $editedPhoneNumber, $editedAddress, $newPassword, $loggedInUsername);
@@ -94,71 +97,54 @@ $conn->close();
     <title>Edit Profile</title>
     <link rel="stylesheet" type="text/css" href="../styles.css">
     <script type="text/javascript">
-        function validateForm() {
-            var username = document.getElementsByName("edited_username")[0].value;
-            var password = document.getElementById("current_password").value;
-            var confirmPassword = document.getElementById("new_password").value;
-            var email = document.getElementsByName("edited_email")[0].value;
-            var phoneNumber = document.getElementsByName("edited_phone_number")[0].value;
-            var address = document.getElementById("edited_address").value;
-
-            // Regular expressions for validation
+    function checkUsername(input) {
             var usernameRegex = /^[a-zA-Z0-9]+$/;
-            var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]/;
-            var phoneNumberRegex = /^\d{8}$/;
-            var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
-
-            // Check if the username contains only letters and numbers
-            if (!username.match(usernameRegex)) {
-                alert("Username can only contain letters and numbers.");
-                return false;
-            }
-            if (!password.match(passwordRegex)) {
-                alert("Please enter a valid password between 8-12 characters, including at least one special character, one capital letter, and one number.");
-                return false;
-            }
-            // Check if the password and confirm password match
-            if (hash('sha256', password) !== hash('sha256', confirmPassword)) {
-                alert("Passwords do not match.");
-                return false;
-            }
-
-            // Check if the email address is valid
-            if (!email.match(emailRegex)) {
-                alert("Please enter a valid email address.");
-                return false;
-            }
-
-            // Check if the phone number contains exactly 8 digits
-            if (!phoneNumber.match(phoneNumberRegex)) {
-                alert("Please enter a valid 8-digit phone number.");
-                return false;
-            }
-
-            // Check if the address is not empty
-            if (address.trim() === "") {
-                alert("Address is required.");
-                return false;
-            }
-
-            return true;
-        }
-
-        function checkCurrentPassword(input){
-            var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
             let container = document.createElement("div");
-            container.className = "checkCurrentPassword";
+            container.className = "checkUsername";
             let p = document.createElement("p");
-            p.textContent = "Please enter a valid password between 8-12 characters, including at least one special character, one capital letter, and one number.";
+            p.textContent = "Username can only contain letters and numbers.";
             container.appendChild(p);
-            let existingError = document.querySelector(".checkCurrentPassword");
+
+            // Check if a previous error message exists and remove it
+            let existingError = document.querySelector(".checkUsername");
             if (existingError) {
                 existingError.remove();
             }
+
             let span = document.createElement("span");
             submitButton = document.getElementsByClassName("submit-button")[0];
-            
-            if (!input.value.match(passwordRegex) || input.value === '') {
+
+            if (!input.value.match(usernameRegex) || input.value === '') {
+                container.appendChild(p);
+                input.after(container);
+                submitButton.disabled = true;
+                return false;
+            } else {
+                submitButton.disabled = false;
+                return true;
+            }
+    }
+
+        // Check if the email address is valid
+        function checkEmail(input) {
+            var emailRegex = /^[a-zA-Z0-9._-]+@localhost$/;
+
+            let container = document.createElement("div");
+            container.className = "checkEmail";
+            let p = document.createElement("p");
+            p.textContent = "Please enter a valid email address.(eg: test@localhost)";
+            container.appendChild(p);
+
+            // Check if a previous error message exists and remove it
+            let existingError = document.querySelector(".checkEmail");
+            if (existingError) {
+                existingError.remove();
+            }
+
+            let span = document.createElement("span");
+            submitButton = document.getElementsByClassName("submit-button")[0];
+
+            if (!input.value.match(emailRegex)) {
                 container.appendChild(p);
                 input.after(container);
                 submitButton.disabled = true;
@@ -169,16 +155,100 @@ $conn->close();
             }
         }
 
-        function checkPassword(input) {
+        // Check if the phone number contains exactly 8 digits
+        function checkPhone(input) {
+            var phoneNumberRegex = /^\d{8}$/;
+            let container = document.createElement("div");
+            container.className = "checkPhone";
+            let p = document.createElement("p");
+            p.textContent = "Please enter a valid 8-digit phone number.";
+            container.appendChild(p);
+
+            // Check if a previous error message exists and remove it
+            let existingError = document.querySelector(".checkPhone");
+            if (existingError) {
+                existingError.remove();
+            }
+
+            let span = document.createElement("span");
+            submitButton = document.getElementsByClassName("submit-button")[0];
+
+            if (!input.value.match(phoneNumberRegex)) {
+                container.appendChild(p);
+                input.after(container);
+                submitButton.disabled = true;
+                return false;
+            }
+            else {
+                submitButton.disabled = false;
+                return true;
+            }
+        }
+
+
+        // Check if the address is not empty
+        function checkAddress(input) {
+            let container = document.createElement("div");
+            container.className = "checkAddress";
+            let p = document.createElement("p");
+            p.textContent = "Address is required.";
+            container.appendChild(p);
+
+            // Check if a previous error message exists and remove it
+            let existingError = document.querySelector(".checkAddress");
+            if (existingError) {
+                existingError.remove();
+            }
+
+            let span = document.createElement("span");
+            submitButton = document.getElementsByClassName("submit-button")[0];
+            if (input.value.trim() === "") {
+                container.appendChild(p);
+                input.after(container);
+                submitButton.disabled = true;
+                return false;
+            }
+            else {
+                submitButton.disabled = false;
+                return true;
+            }
+        }
+
+        function checkPassword(input){
             var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
             let container = document.createElement("div");
             container.className = "checkPassword";
             let p = document.createElement("p");
             p.textContent = "Please enter a valid password between 8-12 characters, including at least one special character, one capital letter, and one number.";
             container.appendChild(p);
+            let existingError = document.querySelector(".checkPassword");
+            if (existingError) {
+                existingError.remove();
+            }
+            let span = document.createElement("span");
+            submitButton = document.getElementsByClassName("submit-button")[0];
+            
+            if (!input.value.match(passwordRegex) || input.value === '') {
+                container.appendChild(p);
+                input.after(container);
+                submitButton.disabled = true;
+                return false;
+            } else {
+                submitButton.disabled = false;
+                return true;
+            }
+        }
+
+        function matchPassword(input) {
+            var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
+            let container = document.createElement("div");
+            container.className = "matchPassword";
+            let p = document.createElement("p");
+            p.textContent = "Please enter a valid password between 8-12 characters, including at least one special character, one capital letter, and one number.";
+            container.appendChild(p);
 
             // Check if a previous error message exists and remove it
-            let existingError = document.querySelector(".checkPassword");
+            let existingError = document.querySelector(".matchPassword");
             if (existingError) {
                 existingError.remove();
             }
@@ -195,6 +265,14 @@ $conn->close();
                 submitButton.disabled = false;
                 return true;
             }
+        }
+
+        function validateForm() {
+            checkUsername();
+            checkPassword();
+            checkEmail();
+            checkPhone();
+            checkAddress();
         }
     </script>
 </head>
@@ -235,22 +313,22 @@ $conn->close();
         <div id="user-login">
             <form method="POST" onsubmit="return validateForm()" action="edit_profile.php">
                 <p class="edit-input">Username:</p>
-                <input type="text" class="user-input" id="edited_username" name="edited_username" value="<?php echo $user['username']; ?>" readonly><br>
+                <input type="text" class="user-input" id="edited_username" name="edited_username" value="<?php echo $user['username']; ?>" onchange="checkUsername(this)" readonly><br>
 
                 <p class="edit-input">Email:</p>
-                <input type="email" class="user-input" id="edited_email" name="edited_email" value="<?php echo $user['email']; ?>" required><br>
+                <input type="email" class="user-input" id="edited_email" name="edited_email" value="<?php echo $user['email']; ?>" onchange="checkEmail(this)" required><br>
 
                 <p class="edit-input">Phone Number:</p>
-                <input type="tel" class="user-input" id="edited_phone_number" name="edited_phone_number" value="<?php echo $user['phone_number']; ?>" required><br>
+                <input type="tel" class="user-input" id="edited_phone_number" name="edited_phone_number" value="<?php echo $user['phone_number']; ?>" onchange="checkPhone(this)" required><br>
 
                 <p class="edit-input">New Address:</p>
-                <input type="text" name="edited_address" class="user-input" id="edited_address" value="<?php echo $user['address']; ?>" required><br>
+                <input type="text" name="edited_address" class="user-input" id="edited_address" value="<?php echo $user['address']; ?>" required onchange="checkAddress(this)"><br>
 
                 <p class="edit-input">*Current Password:</p>
-                <input type="password" class="user-input" id="current_password" name="current_password" onchange="checkCurrentPassword(this)"><br>
+                <input type="password" class="user-input" id="current_password" name="current_password" onchange="checkPassword(this)"><br>
 
                 <p class="edit-input">New Password:</p>
-                <input type="password" class="user-input" id="new_password" name="new_password" onchange="checkPassword(this)"><br>
+                <input type="password" class="user-input" id="new_password" name="new_password" onchange="matchPassword(this)"><br>
 
                 <p> *Current Password is required to edit details</p>
 
