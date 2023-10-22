@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $insertQuery = "INSERT INTO users (username, password, email, phone_number, role,address) VALUES (?, ?, ?, ?, ?,?)";
     $stmt = $conn->prepare($insertQuery);
-    $stmt->bind_param("ssssss", $username, $password, $email, $phone_number, $role,$address);
+    $stmt->bind_param("ssssss", $username, hash('sha256',$password), $email, $phone_number, $role,$address);
     $stmt->execute();
     $stmt->close();
     echo "<script>

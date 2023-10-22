@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Perform user authentication
     $query = "SELECT role FROM users WHERE username = ? AND password = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ss", $username, $password);
+    $stmt->bind_param("ss", $username, hash('sha256',$password));
     $stmt->execute();
     $stmt->bind_result($role);
     $stmt->fetch();

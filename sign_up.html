@@ -28,7 +28,7 @@
             return false;
         }
         // Check if the password and confirm password match
-        if (password !== confirmPassword) {
+        if (hash('sha256',password) !== hash('sha256',confirmPassword)) {
             alert("Passwords do not match.");
             return false;
         }
