@@ -17,7 +17,7 @@ if (productsList) {
                 productCard.className = 'product-card';
                 productCard.innerHTML = `
                 <div class="product-container">
-                <img src="${product.image_url}" alt="${product.product_name}" class="product-image">
+                <img src="../../images/${product.image_url}" alt="${product.product_name}" class="product-image">
                 <div class="product-details-container">
                 <h3>${product.product_name}</h3>
                 <p>From $${product.price}</p>

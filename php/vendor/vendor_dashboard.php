@@ -202,7 +202,7 @@ if(isset($_POST['toggle_order_status'])){
             echo "<td>" . $row["product_name"] . "</td>";
             echo "<td>" . $row["description"] . "</td>";
             echo "<td>" . $row["price"] . "</td>";
-            echo "<td><a href='" . $row["image_url"] . "'><img src='" . $row["image_url"] . "' alt='Product Image'></a></td>";
+            echo "<td><img src='../../images/" . $row["image_url"] . "' alt='Product Image'></td>";
             echo "<td>" . $row["status"] . "</td>";
             echo "<td>";
             echo "<form action='edit_product.php?product_id=" . $row['product_id'] . "' method='POST'>";

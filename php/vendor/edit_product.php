@@ -36,10 +36,48 @@ if (isset($_POST['edit_product_submit'])) {
     $editedProductPrice = $_POST['edited_product_price'];
     $editedProductStatus = $_POST['edited_product_status'];
 
+    $target_dir = '../../images/';
+    $target_file = $target_dir . basename($_FILES["edited_image_url"]["name"]);
+    $editedImageURL =  $product['image_url'];
+
+    if ($target_file!== '../../images/'){
+    $editedImageURL = '../images/'.basename($_FILES["edited_image_url"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+    // Check if image file is a actual image or fake image
+    if(isset($_POST["submit"])) {
+      $check = getimagesize($_FILES["edited_image_url"]["tmp_name"]);
+      if($check !== false) {
+        echo "File is an image - " . $check["mime"] . ".";
+        $uploadOk = 1;
+      } else {
+        echo "File is not an image.";
+        $uploadOk = 0;
+      }
+    }
+    if ($uploadOk == 0) {
+        echo "Sorry, your file was not uploaded.";
+      // if everything is ok, try to upload file
+      } else {
+        if (move_uploaded_file($_FILES["edited_image_url"]["tmp_name"], $target_file)) {
+          echo "The file ". htmlspecialchars( basename( $_FILES["edited_image_url"]["name"])). " has been uploaded.";
+        } else {
+          echo "Sorry, there was an error uploading your file.";
+        }
+        $filename = '../' . $product['image_url'];
+        if (file_exists($filename)) {
+            unlink($filename);
+            echo 'File '.$filename.' has been deleted';
+          } else {
+            echo 'Could not delete '.$filename.', file does not exist';
+          }
+      }
+    }
+
     // Perform edit for the selected product
-    $editQuery = "UPDATE products SET product_name = ?, description = ?, price = ?, status = ? WHERE product_id = ?";
+    $editQuery = "UPDATE products SET product_name = ?, description = ?, price = ?, image_url = ?, status = ? WHERE product_id = ?";
     $stmt = $conn->prepare($editQuery);
-    $stmt->bind_param("ssdsi", $editedProductName, $editedProductDescription, $editedProductPrice, $editedProductStatus, $productId);
+    $stmt->bind_param("ssdssi", $editedProductName, $editedProductDescription, $editedProductPrice, $editedImageURL, $editedProductStatus, $productId);
     $stmt->execute();
     $stmt->close();
 
@@ -58,7 +96,7 @@ $conn->close();
 <body>
     <h1>Edit Product</h1>
     <?php if (isset($product)): ?>
-    <form method="POST" action="edit_product.php?product_id=<?php echo $productId; ?>">
+    <form method="POST" action="edit_product.php?product_id=<?php echo $productId; ?>" enctype="multipart/form-data">
         <input type="hidden" name="product_id" value="<?php echo $productId; ?>">
         <label for="edited_product_name">Product Name:</label>
         <input type="text" id="edited_product_name" name="edited_product_name" value="<?php echo $product['product_name']; ?>" required><br>
@@ -68,6 +106,9 @@ $conn->close();
         
         <label for="edited_product_price">Product Price:</label>
         <input type="number" id="edited_product_price" name="edited_product_price" step="0.01" value="<?php echo $product['price']; ?>" required><br>
+
+        <label for="edited_image_url">Image:</label>
+        <input type="file" id="edited_image_url" name="edited_image_url"><br>
         
         <label for="edited_product_status">Product Status:</label>
         <select id="edited_product_status" name="edited_product_status" required>
@@ -75,7 +116,7 @@ $conn->close();
             <option value="unavailable" <?php if ($product['status'] === 'unavailable') echo 'selected'; ?>>Unavailable</option>
         </select><br>
         
-        <button type="submit" name="edit_product_submit">Save Changes</button>
+        <input type="submit" name="edit_product_submit" value="Save Changes"></input>
     </form>
     <?php else: ?>
         <p>Product not found.</p>
