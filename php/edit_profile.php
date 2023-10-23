@@ -37,12 +37,12 @@ if (isset($_POST['edit_profile_submit'])) {
     $editedEmail = $_POST['edited_email'];
     $editedPhoneNumber = $_POST['edited_phone_number'];
     $currentPassword = $_POST['current_password'];
-    $newPassword = hash("sha256",$_POST['new_password']);
+    $newPassword = hash("sha256", $_POST['new_password']);
     $editedAddress = $_POST['edited_address'];
-    if ($currentPassword ==='') {
+    if ($currentPassword === '') {
         echo "<script>alert('No password is input! Please try again.');
         window.location.href='edit_profile.php';</script>";
-    }else if ($user['password'] !== hash('sha256', $currentPassword)) {
+    } else if ($user['password'] !== hash('sha256', $currentPassword)) {
         echo "<script>alert('Incorrect password! Please try again.');
         window.location.href='edit_profile.php';</script>";
     } else {
@@ -97,7 +97,7 @@ $conn->close();
     <title>Edit Profile</title>
     <link rel="stylesheet" type="text/css" href="../styles.css">
     <script type="text/javascript">
-    function checkUsername(input) {
+        function checkUsername(input) {
             var usernameRegex = /^[a-zA-Z0-9]+$/;
             let container = document.createElement("div");
             container.className = "checkUsername";
@@ -123,7 +123,7 @@ $conn->close();
                 submitButton.disabled = false;
                 return true;
             }
-    }
+        }
 
         // Check if the email address is valid
         function checkEmail(input) {
@@ -178,8 +178,7 @@ $conn->close();
                 input.after(container);
                 submitButton.disabled = true;
                 return false;
-            }
-            else {
+            } else {
                 submitButton.disabled = false;
                 return true;
             }
@@ -207,14 +206,13 @@ $conn->close();
                 input.after(container);
                 submitButton.disabled = true;
                 return false;
-            }
-            else {
+            } else {
                 submitButton.disabled = false;
                 return true;
             }
         }
 
-        function checkPassword(input){
+        function checkPassword(input) {
             var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
             let container = document.createElement("div");
             container.className = "checkPassword";
@@ -227,7 +225,10 @@ $conn->close();
             }
             let span = document.createElement("span");
             submitButton = document.getElementsByClassName("submit-button")[0];
-            
+            new_password = document.getElementById("new_password");
+            if (new_password.value !== '') {
+                matchPassword(new_password);
+            }
             if (!input.value.match(passwordRegex) || input.value === '') {
                 container.appendChild(p);
                 input.after(container);
@@ -247,6 +248,14 @@ $conn->close();
             p.textContent = "Please enter a valid password between 8-12 characters, including at least one special character, one capital letter, and one number.";
             container.appendChild(p);
 
+            current_password = document.getElementById("current_password");
+            if (current_password.value === '') {
+                p.textContent = "Please enter your current password!";
+            }
+            if (current_password.value === input.value) {
+                p.textContent = "Please enter new password!";
+            }
+
             // Check if a previous error message exists and remove it
             let existingError = document.querySelector(".matchPassword");
             if (existingError) {
@@ -255,8 +264,8 @@ $conn->close();
 
             let span = document.createElement("span");
             submitButton = document.getElementsByClassName("submit-button")[0];
-            
-            if (!input.value.match(passwordRegex) || input.value === '') {
+
+            if (!input.value.match(passwordRegex) && input.value !== '' || current_password.value === '' || current_password.value === input.value || input.value !== '' && current_password.value === '') {
                 container.appendChild(p);
                 input.after(container);
                 submitButton.disabled = true;
@@ -332,7 +341,7 @@ $conn->close();
 
                 <p> *Current Password is required to edit details</p>
 
-                <input type="submit" name="edit_profile_submit" class="submit-button" onclick="return confirm('Are you sure you want to make changes?')" value="Save Changes">
+                <input type="submit" name="edit_profile_submit" class="submit-button" onclick="return confirm('Are you sure you want to make changes?')" value="Save Changes" disabled>
             </form>
         </div>
 

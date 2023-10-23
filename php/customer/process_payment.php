@@ -87,7 +87,7 @@ foreach ($cartItems as $productName => $quantity) {
 // Send an email to the customer
 // Create an HTML email message
 $to = $customerEmail;
-$subject = "Domini's Pizza House- Order Receipt";
+$subject = "Domini's Pizza House - Order Receipt";
 $message = "<html><body>";
 $message .= "<h1>Your Pizza Order Confirmation</h1>";
 $message .= "<p>Thank you for placing your order with us. Here are the details of your order:</p>";

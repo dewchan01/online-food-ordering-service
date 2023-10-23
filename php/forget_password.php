@@ -13,9 +13,9 @@ if($conn->connect_error)
 }
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $checkEmail = $_POST["email"];
-
+    $password = generateRandomPassword();
      // Generate a temporary password
-    $newPassword = hash('sha256',generateRandomPassword());
+    $newPassword = hash('sha256',$password);
 
 
     // Fetch the user details from the database
@@ -35,9 +35,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $stmt->close();
 
     $to = $checkEmail;
-    $subject = "Reset New Password";
-    $message = "Your temporary password is: $newPassword";
-    $headers = "From: vendora@localhost";
+    $subject = "Domini's Pizza House - Reset New Password";
+    $message = "<html><body>";
+    $message .= "<h1>Your password has been reset!</h1>";
+    $message .= "<p><strong>Don't expose your password to others!</strong><br><br>Your temporary password is: <strong>$password</strong></p>";
+    $message .= "</body></html>";
+    $headers = "From: vendora@localhost\r\n";
+    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
     mail($to, $subject, $message, $headers);
     // Reset user's password
@@ -51,19 +55,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 
 // Function to generate a random temporary password
-function generateRandomPassword($length = 10) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+~`|}{[]\:;?><,.-=';
-    $randomPassword = '';
-    $characterCount = strlen($characters);
+function generateRandomPassword() {
+    $lowercase = 'abcdefghijklmnopqrstuvwxyz';
+    $uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $digits = '0123456789';
+    $specialChars = '@$!%*?&';
     
-    for ($i = 0; $i < $length; $i++) {
-        $randomIndex = rand(0, $characterCount - 1);
-        $randomPassword .= $characters[$randomIndex];
+    // Choose one character from each category
+    $password = $lowercase[rand(0, strlen($lowercase) - 1)];
+    $password .= $uppercase[rand(0, strlen($uppercase) - 1)];
+    $password .= $digits[rand(0, strlen($digits) - 1)];
+    $password .= $specialChars[rand(0, strlen($specialChars) - 1)];
+    
+    $remainingLength = rand(4, 8); // Random length between 8 and 12, accounting for the 4 already chosen characters
+    
+    $allCharacters = $lowercase . $uppercase . $digits . $specialChars;
+    
+    for ($i = 0; $i < $remainingLength; $i++) {
+        $randomIndex = rand(0, strlen($allCharacters) - 1);
+        $password .= $allCharacters[$randomIndex];
     }
     
-    return $randomPassword;
+    // Shuffle the characters to make the password random
+    $password = str_shuffle($password);
+    
+    return $password;
 }
-
 
 $conn->close();
 ?>
@@ -73,6 +90,37 @@ $conn->close();
 <head>
     <title>Reset Password</title>
     <link rel="stylesheet" type="text/css" href="../styles.css">
+    <script type="text/javascript">
+    // Check if the email address is valid
+        function checkEmail(input) {
+            var emailRegex = /^[a-zA-Z0-9._-]+@localhost$/;
+
+            let container = document.createElement("div");
+            container.className = "checkEmail";
+            let p = document.createElement("p");
+            p.textContent = "Please enter a valid email address.(eg: test@localhost)";
+            container.appendChild(p);
+
+            // Check if a previous error message exists and remove it
+            let existingError = document.querySelector(".checkEmail");
+            if (existingError) {
+                existingError.remove();
+            }
+
+            let span = document.createElement("span");
+            submitButton = document.getElementsByClassName("submit-button")[0];
+
+            if (!input.value.match(emailRegex)) {
+                container.appendChild(p);
+                input.after(container);
+                submitButton.disabled = true;
+                return false;
+            } else {
+                submitButton.disabled = false;
+                return true;
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="nav" style="justify-content: flex-start;">
@@ -85,8 +133,8 @@ $conn->close();
         <div id="user-login">
             <h3>Please enter your email address and we will email you instructions to reset your password.</h3>
             <form method="post">
-                <input type="email" name="email" placeholder="Email" class="user-input" requried><br>
-                <button type="submit" class="submit-button">Submit</button>
+                <input type="email" name="email" placeholder="Email" class="user-input" required onchange="checkEmail(this)"><br>
+                <button type="submit" class="submit-button" onclick="return confirm('Are you sure is this your email address?')">Submit</button>
 
             </form>
             <input type="button" value="Back" id="back" onclick="window.location.href='../index.html'">
