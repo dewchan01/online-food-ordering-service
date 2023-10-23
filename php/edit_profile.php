@@ -217,7 +217,7 @@ $conn->close();
             let container = document.createElement("div");
             container.className = "checkPassword";
             let p = document.createElement("p");
-            p.textContent = "Please enter a valid password between 8-12 characters, including at least one special character, one capital letter, and one number.";
+            p.textContent = "Please enter a valid password between 8-12 characters, including at least one allowed special character [@$!%*?&], one capital letter, and one number.";
             container.appendChild(p);
             let existingError = document.querySelector(".checkPassword");
             if (existingError) {
@@ -245,7 +245,7 @@ $conn->close();
             let container = document.createElement("div");
             container.className = "matchPassword";
             let p = document.createElement("p");
-            p.textContent = "Please enter a valid password between 8-12 characters, including at least one special character, one capital letter, and one number.";
+            p.textContent = "Please enter a valid password between 8-12 characters, including at least one special character [@$!%*?&], one capital letter, and one number.";
             container.appendChild(p);
 
             current_password = document.getElementById("current_password");
