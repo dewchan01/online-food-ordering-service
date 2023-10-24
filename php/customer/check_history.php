@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION["username"])) {
-    header("Location: ../user_login.php");
+    header("Location: ../../login.html");
     exit();
 }
 
@@ -61,7 +61,7 @@ height= "20"style="margin-top:5px;" ><p style="margin:4px 0 0 7px;">Logout</p></
     </div>
     <h1 style="text-align:center;">Your Orders</h1>
     <?php if (!empty($orders)): ?>
-    <table border="1"  style="margin:auto;">
+    <table class="order-history"  style="margin:auto;border-spacing: 0;">
         <tr>
             <th>Time of Order</th>
             <th>Product Name</th>
@@ -86,10 +86,10 @@ height= "20"style="margin-top:5px;" ><p style="margin:4px 0 0 7px;">Logout</p></
         <?php endforeach; ?>
     </table>
     <?php else: ?>
-        <p>No orders found.</p>
+        <p style="text-align:center;">No orders found.</p>
     <?php endif; ?>
     
-    <a href="customer_dashboard.php" id="back-to-order-btn" style="margin-left:200px;">Back</a>
+    <a href="customer_dashboard.php" id="back-to-menu-btn">Back to Menu</a>
     <script type="text/javascript" src="../../js/script.js"></script>
 
 </body>

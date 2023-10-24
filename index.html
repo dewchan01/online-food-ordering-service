@@ -6,7 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Domini's Pizza House</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
-
+    <style>
+        #order-history{
+            border-bottom-right-radius:15px;
+            border-bottom-left-radius:15px;
+            border-top:1px solid #AFAFAF;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,8 +24,17 @@
             <a href="php/order.php">MENU</a>
         </div>
         <div class="my-account">
-            <a href="php/edit_profile.php"><img src="images/acc-1.png" alt="User's Account" height="37" width="34" style="padding-top: 5px;"></a>
-            <a href="php/edit_profile.php">MY ACCOUNT</a>
+            <div id="my-account-container" style="cursor: pointer;">
+                <a><img src="images/acc-1.png" alt="User's Account" height="37" width="34" style="padding-top: 5px;"></a>
+                <a>MY ACCOUNT</a>
+            </div>
+            <div class="basic-buttons-container" id="my-account-nav">
+                <a href="php/edit_profile.php" class="basic-buttons" id="edit-profile"><img src="images/acc-3.png" alt="User's Account" width= "34"
+height= "30"><p style="margin:5px 0 0 8px;">Edit Profile</p></a>
+                <a href="php/customer/check_history.php" class="basic-buttons" id="order-history"><img src="images/newspaper-regular-1.svg" alt="Order History" width= "34"
+                height= "25"><p style="margin:5px 0 0 7px;">Order History</p></a>
+                
+            </div> 
         </div>
     </div>
     <div class="order-nav">
@@ -51,6 +66,7 @@
             time flavors and variety such as Mentaiko Pizza, Chocolate Lava Cake, and Cheeseburger Pizzas.
         </p>
     </div>
+    <script type="text/javascript" src="js/script.js"></script>
 </body>
 
 </html>

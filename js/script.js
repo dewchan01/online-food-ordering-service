@@ -233,5 +233,6 @@ if(myAccount){
     myAccount.addEventListener('click', () =>{
     console.log('Clicked on my account');
     myAccountNav.style.display = myAccountNav.style.display ==='block' ? 'none' : 'block';
+    
     });
 }
