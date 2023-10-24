@@ -76,7 +76,7 @@ height= "20"style="margin-top:5px;" ><p style="margin:4px 0 0 7px;">Logout</p></
             <tr>
                 <td><?php echo $order['time']; ?></td>
                 <td><?php echo $order['product_name']; ?></td>
-                <td style="text-align:center;"><img src="<?php echo $order['image_url']; ?>" alt="Product Image" width=50% height=50%></td>
+                <td style="text-align:center;"><img src="../<?php echo $order['image_url']; ?>" alt="Product Image" width=50% height=50%></td>
                 <td><?php echo $order['quantity']; ?></td>
                 <td><?php echo $order['total_price']; ?></td>
                 <td><?php echo $order['order_status']; ?></td>
