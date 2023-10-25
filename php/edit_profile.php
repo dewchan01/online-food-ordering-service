@@ -322,7 +322,7 @@ $conn->close();
         <div id="user-login">
             <form method="POST" onsubmit="return validateForm()" action="edit_profile.php">
                 <p class="edit-input">Username:</p>
-                <input type="text" class="user-input" id="edited_username" name="edited_username" value="<?php echo $user['username']; ?>" onchange="checkUsername(this)" readonly><br>
+                <input type="text" class="user-input" id="edited_username" name="edited_username" style="background:#AFAFAF" value="<?php echo $user['username']; ?>" onchange="checkUsername(this)" readonly><br>
 
                 <p class="edit-input">Email:</p>
                 <input type="email" class="user-input" id="edited_email" name="edited_email" value="<?php echo $user['email']; ?>" onchange="checkEmail(this)" required><br>

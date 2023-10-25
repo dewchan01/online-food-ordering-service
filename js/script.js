@@ -236,3 +236,33 @@ if(myAccount){
     
     });
 }
+
+//menu nav
+let navs = document.querySelectorAll(".categories-nav");
+
+navs.forEach(function(nav){
+    nav.addEventListener("click",function(event){
+        event.preventDefault();
+
+        nav.style.color="white";
+        nav.style.background="#4A4A4A";
+        nav.style.borderTopRightRadius = "9px";
+        nav.style.borderTopLeftRadius= "9px";
+        if(nav.id==="values-meal"){
+            nav.style.width="150px";
+        }
+        else{
+            nav.style.width="80px";
+        }
+
+        navs.forEach(function(otherNav){
+            if(otherNav !== nav){
+                otherNav.style.color="black";
+                otherNav.style.background="white";
+                otherNav.style.borderTopRightRadius = "0px";
+                otherNav.style.borderTopLeftRadius= "0px";
+            }
+        });
+
+    });
+});

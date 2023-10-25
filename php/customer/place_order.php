@@ -102,7 +102,7 @@ $conn->close();
                     $totalQuantity += $quantity;
                     echo "<div class='cart-item'>";
                     echo "<div class='cart-item-container'>$quantity x $productName";
-                    echo "<p style='font-weight:700;margin:0;'>$$price</p> </div>";
+                    echo "<p style='font-weight:700;margin:0;'>$$totalPrice</p> </div>";
                     echo "</div>";
                 }
             }
@@ -132,10 +132,10 @@ $conn->close();
             <h3>Delivery Instruction</h3>
             <textarea name="delivery-instruction" id="delivery-instruction-text" cols="30" rows="10" style="resize:none;width:400px;"  placeholder="Fill in special requests here. We will accommodate as best as we could. Timed orders and edits have to be made during the ordering process."></textarea>
             </div>
-            <button type="submit" name="confirm_payment" class="confirm-btn" id="confirm-payment-btn" value="Confirm Payment" style="margin-top:10px;width:400px;" onclick="confirmPayment()"><?php echo $totalQuantity ?> items | Total Price: $<?php echo $totalCost+$deliveryFee; ?> | Confirm Payment</button>
+            <button type="submit" name="confirm_payment" class="confirm-btn" id="confirm-payment-btn" value="Confirm Payment" style="margin-top:10px;width:400px" onclick="confirmPayment()"><?php echo $totalQuantity ?> items | Total Price: $<?php echo $totalCost+$deliveryFee; ?> | Confirm Payment</button>
             </form>
         </div>
-        <input type="button" name="back_to_order" id="back-to-order-btn" onclick="backToOrder()"value="Menu">
+        <input type="button" name="back_to_order" id="back-to-order-btn" onclick="backToOrder()"style="width:120px;cursor:pointer;"value="Back to Menu">
     </div>
     <script src="../../js/payment.js"></script>
 

@@ -95,6 +95,7 @@ a{
 }
 .banner-image{
     height: 350px;   
+    cursor: pointer;
 }
 .vector{
     height: 50%;
@@ -141,6 +142,7 @@ p{
     background-repeat: no-repeat;
     background-position-x: 10px;
     background-position-y: 10px;
+    cursor: pointer;
 }
 #back-to-order-btn{
     border-radius: 10px;
@@ -195,6 +197,7 @@ p{
     font-family: Work Sans;
     color: #FFF;
     font-weight: 600;
+    cursor: pointer;
     
 }
 
@@ -235,6 +238,7 @@ p{
     width: 400px;
     height: 400px;
     margin: auto;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
 }
 
 .basic-buttons-container{
@@ -278,6 +282,7 @@ p{
 .categories a{
     font-weight: 700;
 }
+
 /* .categories button{
     border: none;
     height: 40px;
@@ -288,12 +293,11 @@ p{
     
 } */
 
-.categories a:active{
+/* .categories a:active{
     background: #4A4A4A;
     border-top-right-radius: 9px;
     border-top-left-radius: 9px;
-    /* border-bottom-right-radius: ; */
-}
+} */
 
 .categories-choices{
     background: #4A4A4A;
@@ -361,6 +365,7 @@ p{
     height: 25px;
     background: #1FC36A;
     color: #FFF;
+    cursor:pointer;
 }
 
 #customer-login, #vendor-login {
@@ -454,6 +459,7 @@ p{
 .quantity-btn{
     border:none;
     background-color: white;
+    cursor: pointer;
     
 }
 
@@ -464,6 +470,7 @@ p{
     border: none;
     height: 35px;
     width: 280px;
+    cursor: pointer;
 }
 #checkout-btn{
     background: #1FC36A;
@@ -472,6 +479,7 @@ p{
     border: none;
     height: 35px;
     width: 280px;
+    cursor: pointer;
 }
 
 #cart-count {

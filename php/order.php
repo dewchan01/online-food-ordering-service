@@ -52,7 +52,7 @@ height= "20"style="margin-top:5px;" ><p style="margin:4px 0 0 7px;">Logout</p></
                         <img src="../images/van-1.png" alt="van" height="50%" style="margin-left:27px">
                         <p style="margin:0;padding-top: 4px;padding-left: 40px;font-weight: 700;">DINE IN</p>
                     </div>
-                    <div id="delivery" style="width:400px;" onclick="window.location.href='customer/customer_dashboard.php'">
+                    <div id="delivery" style="width:400px;margin-top:20px;" onclick="window.location.href='customer/customer_dashboard.php'">
                         <img src="../images/van-2.png" alt="van" height="50%">
                         <p style="margin:0;padding-top: 4px;padding-left: 40px;font-weight: 700;">DELIVERY NOW</p>   
                     </div>
