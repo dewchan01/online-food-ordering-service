@@ -325,7 +325,7 @@ $conn->close();
             </div>
         </div>
     </div>
-    <!-- <?php if ($user['role'] === 'customer') : ?> -->
+    <?php if ($user['role'] === 'customer') : ?>
 
 
     <div class="login-signup">
@@ -359,7 +359,7 @@ $conn->close();
 
     </div>
 
-    <!-- <?php elseif ($user['role'] === 'vendor') : ?>
+    <?php elseif ($user['role'] === 'vendor') : ?>
     <form method="POST" action="edit_profile.php">
         <label for="edited_username">Username:</label>
         <input type="text" id="edited_username" name="edited_username" value="<?php echo $user['username']; ?>" readonly><br>
@@ -380,7 +380,7 @@ $conn->close();
     </form>
     <?php else : ?>
         <p>User profile not found.</p>
-    <?php endif; ?> -->
+    <?php endif; ?>
 
     <script type="text/javascript" src="../js/script.js"></script>
 </body>
