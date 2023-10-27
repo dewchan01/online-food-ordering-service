@@ -140,6 +140,10 @@ $conn->close();
             if (existingError) {
                 existingError.remove();
             }
+            current_password = document.getElementById("current_password");
+            if (current_password.value === '') {
+                checkPassword();
+            }
 
             let span = document.createElement("span");
             submitButton = document.getElementsByClassName("submit-button")[0];
@@ -169,6 +173,10 @@ $conn->close();
             if (existingError) {
                 existingError.remove();
             }
+            current_password = document.getElementById("current_password");
+            if (current_password.value === '') {
+                checkPassword();
+            }
 
             let span = document.createElement("span");
             submitButton = document.getElementsByClassName("submit-button")[0];
@@ -197,6 +205,10 @@ $conn->close();
             let existingError = document.querySelector(".checkAddress");
             if (existingError) {
                 existingError.remove();
+            }
+            current_password = document.getElementById("current_password");
+            if (current_password.value === '') {
+                checkPassword();
             }
 
             let span = document.createElement("span");
@@ -339,7 +351,7 @@ $conn->close();
                 <p class="edit-input">New Password:</p>
                 <input type="password" class="user-input" id="new_password" name="new_password" onchange="matchPassword(this)"><br>
 
-                <p> *Current Password is required to edit details</p>
+                <p style="color:red;"> *Current Password is required to edit details</p>
 
                 <input type="submit" name="edit_profile_submit" class="submit-button" onclick="return confirm('Are you sure you want to make changes?')" value="Save Changes" disabled>
             </form>
