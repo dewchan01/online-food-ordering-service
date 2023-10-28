@@ -360,24 +360,36 @@ $conn->close();
     </div>
 
     <?php elseif ($user['role'] === 'vendor') : ?>
-    <form method="POST" action="edit_profile.php">
-        <label for="edited_username">Username:</label>
-        <input type="text" id="edited_username" name="edited_username" value="<?php echo $user['username']; ?>" readonly><br>
-        
-        <label for="edited_email">Email:</label>
-        <input type="email" id="edited_email" name="edited_email" value="<?php echo $user['email']; ?>" required><br>
-        
-        <label for="edited_phone_number">Phone Number:</label>
-        <input type="tel" id="edited_phone_number" name="edited_phone_number" value="<?php echo $user['phone_number']; ?>" required><br>
-        
-        <label for="current_password">Current Password:</label>
-        <input type="password" id="current_password" name="current_password" required><br>
-        <label for="_password">New Password:</label>
-        <input type="password" id="new_password" name="new_password" required><br>
-        <br>
-        <button type="submit" name="edit_profile_submit">Save Changes</button>
-        <a href='vendor/vendor_dashboard.php';>Back to Dashboard</a>
-    </form>
+        <div class="login-signup">
+        <h2>My Details</h2>
+        <input type="button" value="Back" id="back" onclick="window.location.href='vendor/vendor_dashboard.php'">
+        <div id="user-login">
+            <form method="POST" onsubmit="return validateForm()" action="edit_profile.php">
+                <p class="edit-input">Username:</p>
+                <input type="text" class="user-input" id="edited_username" name="edited_username" style="background:#AFAFAF" value="<?php echo $user['username']; ?>" onchange="checkUsername(this)" readonly><br>
+
+                <p class="edit-input">Email:</p>
+                <input type="email" class="user-input" id="edited_email" name="edited_email" value="<?php echo $user['email']; ?>" onchange="checkEmail(this)" required><br>
+
+                <p class="edit-input">Phone Number:</p>
+                <input type="tel" class="user-input" id="edited_phone_number" name="edited_phone_number" value="<?php echo $user['phone_number']; ?>" onchange="checkPhone(this)" required><br>
+
+                <p class="edit-input">New Address:</p>
+                <input type="text" name="edited_address" class="user-input" id="edited_address" value="<?php echo $user['address']; ?>" required onchange="checkAddress(this)"><br>
+
+                <p class="edit-input">*Current Password:</p>
+                <input type="password" class="user-input" id="current_password" name="current_password" onchange="checkPassword(this)"><br>
+
+                <p class="edit-input">New Password:</p>
+                <input type="password" class="user-input" id="new_password" name="new_password" onchange="matchPassword(this)"><br>
+
+                <p style="color:red;"> *Current Password is required to edit details</p>
+
+                <input type="submit" name="edit_profile_submit" class="submit-button" onclick="return confirm('Are you sure you want to make changes?')" value="Save Changes" disabled>
+            </form>
+        </div>
+
+    </div>
     <?php else : ?>
         <p>User profile not found.</p>
     <?php endif; ?>
