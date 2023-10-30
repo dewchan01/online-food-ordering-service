@@ -237,7 +237,7 @@ if(myAccount){
     });
 }
 
-//menu nav
+//Menu Nav
 let navs = document.querySelectorAll(".categories-nav");
 
 navs.forEach(function(nav){
@@ -266,3 +266,5 @@ navs.forEach(function(nav){
 
     });
 });
+
+//

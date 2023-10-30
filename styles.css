@@ -71,6 +71,7 @@ a{
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 0.5;
 }
 #delivery
 {
@@ -126,11 +127,11 @@ p{
     flex-direction: column;
     text-align: center;
 }
+
 #back{
     border-radius: 10px;
     background: #878787;
-    margin-right: 800px;
-    width: 70px;
+    width: 75px;
     height: 25px;
     display: flex;
     justify-content: center;
@@ -140,15 +141,16 @@ p{
     border: none;
     background-image: url('images/vectorSmall.png');
     background-repeat: no-repeat;
-    background-position-x: 10px;
+    background-position-x: 5px;
     background-position-y: 10px;
+    margin-right: 800px;
     cursor: pointer;
 }
+
 #back-to-order-btn{
     border-radius: 10px;
     background: #878787;
-    margin-right: 800px;
-    width: 70px;
+    width: 110px;
     height: 25px;
     display: flex;
     justify-content: center;
@@ -161,6 +163,8 @@ p{
     background-position-x: 5px;
     background-position-y: 10px;
     margin:10px;
+    margin-right: 800px;
+    cursor: pointer;
 }
 #back-to-menu-btn{
     border-radius: 10px;
@@ -199,6 +203,10 @@ p{
     font-weight: 600;
     cursor: pointer;
     
+}
+.submit-button:disabled{
+    opacity: 0.5;
+    cursor: none;
 }
 
 #user-login{
@@ -258,6 +266,11 @@ p{
     height: 30px;
     background-color: white;
     padding:8px;
+}
+
+#login-btn{
+    border-radius:15px;
+    border-bottom:1px solid #AFAFAF;
 }
 
 #edit-profile{
@@ -458,7 +471,7 @@ p{
 }
 .quantity-btn{
     border:none;
-    background-color: white;
+    background-color: #FAFAFA;
     cursor: pointer;
     
 }
@@ -471,6 +484,10 @@ p{
     height: 35px;
     width: 280px;
     cursor: pointer;
+}
+.confirm-btn:disabled{
+    opacity: 0.5;
+    cursor:none;
 }
 #checkout-btn{
     background: #1FC36A;
@@ -571,4 +588,12 @@ p{
 }
 .arrow-down.active{
     transform: rotate(-90deg);
+}
+
+#pizza-active{
+    color:white;
+    background:#4A4A4A;
+    border-top-right-radius: 9px;
+    border-top-left-radius: 9px;
+    width:80px;
 }

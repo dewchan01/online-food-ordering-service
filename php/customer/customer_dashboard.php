@@ -43,11 +43,11 @@ $conn->close();
     <!-- Customer-specific dashboard content -->
     <div class="nav" style="padding-bottom:0;">
         <div class="header">
-            <a href="../../index.html" class="headerLogo"><img src="../../images/logo.png" alt="Domini's Logo" height="21" width="23">Domini's</a>
+            <a href="../../index.php" class="headerLogo"><img src="../../images/logo.png" alt="Domini's Logo" height="21" width="23">Domini's</a>
         </div>
         <div class="categories">
             <a href="customer_dashboard.php" id="values-meal" class="categories-nav">Values Meal</a>
-            <a href="customer_dashboard.php" class="categories-nav">Pizzas</a>
+            <a href="customer_dashboard.php" class="categories-nav" id="pizza-active" >Pizzas</a>
             <a href="customer_dashboard.php" class="categories-nav">Sides</a>
             <a href="customer_dashboard.php" class="categories-nav">Drinks</a>
         </div>

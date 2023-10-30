@@ -125,7 +125,7 @@ $conn->close();
 <body>
     <div class="nav" style="justify-content: flex-start;">
         <div class="header">
-            <a href="../index.html" class="headerLogo"><img src="../images/logo.png" alt="Domini's Logo" height="21" width="23">Domini's</a>
+            <a href="../index.php" class="headerLogo"><img src="../images/logo.png" alt="Domini's Logo" height="21" width="23">Domini's</a>
         </div>
     </div>
     <div class="login-signup">
@@ -134,10 +134,10 @@ $conn->close();
             <h3>Please enter your email address and we will email you instructions to reset your password.</h3>
             <form method="post">
                 <input type="email" name="email" placeholder="Email" class="user-input" required onchange="checkEmail(this)"><br>
-                <button type="submit" class="submit-button" onclick="return confirm('Are you sure is this your email address?')">Submit</button>
+                <button type="submit" class="submit-button" style="margin-top:25px;" onclick="return confirm('Are you sure is this your email address?')">Submit</button>
 
             </form>
-            <input type="button" value="Back" id="back" onclick="window.location.href='../index.html'">
+            <input type="button" value="Back" id="back" onclick="window.location.href='../login.html'">
         </div>
         
     </div>

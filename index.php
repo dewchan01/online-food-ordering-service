@@ -1,3 +1,14 @@
+<?php
+// Ensure the user is logged in as a customer
+session_start();
+if (!isset($_SESSION["username"])) {
+    $login=FALSE;
+}
+else{
+    $login=TRUE;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,19 +17,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Domini's Pizza House</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <style>
-        #order-history{
-            border-bottom-right-radius:15px;
-            border-bottom-left-radius:15px;
-            border-top:1px solid #AFAFAF;
-        }
-    </style>
 </head>
 
 <body>
     <div class="nav">
         <div class="header">
-            <a href="index.html" class="headerLogo"><img src="images/logo.png" alt="Domini's Logo" height="21" width="23">Domini's</a>
+            <a href="index.php" class="headerLogo"><img src="images/logo.png" alt="Domini's Logo" height="21" width="23">Domini's</a>
         </div>
         <div class="menu">
             <a href="php/order.php">MENU</a>
@@ -29,11 +33,16 @@
                 <a>MY ACCOUNT</a>
             </div>
             <div class="basic-buttons-container" id="my-account-nav">
-                <a href="php/edit_profile.php" class="basic-buttons" id="edit-profile"><img src="images/acc-3.png" alt="User's Account" width= "34"
-height= "30"><p style="margin:5px 0 0 8px;">Edit Profile</p></a>
-                <a href="php/customer/check_history.php" class="basic-buttons" id="order-history"><img src="images/newspaper-regular-1.svg" alt="Order History" width= "34"
-                height= "25"><p style="margin:5px 0 0 7px;">Order History</p></a>
-                
+                <?php
+                    if (!$login) {
+                        echo "<a href='login.html' class='basic-buttons' id='login-btn'><p style='margin:5px 0 0 8px;'>Log In</p></a>";
+                    }
+                    else{
+                        echo "<a href='php/edit_profile.php' class='basic-buttons' id='edit-profile'><img src='images/acc-3.png' alt='User\'s Account' width='34' height='30'><p style='margin:5px 0 0 8px;'>Edit Profile</p></a>";
+                        echo "<a href='php/customer/check_history.php' class='basic-buttons' id='order-history'><img src='images/newspaper-regular-1.svg' alt='Order History' width='34' height='25' style='margin-top:5px;'><p style='margin:5px 0 0 7px;'>Order History</p></a>";
+                        echo "<a href='php/logout.php' class='basic-buttons' id='log-out' onclick='return confirm(\"Are you sure you want to log out?\")'><img src='images/vector.svg' alt='Order History' width='34' height='20' style='margin-top:5px;'><p style='margin:4px 0 0 7px;'>Logout</p></a>";
+                    }
+                ?>
             </div> 
         </div>
     </div>

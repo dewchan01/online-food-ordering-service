@@ -21,7 +21,7 @@ $customerUsername = $_SESSION["username"];
 <body>
     <div class="nav">
         <div class="header">
-            <a href="../index.html" class="headerLogo"><img src="../images/logo.png" alt="Domini's Logo" height="21" width="23">Domini's</a>
+            <a href="../index.php" class="headerLogo"><img src="../images/logo.png" alt="Domini's Logo" height="21" width="23">Domini's</a>
         </div>
         <div class="menu">
             <a href="customer/customer_dashboard.php">MENU</a>

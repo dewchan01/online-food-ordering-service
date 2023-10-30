@@ -302,7 +302,7 @@ $conn->close();
 <body>
     <div class="nav">
         <div class="header">
-            <a href="../index.html" class="headerLogo"><img src="../images/logo.png" alt="Domini's Logo" height="21" width="23">Domini's</a>
+            <a href="../index.php" class="headerLogo"><img src="../images/logo.png" alt="Domini's Logo" height="21" width="23">Domini's</a>
         </div>
         <div class="menu">
             <a href="order.php">MENU</a>
@@ -330,7 +330,7 @@ $conn->close();
 
     <div class="login-signup">
         <h2>My Details</h2>
-        <input type="button" value="Back" id="back" onclick="window.location.href='order.php'">
+        <input type="button" value="Back to Order"  id="back-to-order-btn" style="margin-right:800px;" onclick="window.location.href='customer/customer_dashboard.php'">
         <div id="user-login">
             <form method="POST" onsubmit="return validateForm()" action="edit_profile.php">
                 <p class="edit-input">Username:</p>

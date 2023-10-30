@@ -152,14 +152,14 @@ $conn->close();
 <body>
     <div class="nav" style="justify-content: flex-start;">
         <div class="header">
-            <a href="../../index.html" class="headerLogo"><img src="../../images/logo.png" alt="Domini's Logo" height="21" width="23">Domini's</a>
+            <a href="../../index.php" class="headerLogo"><img src="../../images/logo.png" alt="Domini's Logo" height="21" width="23">Domini's</a>
         </div>
     </div>
     <div class="confirmation-container">
         <h2>Payment Successful!</h2>
         <p style="text-align:center;">Your order has been confirmed.</p>
         <p style="text-align:center;">Please check your email for the receipt.</p>
-        <a href="customer_dashboard.php" id="back-to-order-btn" style="margin:auto;">Back</a>
+        <a href="customer_dashboard.php" id="back-to-order-btn" style="margin:auto;width:70px;">Back</a>
     </div>
 </body>
 </html>
