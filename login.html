@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Food Ordering Portal - Login</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
+
 <body>
     <div class="nav" style="justify-content: flex-start;">
         <div class="header">
-            <a href="index.php" class="headerLogo"><img src="images/logo.png" alt="Domini's Logo" height="21" width="23">Domini's</a>
+            <a href="index.php" class="headerLogo"><img src="images/logo.png" alt="Domini's Logo" height="21"
+                    width="23">Domini's</a>
         </div>
     </div>
-    <!-- Login UI -->
     <div class="login-signup">
         <h2>Log in</h2>
         <input type="button" value="Back to Home" id="back-to-order-btn" onclick="window.location.href='index.php'">
@@ -18,19 +20,17 @@
             <form action="php/user_login.php" method="post">
                 <input type="text" name="username" placeholder="Username" class="user-input" required>
                 <br><br><br>
-                <input type="password" name="password" placeholder="Password" class="user-input"  required>
-                <p style="text-align: left;"><a href="php/forget_password.php" style="font-size: 20px; ">Forgotten your password?</a></p>
-                <p style="font-size: 20px;text-align: left;">Don't have an account? <a href="sign_up.html">Create an Account</a></p>
+                <input type="password" name="password" placeholder="Password" class="user-input" required>
+                <p style="text-align: left;"><a href="php/forget_password.php" style="font-size: 20px; ">Forgotten your
+                        password?</a></p>
+                <p style="font-size: 20px;text-align: left;">Don't have an account? <a href="sign_up.html">Create an
+                        Account</a></p>
                 <button type="submit" class="submit-button">Log in</button>
             </form>
         </div>
-        
+
     </div>
-    
-    
     <script src="js/script.js"></script>
 </body>
+
 </html>
-
-
-

@@ -10,13 +10,12 @@ $customerUsername = $_SESSION["username"];
 
 $userServerName = "localhost";
 $userDbUserName = "root";
-$userDbPassword ="";
+$userDbPassword = "";
 $userDbName = "database";
 
-$userConn = new mysqli($userServerName,$userDbUserName,$userDbPassword,$userDbName);
-if($userConn->connect_error)
-{
-    die("Database connection failed: ". $userConn->connect_error);
+$userConn = new mysqli($userServerName, $userDbUserName, $userDbPassword, $userDbName);
+if ($userConn->connect_error) {
+    die("Database connection failed: " . $userConn->connect_error);
 }
 $addressQuery = "SELECT address FROM users WHERE username = ?";
 $addressStmt = $userConn->prepare($addressQuery);
@@ -28,7 +27,6 @@ if ($addressResult->num_rows > 0) {
     $addressRow = $addressResult->fetch_assoc();
     $address = $addressRow['address'];
 } else {
-    // Handle the case where the address is not found (you can set a default address or display an error)
     $address = "Address Not Found";
 }
 
@@ -52,7 +50,6 @@ if ($conn->connect_error) {
 
 
 $products = [];
-// Process the cart items and insert them into the orders table
 $sql = "SELECT product_id, product_name, price, image_url, description FROM products";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
@@ -73,19 +70,15 @@ foreach ($cartItems as $productName => $quantity) {
         $price = $product['price'];
         $totalPrice = $price * $quantity;
 
-        // Insert order details into the orders table
         $insertQuery = "INSERT INTO orders (time, image_url, username, product_id, product_name, description, quantity, total_price, address, order_status,delivery_instruction) 
         VALUES (CURRENT_TIMESTAMP, ?, ?, ?, ?, ?, ?, ?,?, 'Order Confirmed',?)";
 
         $stmt = $conn->prepare($insertQuery);
-        $stmt->bind_param("ssisssdss", $imageURL, $customerUsername, $productID, $productName, $description, $quantity, $totalPrice,$address,$deliveryInstruction);
+        $stmt->bind_param("ssisssdss", $imageURL, $customerUsername, $productID, $productName, $description, $quantity, $totalPrice, $address, $deliveryInstruction);
         $stmt->execute();
         $stmt->close();
     }
-    
 }
-// Send an email to the customer
-// Create an HTML email message
 $to = $customerEmail;
 $subject = "Domini's Pizza House - Order Receipt";
 $message = "<html><body>";
@@ -93,13 +86,12 @@ $message .= "<h1>Your Pizza Order Confirmation</h1>";
 $message .= "<p>Thank you for placing your order with us. Here are the details of your order:</p>";
 $message .= "<table border='1'>";
 $message .= "<tr><th>Product Name</th><th>Quantity</th><th>Total Price</th></tr>";
-$totalPrice=0;
-// Loop through cart items to add them to the table
+$totalPrice = 0;
 foreach ($cartItems as $productName => $quantity) {
     if (isset($products[$productName])) {
         $product = $products[$productName];
         $price = $product['price'];
-        $productPrice = number_format($price * $quantity,2,'.','');
+        $productPrice = number_format($price * $quantity, 2, '.', '');
         $totalPrice += $price * $quantity;
 
         $message .= "<tr>";
@@ -109,21 +101,19 @@ foreach ($cartItems as $productName => $quantity) {
         $message .= "</tr>";
     }
 }
-$totalCost = $totalPrice+5;
+$totalCost = $totalPrice + 5;
 date_default_timezone_set('Asia/Singapore');
 $time = date("Y-m-d H:i:s");
 $message .= "</table>";
 $message .= "<p>Delivery Address: $address</p>";
 $message .= "<p>Delivery Instruction: $deliveryInstruction</p>";
-$message .= "<p>Order Time: $time</p>"; 
+$message .= "<p>Order Time: $time</p>";
 $message .= "<p>Total Cost (including delivery fee $5.00): $$totalCost</p>";
 $message .= "</body></html>";
 
-// Set the email content type to HTML
 $headers = "From: vendora@localhost\r\n";
 $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
-// Send the HTML email
 mail($to, $subject, $message, $headers);
 $addressStmt->close();
 $emailStmt->close();
@@ -133,14 +123,21 @@ $conn->close();
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Checkout Confirmation</title>
     <link rel="stylesheet" type="text/css" href="../../styles.css">
     <style>
-        /* Add your confirmation animation styles here */
         @keyframes successAnimation {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .confirmation-container {
@@ -149,6 +146,7 @@ $conn->close();
         }
     </style>
 </head>
+
 <body>
     <div class="nav" style="justify-content: flex-start;">
         <div class="header">
@@ -162,4 +160,5 @@ $conn->close();
         <a href="customer_dashboard.php" id="back-to-order-btn" style="margin:auto;width:70px;">Back</a>
     </div>
 </body>
+
 </html>

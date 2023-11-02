@@ -1,6 +1,5 @@
 
 <?php
-// Replace these with your actual database connection details
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -16,11 +15,11 @@ $errors = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
-    $password = hash('sha256',$_POST["password"]);
+    $password = hash('sha256', $_POST["password"]);
     $email = $_POST["email"];
     $phone_number = $_POST["phone_number"];
     $role = "customer";
-    $address=$_POST["address"];
+    $address = $_POST["address"];
 
     $checkUsernameQuery = "SELECT * FROM users WHERE username = ?";
     $stmt = $conn->prepare($checkUsernameQuery);
@@ -32,7 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $stmt->close();
 
-    // Check for duplicate email
     $checkEmailQuery = "SELECT * FROM users WHERE email = ?";
     $stmt = $conn->prepare($checkEmailQuery);
     $stmt->bind_param("s", $email);
@@ -45,19 +43,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($errors)) {
 
-    $insertQuery = "INSERT INTO users (username, password, email, phone_number, role,address) VALUES (?, ?, ?, ?, ?,?)";
-    $stmt = $conn->prepare($insertQuery);
-    $stmt->bind_param("ssssss", $username, $password, $email, $phone_number, $role,$address);
-    $stmt->execute();
-    $stmt->close();
-    echo "<script>
+        $insertQuery = "INSERT INTO users (username, password, email, phone_number, role,address) VALUES (?, ?, ?, ?, ?,?)";
+        $stmt = $conn->prepare($insertQuery);
+        $stmt->bind_param("ssssss", $username, $password, $email, $phone_number, $role, $address);
+        $stmt->execute();
+        $stmt->close();
+        echo "<script>
     alert('Registration successful. You can now login.');
     window.location.href='../login.html';</script>";
-    }else{
-    echo "<script>
-    alert('".$errors[0]."');window.location.href='../sign_up.html';</script>";
+    } else {
+        echo "<script>
+    alert('" . $errors[0] . "');window.location.href='../sign_up.html';</script>";
     }
-    // Redirect back to the login page
 }
 
 $conn->close();

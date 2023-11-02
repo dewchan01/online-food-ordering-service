@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script type="text/javascript">
 
-        // Check if the username contains only letters and numbers
         function checkUsername(input) {
             var usernameRegex = /^[a-zA-Z0-9]+$/;
             let container = document.createElement("div");
@@ -15,7 +14,6 @@
             p.textContent = "Username can only contain letters and numbers.";
             container.appendChild(p);
 
-            // Check if a previous error message exists and remove it
             let existingError = document.querySelector(".checkUsername");
             if (existingError) {
                 existingError.remove();
@@ -43,7 +41,6 @@
             p.textContent = "Please enter a valid password between 8-12 characters, including at least one allowed special character [@$!%*?&], one capital letter, and one number.";
             container.appendChild(p);
 
-            // Check if a previous error message exists and remove it
             let existingError = document.querySelector(".checkPassword");
             if (existingError) {
                 existingError.remove();
@@ -64,7 +61,6 @@
         }
 
 
-        // Check if the password and confirm password match
         function matchPassword(input) {
             let container = document.createElement("div");
             container.className = "matchPassword";
@@ -72,7 +68,6 @@
             p.textContent = "Passwords do not match.";
             container.appendChild(p);
 
-            // Check if a previous error message exists and remove it
             let existingError = document.querySelector(".matchPassword");
             if (existingError) {
                 existingError.remove();
@@ -93,17 +88,14 @@
             }
         }
 
-        // Check if the email address is valid
         function checkEmail(input) {
             var emailRegex = /^[a-zA-Z0-9._-]+@localhost/;
-
             let container = document.createElement("div");
             container.className = "checkEmail";
             let p = document.createElement("p");
             p.textContent = "Please enter a valid email address.(eg: test@localhost)";
             container.appendChild(p);
 
-            // Check if a previous error message exists and remove it
             let existingError = document.querySelector(".checkEmail");
             if (existingError) {
                 existingError.remove();
@@ -123,7 +115,6 @@
             }
         }
 
-        // Check if the phone number contains exactly 8 digits
         function checkPhone(input) {
             var phoneNumberRegex = /^\d{8}$/;
             let container = document.createElement("div");
@@ -132,7 +123,6 @@
             p.textContent = "Please enter a valid 8-digit phone number.";
             container.appendChild(p);
 
-            // Check if a previous error message exists and remove it
             let existingError = document.querySelector(".checkPhone");
             if (existingError) {
                 existingError.remove();
@@ -153,8 +143,6 @@
             }
         }
 
-
-        // Check if the address is not empty
         function checkAddress(input) {
             let container = document.createElement("div");
             container.className = "checkAddress";
@@ -162,7 +150,6 @@
             p.textContent = "Address is required.";
             container.appendChild(p);
 
-            // Check if a previous error message exists and remove it
             let existingError = document.querySelector(".checkAddress");
             if (existingError) {
                 existingError.remove();
@@ -218,7 +205,8 @@
                 <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm Password"
                     class="user-input" required onchange="matchPassword(this)"><br>
                 <p style="font-size: 20px;text-align:left;">Already got an account?<a href="login.html">Log in</a></p>
-                <input type="submit" value="Create Account" class="submit-button" onclick="return confirm('Are you sure?')">
+                <input type="submit" value="Create Account" class="submit-button"
+                    onclick="return confirm('Are you sure?')">
             </form>
         </div>
     </div>

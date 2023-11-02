@@ -7,28 +7,23 @@ $dbname = "database";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-if($conn->connect_error)
-{
+if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $checkEmail = $_POST["email"];
     $password = generateRandomPassword();
-     // Generate a temporary password
-    $newPassword = hash('sha256',$password);
+    $newPassword = hash('sha256', $password);
 
 
-    // Fetch the user details from the database
     $fetchUserQuery = "SELECT * FROM users WHERE email = ?";
     $stmt = $conn->prepare($fetchUserQuery);
-    $stmt->bind_param("s",$checkEmail);
+    $stmt->bind_param("s", $checkEmail);
     $stmt->execute();
-    $result=$stmt->get_result();
-    if($result->num_rows > 0)
-    {
-        $user=$result->fetch_assoc();
-    }
-    else{
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+    } else {
         echo "<script>alert('Email does not registered! Please try again.');
         window.location.href='forget_password.php';</script>";
     }
@@ -44,41 +39,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
     mail($to, $subject, $message, $headers);
-    // Reset user's password
     $editQuery = "UPDATE users SET password = ? WHERE email = ? ";
     $stmt = $conn->prepare($editQuery);
-    $stmt->bind_param("ss",$newPassword,$checkEmail);
+    $stmt->bind_param("ss", $newPassword, $checkEmail);
     $stmt->execute();
     $stmt->close();
     echo "<script>alert('The temporary password has been sent to your email address. Please check your email.');
     window.location.href='../login.html';</script>";
 }
 
-// Function to generate a random temporary password
-function generateRandomPassword() {
+function generateRandomPassword()
+{
     $lowercase = 'abcdefghijklmnopqrstuvwxyz';
     $uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $digits = '0123456789';
     $specialChars = '@$!%*?&';
-    
-    // Choose one character from each category
+
     $password = $lowercase[rand(0, strlen($lowercase) - 1)];
     $password .= $uppercase[rand(0, strlen($uppercase) - 1)];
     $password .= $digits[rand(0, strlen($digits) - 1)];
     $password .= $specialChars[rand(0, strlen($specialChars) - 1)];
-    
-    $remainingLength = rand(4, 8); // Random length between 8 and 12, accounting for the 4 already chosen characters
-    
+
+    $remainingLength = rand(4, 8);
+
     $allCharacters = $lowercase . $uppercase . $digits . $specialChars;
-    
+
     for ($i = 0; $i < $remainingLength; $i++) {
         $randomIndex = rand(0, strlen($allCharacters) - 1);
         $password .= $allCharacters[$randomIndex];
     }
-    
-    // Shuffle the characters to make the password random
+
     $password = str_shuffle($password);
-    
+
     return $password;
 }
 
@@ -87,11 +79,11 @@ $conn->close();
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Reset Password</title>
     <link rel="stylesheet" type="text/css" href="../styles.css">
     <script type="text/javascript">
-    // Check if the email address is valid
         function checkEmail(input) {
             var emailRegex = /^[a-zA-Z0-9._-]+@localhost$/;
 
@@ -101,7 +93,6 @@ $conn->close();
             p.textContent = "Please enter a valid email address.(eg: test@localhost)";
             container.appendChild(p);
 
-            // Check if a previous error message exists and remove it
             let existingError = document.querySelector(".checkEmail");
             if (existingError) {
                 existingError.remove();
@@ -122,6 +113,7 @@ $conn->close();
         }
     </script>
 </head>
+
 <body>
     <div class="nav" style="justify-content: flex-start;">
         <div class="header">
@@ -135,12 +127,10 @@ $conn->close();
             <form method="post">
                 <input type="email" name="email" placeholder="Email" class="user-input" required onchange="checkEmail(this)"><br>
                 <button type="submit" class="submit-button" style="margin-top:25px;" onclick="return confirm('Are you sure is this your email address?')">Submit</button>
-
             </form>
             <input type="button" value="Back" id="back" onclick="window.location.href='../login.html'">
         </div>
-        
     </div>
-    
 </body>
+
 </html>

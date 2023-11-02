@@ -1,24 +1,19 @@
 <?php
-// Handle user login and authentication
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = hash('sha256',$_POST["password"]);
 
-    // Database connection parameters
     $servername = "localhost";
     $dbusername = "root";
     $dbpassword = "";
     $dbname = "database";
 
-    // Create a database connection
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
-    // Check for connection errors
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Perform user authentication
     $query = "SELECT role FROM users WHERE username = ? AND password = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("ss", $username, $password);
@@ -28,12 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 
     if ($role) {
-        // Start a session and store user information
         session_start();
         $_SESSION["username"] = $username;
 
 
-        // Redirect to appropriate user dashboard
         if ($role === "customer") {
             header("Location: order.php");
             exit();
@@ -47,7 +40,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // Close the database connection
     $conn->close();
 }
-?>
