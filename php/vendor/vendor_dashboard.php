@@ -130,14 +130,31 @@ if(isset($_POST['toggle_order_status'])){
     <link rel="stylesheet" type="text/css" href="../../styles.css">
 </head>
 <body>
-    <h1>Welcome, <?php echo $vendorUsername; ?>!</h1>
+    <div class="nav">
+        <div class="header">
+            <a href="vendor_dashboard.php" class="headerLogo"><img src="../../images/logo.png" alt="Domini's Logo" height="21" width="23">Domini's</a>
+        </div>
+        <div class="my-account">
+            <div id="my-account-container" style="cursor: pointer;">
+                <a><img src="../../images/acc-1.png" alt="User's Account" height="37" width="34" style="padding-top: 5px;"></a>
+                <a>MY ACCOUNT</a>
+            </div>
+            <div class="basic-buttons-container" id="my-account-nav">
+                <a href="../edit_profile.php" class="basic-buttons" id="edit-profile"><img src="../../images/acc-3.png" alt="User's Account" width= "34"
+height= "30"><p style="margin:5px 0 0 8px;">Edit Profile</p></a>
+                <a href="../logout.php" class="basic-buttons" id="log-out" onclick="return confirm('Are you sure you want to log out?')"><img src="../../images/vector.svg" alt="Order History" width= "34"
+height= "20"style="margin-top:5px;" ><p style="margin:4px 0 0 7px;">Logout</p></a>
+            </div> 
+        </div>
+    </div>
     
     <div id="vendor-dashboard">
         <h2>Manage Orders and Products</h2>
         <!-- Provide forms for adding/editing products and items -->
 
         <h3>Your Orders</h3>
-        <table border="1">
+        <div id="underline"></div>
+        <table border="1" class="order-history" style="margin:auto;border-spacing: 0;">
         <tr>
             <th>Order ID</th>
             <th>Time</th>
@@ -169,7 +186,7 @@ if(isset($_POST['toggle_order_status'])){
             
 
             echo "<form method='POST'>";
-            echo "<button type='submit' name='toggle_order_status' value='" . $row['order_id'] . "' . $buttonStatus . >" . $orderStatusText . "</button>";
+            echo "<button type='submit' class='delivered-btn' name='toggle_order_status' value='" . $row['order_id'] . "' . $buttonStatus . >" . $orderStatusText . "</button>";
             echo "</form>";
             echo "</td>";
             echo "</tr>";
@@ -178,13 +195,14 @@ if(isset($_POST['toggle_order_status'])){
         echo "<tr><td colspan='8'>No orders found.</td></tr>";
     }
     ?>
-</table>
+        </table>
 
         <h3>Your Products</h3>
+        <div id="underline"></div>
         <form action="insert_product.php" method="POST">
-            <button type="submit">Insert New Product</button>
+            <button type="submit" class="insert-order-btn">Insert New Product</button>
         </form>
-        <table border="1">
+        <table border="1" class="order-history" style="margin:auto 100px auto 100px;border-spacing: 0;">
     <tr>
         <th>Product ID</th>
         <th>Product Name</th>
@@ -202,14 +220,14 @@ if(isset($_POST['toggle_order_status'])){
             echo "<td>" . $row["product_name"] . "</td>";
             echo "<td>" . $row["description"] . "</td>";
             echo "<td>" . $row["price"] . "</td>";
-            echo "<td><img src='../../images/" . $row["image_url"] . "' alt='Product Image'></td>";
+            echo "<td style ='width:250px'><img width=100% height=100% src='../../images/" . $row["image_url"] . "' alt='Product Image'></td>";
             echo "<td>" . $row["status"] . "</td>";
             echo "<td>";
             echo "<form action='edit_product.php?product_id=" . $row['product_id'] . "' method='POST'>";
-            echo "<button type='submit'>Edit</button>";
+            echo "<button type='submit' class='action-btn'>Edit</button>";
             echo "</form>";
             echo "<form method='POST'>";
-            echo "<button type='submit' name='delete_product' value = ".$row['product_id'] . ">Delete</button>";
+            echo "<button type='submit' name='delete_product' value = ".$row['product_id'] . " class='action-btn' style='color:red'>Delete</button>";
             echo "</form>";
             echo "</td>";
             echo "</tr>";
@@ -222,8 +240,6 @@ if(isset($_POST['toggle_order_status'])){
 
     </div>
 
-    <a href="../logout.php">Logout</a>
-    <a href="../edit_profile.php">Edit Profile</a>
     <script src="../../js/script.js"></script>
 </body>
 </html>

@@ -69,31 +69,53 @@ $conn->close();
 </head>
 
 <body>
-    <h1>Insert New Product</h1>
+    <div class="nav">
+        <div class="header">
+            <a href="vendor_dashboard.php" class="headerLogo"><img src="../../images/logo.png" alt="Domini's Logo" height="21" width="23">Domini's</a>
+        </div>
+        <div class="my-account">
+            <div id="my-account-container" style="cursor: pointer;">
+                <a><img src="../../images/acc-1.png" alt="User's Account" height="37" width="34" style="padding-top: 5px;"></a>
+                <a>MY ACCOUNT</a>
+            </div>
+            <div class="basic-buttons-container" id="my-account-nav">
+                <a href="../edit_profile.php" class="basic-buttons" id="edit-profile"><img src="../../images/acc-3.png" alt="User's Account" width= "34"
+height= "30"><p style="margin:5px 0 0 8px;">Edit Profile</p></a>
+                <a href="../logout.php" class="basic-buttons" id="log-out" onclick="return confirm('Are you sure you want to log out?')"><img src="../../images/vector.svg" alt="Order History" width= "34"
+height= "20"style="margin-top:5px;" ><p style="margin:4px 0 0 7px;">Logout</p></a>
+            </div> 
+        </div>
+    </div>
+    <h1 style="text-align:center;">Insert New Product</h1>
+    
+    <div class="login-signup">
+      <a href="vendor_dashboard.php" id="back">Back</a>
+      <div id="user-login" style="text-align:left;">
+        <form method="POST" action="insert_product.php" enctype="multipart/form-data">
+            <label for="new_product_name" class="user-input">Product Name:</label>
+            <input type="text" id="new_product_name" class="user-input" name="new_product_name" style="margin-bottom:25px;" required><br>
 
-    <form method="POST" action="insert_product.php" enctype="multipart/form-data">
-        <label for="new_product_name">Product Name:</label>
-        <input type="text" id="new_product_name" name="new_product_name" required><br>
+            <label for="new_product_description" class="user-input" style="margin: 10px 0 10px 0;">Product Description:</label>
+            <input type="text" id="new_product_description" class="user-input" name="new_product_description" style="margin-bottom:25px;" required></textarea><br>
 
-        <label for="new_product_description">Product Description:</label>
-        <textarea id="new_product_description" name="new_product_description" required></textarea><br>
+            <label for="new_product_price" class="user-input" style="margin: 10px 0 10px 0;">Product Price:</label>
+            <input type="number" id="new_product_price" class="user-input" name="new_product_price" step="0.01" style="margin-bottom:25px;" required><br>
 
-        <label for="new_product_price">Product Price:</label>
-        <input type="number" id="new_product_price" name="new_product_price" step="0.01" required><br>
+            <label for="new_image_url" class="user-input" style="margin-right:20px;">Image:</label>
+            <input type="file" id="new_image_url" name="new_image_url" style="margin-bottom:25px;"><br>
 
-        <label for="new_image_url">Image:</label>
-        <input type="file" id="new_image_url" name="new_image_url"><br>
+            <label for="new_product_status" class="user-input">Product Status:</label>
+            <select id="new_product_status" name="new_product_status" class="user-input" required>
+                <option value="available">Available</option>
+                <option value="unavailable">Unavailable</option>
+            </select><br>
 
-        <label for="new_product_status">Product Status:</label>
-        <select id="new_product_status" name="new_product_status" required>
-            <option value="available">Available</option>
-            <option value="unavailable">Unavailable</option>
-        </select><br>
-
-        <input type="submit" name="insert_product"  value="Insert Product">
-    </form>
-
-    <a href="vendor_dashboard.php">Back to Dashboard</a>
+            <input type="submit" name="insert_product" class="insert-order-btn" value="Insert Product">
+        </form>
+      </div>
+      
+</div>
+<script src="../../js/script.js"></script>
 </body>
 
 </html>
