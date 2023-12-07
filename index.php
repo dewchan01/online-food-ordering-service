@@ -40,6 +40,7 @@ if (!isset($_SESSION["username"])) {
                 <?php
                 if (!$login) {
                     echo "<a href='login.html' class='basic-buttons' id='login-btn'><img src='images/vector2.svg' alt='Log In' width='34' height='20' style='margin-top:5px;'><p style='margin:5px 0 0 8px;'>Log In</p></a>";
+                    echo "<a href='php/customer/guest_dashboard.php' class='basic-buttons' id='login-btn'><img src='images/vector2.svg' alt='Log In' width='34' height='20' style='margin-top:5px;'><p style='margin:5px 0 0 8px;'>Log In as Guest</p></a>";
                 } else {
                     echo "<a href='php/edit_profile.php' class='basic-buttons' id='edit-profile'><img src='images/acc-3.png' alt='User\'s Account' width='34' height='30'><p style='margin:5px 0 0 8px;'>Edit Profile</p></a>";
                     echo "<a href='php/customer/check_history.php' class='basic-buttons' id='order-history'><img src='images/newspaper-regular-1.svg' alt='Order History' width='34' height='25' style='margin-top:5px;'><p style='margin:5px 0 0 7px;'>Order History</p></a>";

@@ -4,3 +4,12 @@ function backToOrder() {
         window.location.href = "customer_dashboard.php";
     }
 }
+
+function requestLogin(username) {
+    if (username == "guest") {
+        var requestLogin = confirm('You are not logged in! Do you want to proceed to login?');
+    }
+    if (requestLogin) {
+        window.location.href = "../../login.html";
+    }
+}

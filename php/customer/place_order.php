@@ -16,8 +16,11 @@ $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
-$customerUsername = $_SESSION["username"];
+if (!isset($_SESSION["username"])) {
+    $customerUsername = "guest";
+} else {
+    $customerUsername = $_SESSION["username"];
+}
 
 $products = [];
 $sql = "SELECT product_id, product_name, price, image_url, description FROM products";
@@ -33,7 +36,6 @@ $stmt->close();
 
 $conn->close();
 
-$customerUsername = $_SESSION["username"];
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -44,14 +46,15 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+if ($customerUsername != "guest") {;
+    $address = "";
+    $sql = "SELECT address FROM users WHERE username = '$customerUsername'";
+    $result = $conn->query($sql);
 
-$address = "";
-$sql = "SELECT address FROM users WHERE username = '$customerUsername'";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $address = $row["address"];
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $address = $row["address"];
+    }
 }
 
 $conn->close();
@@ -79,7 +82,7 @@ $conn->close();
                 </div>
                 <div>
                     <h3 style="margin-bottom: 0;">Delivery Now</h3>
-                    <p style="margin-top: 0;"><?php echo $address; ?></p>
+                    <p style="margin-top: 0;"><?php if ($customerUsername != 'guest') echo $address; ?></p>
                 </div>
             </div>
             <h2>Order Details</h2>
@@ -114,15 +117,15 @@ $conn->close();
                 <p>Total Cost: </p>
                 <p>$<?php echo $totalCost + $deliveryFee; ?></p>
             </div>
-            <form method="POST" action="process_payment.php">
-                <input type="hidden" name="cart" value='<?php echo json_encode($cartItems); ?>'>
-                <input type="hidden" name="vendor" value='<?php echo $selectedVendor; ?>'>
-                <div id="delivery-instruction">
-                    <h3>Delivery Instruction</h3>
-                    <textarea name="delivery-instruction" id="delivery-instruction-text" cols="30" rows="10" style="resize:none;width:400px;" placeholder="Fill in special requests here. We will accommodate as best as we could. Timed orders and edits have to be made during the ordering process."></textarea>
-                </div>
-                <button type="submit" name="confirm_payment" class="confirm-btn" id="confirm-payment-btn" value="Confirm Payment" style="margin-top:10px;width:400px" onclick="confirmPayment()"><?php echo $totalQuantity ?> items | Total Price: $<?php echo $totalCost + $deliveryFee; ?> | Confirm Payment</button>
-            </form>
+            <?php if ($customerUsername != "guest") echo "<form method='POST' action='process_payment.php'>"; ?>
+            <input type="hidden" name="cart" value='<?php echo json_encode($cartItems); ?>'>
+            <input type="hidden" name="vendor" value='<?php echo $selectedVendor; ?>'>
+            <div id="delivery-instruction">
+                <h3>Delivery Instruction</h3>
+                <textarea name="delivery-instruction" id="delivery-instruction-text" cols="30" rows="10" style="resize:none;width:400px;" placeholder="Fill in special requests here. We will accommodate as best as we could. Timed orders and edits have to be made during the ordering process."></textarea>
+            </div>
+            <button type="submit" name="confirm_payment" class="confirm-btn" id="confirm-payment-btn" value="Confirm Payment" style="margin-top:10px;width:400px" onclick="requestLogin('<?php echo $customerUsername; ?>')">'<?php echo $totalQuantity; ?> items | Total Price: $<?php echo $totalCost + $deliveryFee; ?> | Confirm Payment</button>
+            <?php if ($customerUsername != "guest") echo "</form>"; ?>
         </div>
         <input type="button" name="back_to_order" id="back-to-order-btn" onclick="backToOrder()" style="width:120px;cursor:pointer;" value="Back to Menu">
     </div>
