@@ -7,11 +7,11 @@
     <script type="text/javascript">
 
         function checkUsername(input) {
-            var usernameRegex = /^[a-zA-Z0-9]+$/;
+            var usernameRegex = /(^(?=.*[A-Za-z])(?=.*[0-9]).*)$/;
             let container = document.createElement("div");
             container.className = "checkUsername";
             let p = document.createElement("p");
-            p.textContent = "Username can only contain letters and numbers.";
+            p.textContent = "Username needs contain at least 1 letter and 1 number.";
             container.appendChild(p);
 
             let existingError = document.querySelector(".checkUsername");
