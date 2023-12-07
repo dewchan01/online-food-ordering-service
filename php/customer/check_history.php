@@ -98,7 +98,7 @@ $conn->close();
         <p style="text-align:center;">No orders found.</p>
     <?php endif; ?>
 
-    <a href="customer_dashboard.php" id="back-to-menu-btn">Back to Menu</a>
+    <a href="../order.php" id="back-to-menu-btn">Back to Order</a>
     <script type="text/javascript" src="../../js/script.js"></script>
 
 </body>
