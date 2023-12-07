@@ -322,7 +322,7 @@ $conn->close();
 
         <div class="login-signup">
             <h2>My Details</h2>
-            <input type="button" value="Back to Order" id="back-to-order-btn" style="margin-right:800px;" onclick="window.location.href='customer/customer_dashboard.php'">
+            <input type="button" value="Back to Order" id="back-to-order-btn" style="margin-right:800px;" onclick="window.location.href='order.php'">
             <div id="user-login">
                 <form method="POST" onsubmit="return validateForm()" action="edit_profile.php">
                     <p class="edit-input">Username:</p>

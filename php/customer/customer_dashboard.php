@@ -60,7 +60,7 @@ $conn->close();
                 </div>
                 <div id="address-details">
                     <h3 style="margin-bottom:3px;margin-top:3px;">Delivery Now:</h3>
-                    <a href="../edit_profile.php"><?php echo $address; ?></a>
+                    <span><?php echo $address; ?></span>
                 </div>
             </div>
             <br>
